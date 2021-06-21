@@ -42,3 +42,9 @@ It uses the graphql schema created by nexus out of types, queries, and mutations
 /apollo/context passes prisma through context to queries/mutations, enabling me to read/write the database.
 
 /prisma contains prisma.schema, which establishes my data model
+prisma is connected to the postgresdb, you migrate it, it creates the tables.
+** Prisma Schema
+
+* TODO
+** Features (Maybe)
+Likes, subscribers
