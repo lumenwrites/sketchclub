@@ -1,0 +1,44 @@
+* Backend Setup
+npm i --save @prisma/client apollo-server aws-sdk bcryptjs cuid dotenv graphql graphql-middleware graphql-scalars graphql-shield jsonwebtoken nexus slugify
+
+npm i --save-dev @types/bcryptjs @types/jsonwebtoken @types/node @types/react prisma ts-node ts-node-dev typescript
+
+Basic files setup:
+
+npm run generate:prisma
+runs prisma generate
+
+# Not Authorized!
+https://www.npmjs.com/package/graphql-shield
+By default shield ensures no internal data is exposed to client if it was not meant to be. Therefore, all thrown errors during execution resolve in Not Authorised! error message if not otherwise specified using error wrapper. This can be turned off by setting allowExternalErrors option to true.
+
+Solution: add an option to the shield:
+export const permissions = shield({
+  Query: {
+  },
+  Mutation: {
+    createPost: rules.isAuthenticatedUser,
+  },
+},{
+  allowExternalErrors: true
+})
+
+# Setup PostgreSQL Database
+psql -U postgres
+create database sketchdaily;
+create user dbuser with encrypted password 'swordfish';
+grant all privileges on database sketchdaily to dbuser;
+
+npm run prisma:migrate
+
+** Initial Setup Files
+/server.ts creates and runs the ApolloServer.
+It uses the graphql schema created by nexus out of types, queries, and mutations.
+
+/nexus/ folder contains types, queries, and mutations.
+/nexus/scehma combines them together.
+/nexus/ shield sets up permissions for accessing the api endpoints.
+
+/apollo/context passes prisma through context to queries/mutations, enabling me to read/write the database.
+
+/prisma contains prisma.schema, which establishes my data model
