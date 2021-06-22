@@ -44,5 +44,3 @@ model Topic {
   title String @unique
   posts Post[] @relation("PostTopic")
 }
-
-

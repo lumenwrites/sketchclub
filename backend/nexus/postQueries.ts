@@ -5,6 +5,8 @@ import {
   list,
   objectType,
   stringArg,
+  queryField,
+  extendType,
   inputObjectType,
   arg,
   asNexusMethod,
@@ -14,8 +16,8 @@ import {
 import { Context } from '../apollo/context'
 
 // Test Query
-export const PostQuery = objectType({
-  name: 'Query',
+export const PostQueries = extendType({
+  type: 'Query',
   definition(t) {
     t.nullable.field('post', {
       type: 'Post',

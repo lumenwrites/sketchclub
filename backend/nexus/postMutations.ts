@@ -3,7 +3,7 @@ import {
   makeSchema,
   nonNull,
   list,
-  objectType,
+  extendType,
   stringArg,
   inputObjectType,
   arg,
@@ -17,9 +17,8 @@ import slugify from 'slugify'
 import cuid from 'cuid'
 
 
-// Test mutation
-export const PostMutation = objectType({
-  name: 'Mutation',
+export const PostMutations = extendType({
+  type: 'Mutation',
   definition(t) {
     t.field('createPost', {
       type: 'Post',

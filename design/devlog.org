@@ -44,7 +44,26 @@ It uses the graphql schema created by nexus out of types, queries, and mutations
 /prisma contains prisma.schema, which establishes my data model
 prisma is connected to the postgresdb, you migrate it, it creates the tables.
 ** Prisma Schema
+# Combining Queries
+https://github.com/graphql-nexus/nexus/issues/101
+https://nexusjs.org/docs/api/extend-type
+extendType
+Defines a way to incrementally build types, by "extending" a type from multiple locations in a project. Useful in situations where you have types split across multiple domains, each of which should add fields to a single type (like the "Query" root).
+
+https://nexusjs.org/docs/api/query-field
+Often times you want to split up query fields into different domains of your application, and like mutationField are another one of the most common use-cases for extendType. queryField exists as a shorthand for this common case:
+
+https://nexusjs.org/docs/api/extend-type
+https://nexusjs.org/docs/api/query-field
 
 * TODO
 ** Features (Maybe)
 Likes, subscribers
+* Meeting Notes
+- Take a look at my design and approve it.
+- Take a look at the outline and my pretty diagrams and approve it.
+
+- How do we present our project? Is it over zoom, do we make a video?
+- Ask someone to let me open source this under creative commons?
+  This project won't make uni any money, but it would be really helpful to me with the job search, and useful to other people.
+- Gitlab? are we supposed to use accounts created for us by the uni?
