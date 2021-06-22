@@ -1,0 +1,46 @@
+html,
+body {
+  color: $text;
+  background: $main-bg;
+  font-family: $main-font;
+  font-weight: 100;
+  margin: 0;
+  height: 100%;
+  font-size: 16px;
+}
+
+main {
+  overflow-x: hidden;
+  overflow-y: overlay;
+  height: calc(100% - 48px); //minus header minus footer
+  &.has-subnav {
+    height: calc(100% - 54px - 32px);
+  }
+}
+
+.wrapper {
+  max-width: $wrapper-width;
+  margin: auto;
+}
+
+::-webkit-scrollbar {
+  width: 10px;
+  height: 10px;
+  cursor: -webkit-grabbing;
+}
+
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+
+::-webkit-scrollbar-corner {
+  background-color: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: $scrollbar-thumb;
+  border: 2px solid transparent !important;
+  border-radius: 9px;
+  background-clip: content-box;
+}
+

@@ -33,7 +33,9 @@ export const PostQueries = extendType({
 
     t.nonNull.list.nonNull.field('posts', {
       type: 'Post',
-      args: {},
+      args: {
+        published: booleanArg(),
+      },
       resolve: (_parent, args, context: Context) => {
         console.log('Posts resolver', context.prisma.post.findMany())
         return context.prisma.post.findMany()

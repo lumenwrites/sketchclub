@@ -1,0 +1,231 @@
+.btn {
+  display: inline-block; // so i can put it inside a div, float right, and they stay horizontal
+  background-color: $btn-bg;
+  height: 32px;
+  line-height: 32px;
+  padding: 0 8px;
+  border: 1px solid $border;
+	border-radius: $border-radius;
+  cursor: pointer;
+  color: $text;
+  &:active,
+  &:focus {
+    color: $text;
+  }
+  svg path {
+    fill: $text;
+  }
+  &:hover {
+    background: $btn-bg-hover;
+    color: $text;
+  }
+  &.disabled {
+    cursor: default;
+    color: $text-dim;
+  }
+  &.large {
+    padding: 8px 16px;
+  }
+  &.full-width {
+    display: block;
+    text-align: center;
+  }
+}
+.btn-cta {
+  border: 1px solid $btn-cta;
+  background: $btn-cta;
+  color: white;
+  &:hover {
+    background: $btn-cta;
+    color: white;
+  }
+}
+.btn-nav {
+  margin-left: 12px;
+}
+
+.dropdown {
+  display: inline-block;
+  position: relative;
+  .menu-handle {
+    cursor: pointer;
+  }
+  &:hover .menu {
+    display: block;
+  }
+  .menu {
+    display: none;
+    position: absolute;
+    min-width: 100%;
+    width: 160px;
+    top: 100%;
+    left: 0;
+    right: auto;
+    &.left {
+      right: 0;
+      left: auto;
+    }
+    z-index: 20;
+    background-color: $panel-bg;
+    box-shadow: 2px 2px 10px 0 #191b22;
+
+    .item {
+      &.active {
+        color: $text;
+      }
+      width: 100%;
+
+      text-overflow: ellipsis;
+      white-space: nowrap;
+      overflow: hidden;
+      display: inherit; //otherwise there are weird margins for some reason?
+    }
+    .btn {
+      margin: 0;
+      border-radius: 0;
+      border: none;
+    }
+  }
+}
+
+.modal-wrapper {
+  position: fixed;
+  z-index: 10;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.modal-bg {
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.4);
+}
+.modal-card {
+  background: $modal-bg;
+  border-radius: 2px;
+  padding: 16px 32px;
+  box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
+  max-width: 700px;
+  width: 700px;
+  &.narrow {
+    width: 400px;
+  }
+  .btn {
+    width: 100%;
+    text-align: center;
+    margin-top: 12px;
+  }
+  .google-login {
+    padding: 24px;
+    svg {
+      margin-right: 10px;
+    }
+  }
+  hr {
+    margin-top: 12px;
+  }
+  &.wide {
+    width: 100%;
+  }
+  z-index: 10;
+  position: absolute;
+  top: 16px;
+  max-height: calc(100% - 32px);
+  overflow-x: hidden;
+  overflow-y: auto;
+  .close-button {
+    position: absolute;
+    right: 4px;
+    top: 0;
+    border: none;
+    background: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    svg path {
+      fill: $text;
+    }
+  }
+  h1,
+  h2 {
+    text-align: center;
+  }
+  input {
+    width: 100%;
+  }
+}
+
+/* Css magic that keeps images 16x9, background in the center. */
+.image-wrapper {
+  width: 100%;
+  position: relative;
+  &:after {
+    padding-top: 56.25%; /* 16:9 ratio */
+    display: block;
+    content: "";
+  }
+  .thumbnail {
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    right: 0;
+    left: 0;
+    background-position: 50% 50% !important;
+    background-size: cover !important;
+
+    margin: 0;
+    border: none;
+    background-color: #1f364d !important;
+  }
+}
+
+
+
+// Inputs
+input {
+  color: $text;
+  font-family: $main-font;
+  background: $input-bg;
+  width: 100%;
+  height: 28px;
+  line-height: 24;
+  float: left;
+  border-radius: 0;
+  border: none;
+  outline: none;
+	border-radius: $border-radius;
+  padding-left: 12px;
+  &::placeholder {
+    /* Chrome, Firefox, Opera, Safari 10.1+ */
+    color: $text-dim;
+    opacity: 1; /* Firefox */
+  }
+}
+
+
+textarea {
+  color: $text;
+  font-family: $main-font;
+	background: $input-bg;
+	vertical-align: top; // fix space after textarea. https://stackoverflow.com/questions/7144843/extra-space-under-textarea-differs-along-browsers
+	width: 100%;
+	border: none;
+	margin-top: 12px;
+	padding: 12px;
+	border-radius: $border-radius;
+  resize: none;
+
+	&:focus {
+		border: none;
+		outline: none;
+	}
+	&::placeholder {
+		/* Chrome, Firefox, Opera, Safari 10.1+ */
+		color: $text-dim;
+		opacity: 1; /* Firefox */
+	}
+}
+

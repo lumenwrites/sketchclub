@@ -1,0 +1,46 @@
+header {
+  background: $header-bg;
+  padding: 8px 24px;
+  height: 48px;
+  .logo {
+    line-height: 32px;
+    font-weight: lighter;
+    
+    float: left;
+    width: 220px;
+    display: block;
+
+    font-family: $logo-font;
+    font-size: 22px;
+    color: $text;
+    font-weight: 100;
+
+    .logo-image, .logo-image img {
+      width: 32px;
+      height: 32px;
+      float: left;
+      margin-right: 5px;
+      border-radius: 50%;
+    }
+  }
+
+  nav {
+    float: right;
+    .dropdown .menu {
+      left: 4px;
+      top: calc(100% + 5px); // not sure why 5
+    }
+  }
+}
+
+.subnav {
+  background: $header-bg;
+  padding: 8px 24px;
+  input {
+    width: calc(100% - 144px);
+  }
+  .btn {
+    margin-left: 4px;
+    width: 140px;
+  }
+}

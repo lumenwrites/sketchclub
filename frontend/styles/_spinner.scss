@@ -1,0 +1,40 @@
+
+.lds-spinner {
+  color: official;
+  display: inline-block;
+  position: relative;
+  width: 80px;
+  height: 80px;
+}
+.lds-spinner div {
+  transform-origin: 40px 40px;
+  animation: lds-spinner 1.2s linear infinite;
+}
+.lds-spinner div:after {
+  content: " ";
+  display: block;
+  position: absolute;
+  top: 3px;
+  left: 37px;
+  width: 6px;
+  height: 18px;
+  border-radius: 20%;
+  background: #fff;
+}
+// spinner
+.spinner {
+  display: block;
+  float: left;
+  margin: 5px;
+  border: 4px solid #343c4ead;// $input-bg;
+  border-top: 4px solid $border;
+  border-radius: 50%;
+  width: 20px;
+  height: 20px;
+  animation: spin 1.25s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

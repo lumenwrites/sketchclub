@@ -24,7 +24,7 @@ model Post {
   topic Topic @relation("PostTopic", fields: [topicId], references: [id])
   topicId String
   title String
-  description String
+  body String
   images Image[] @relation("ImagePost")
   published Boolean  @default(false)
   createdAt DateTime @default(now())

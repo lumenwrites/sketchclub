@@ -20,7 +20,7 @@ type Post {
 
 type Query {
   post(slug: String): Post
-  posts: [Post!]!
+  posts(published: Boolean): [Post!]!
   users: [User!]!
 }
 

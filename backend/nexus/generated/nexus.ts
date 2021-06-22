@@ -129,6 +129,9 @@ export interface NexusGenArgTypes {
     post: { // args
       slug?: string | null; // String
     }
+    posts: { // args
+      published?: boolean | null; // Boolean
+    }
   }
 }
 

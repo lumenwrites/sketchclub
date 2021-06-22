@@ -1,0 +1,219 @@
+article {
+  padding: 20px 40px;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.04);
+  background: $post-bg;
+  text-align: justify;
+  //background: #fffaf1;
+  border-radius: 2px;
+  .post-header {
+    margin: 0 -40px 10px -40px;
+  }
+
+  img {
+    width: 100%;
+    border-radius: 2px;
+  }
+  .header-img {
+    width: calc(100% + 80px);
+    margin: -40px;
+    margin: -20px -40px;
+    margin-bottom: 0;
+  }
+  .gallery {
+    .current-image {
+      position: relative;
+      .next-image, .prev-image {
+        position: absolute;
+        top: 0;
+        width: 40px;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        height: 100%;
+        display: flex;
+        justify-content: center; /* center items vertically, in this case */
+        align-items: center;
+        cursor: pointer;
+        display: none;
+      }
+      .prev-image {
+        left: 0;
+      }
+      .next-image {
+        right: 0;
+      }
+      &:hover {
+        .next-image, .prev-image {
+          display: flex;
+        }
+      }
+    }
+
+    .images {
+      white-space: nowrap;
+      overflow: hidden;
+      overflow-x: auto;
+      .image {
+        display: inline-block;
+        width: 160px;
+        height: 90px;
+        margin: 5px;
+        margin-bottom: 0;
+        // float: left;
+        cursor: pointer;
+        overflow: hidden; // TODO: Shouldnt need this if 16x9 thumbnails work correctly
+        &.active {
+          border: 2px solid #56b1fd;
+        }
+      }
+    }
+  }
+  h1,
+  h2 {
+    text-align: center;
+  }
+}
+.asset {
+  padding: 0 40px 20px 40px;
+
+  .btn-cta {
+    margin-top: 20px;
+  }
+  .tags {
+    margin-top: 20px;
+    padding: 2px 40px 4px 40px;
+    width: calc(100% + 80px);
+    margin-left: -40px;
+  }
+}
+
+.post-footer {
+  color: $text-dim;
+  .by {
+    float: right;
+    .author {
+      color: $text-blue;
+      cursor: pointer;
+      &:hover {
+        color: white;
+      }
+    }
+  }
+}
+
+.edit {
+  input {
+    width: 100%;
+    background: $input-bg-dark;
+    height: 32px;
+    padding: 12px;
+    margin-top: 12px;
+  }
+
+  .files {
+    margin-top: 12px;
+    .file {
+      border: 1px solid $border;
+      margin-top: -1px;
+      line-height: 32px;
+      padding: 6px 12px;
+      .remove {
+        float: right;
+        margin: 0;
+        height: 32px;
+      }
+    }
+  }
+  .images {
+    margin-top: 12px;
+    white-space: nowrap;
+    overflow: hidden;
+    overflow-x: auto;
+    .preview-image {
+      display: inline-block;
+      width: 150px;
+      height: 84px; //16x9
+      // float: left;
+      margin-right: 12px;
+      position: relative;
+      border-radius: 2px;
+      background: $input-bg-dark;
+      .delete {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        background: rgba(0, 0, 0, 0.5);
+        display: flex;
+        justify-content: center; /* center items vertically, in this case */
+        align-items: center;
+        cursor: pointer;
+        display: none;
+      }
+      &:hover {
+        .delete {
+          display: flex;
+        }
+      }
+    }
+    .add-image {
+      display:inline-block;
+      margin-right: 12px;
+    } 
+    .image-placeholder {
+      width: 150px;
+      height: 84px; //16x9
+      border-radius: 2px;
+      background: $input-bg-dark;
+      overflow: hidden; // Flex breaks things, this fixes things for some reason
+      .flex-center {
+        display: flex;
+        justify-content: center; /* center items vertically */
+        align-items: center;
+        height: 84px;
+      }
+      cursor: pointer;
+      &:hover {
+        background: $btn-bg-hover;
+      }
+    }
+  }
+  .btn {
+    margin-top: 12px;
+    background: #333b4f; //$btn-bg;// #262d3b;
+    color: white;
+    &:hover {
+      background: $btn-bg-hover;
+    }
+  }
+  .upload {
+    display: block;
+    margin: auto;
+    margin-top: 12px;
+    width: 140px;
+    text-align: center;
+  }
+  .category-tags {
+    margin-top: 12px;
+    input {
+      width: calc(100% - 144px);
+      margin: 0;
+    }
+    .btn {
+      width: 140px;
+      line-height: 32px;
+      float: left;
+      margin: 0;
+      margin-right: 4px;
+    }
+  }
+  .buttons {
+    .btn {
+      margin-left: 12px;
+    }
+    .delete {
+      float: left;
+      margin-left: 0;
+    }
+  }
+}

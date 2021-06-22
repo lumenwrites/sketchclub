@@ -55,6 +55,58 @@ Often times you want to split up query fields into different domains of your app
 
 https://nexusjs.org/docs/api/extend-type
 https://nexusjs.org/docs/api/query-field
+* Frontend Setup
+https://dev.to/filippofonseca/how-to-set-up-a-next-js-project-with-typescript-and-react-576h
+npm create next-app
+create tsconfig.json
+npm install --save-dev typescript @types/react @types/node
+
+
+npm i --save @apollo/client graphql @fortawesome/fontawesome-svg-core @fortawesome/free-brands-svg-icons @fortawesome/free-regular-svg-icons @fortawesome/free-solid-svg-icons @fortawesome/react-fontawesome dotenv sass
+
+npm i --save next-with-apollo @apollo/link-error
+
+- Set up apollo client with links
+- _app.tsx
+  Wrap everything in apollo provider.
+- Set up queries
+- Set up styles
+- hooks
+- context
+# apollo links
+https://www.apollographql.com/docs/react/api/link/introduction/
+The Apollo Link library helps you customize the flow of data between Apollo Client and your GraphQL server.  You can define your client's network behavior as a chain of link objects that execute in a sequence:
+
+The first link might log the details of the operation for debugging purposes.
+The second link might add an HTTP header to the outgoing operation request for authentication purposes.
+The final (terminating) link sends the operation to its destination (usually a GraphQL server over HTTP).
+
+
+
+
+
+
+
+
+maybe:
+cookie-cutter // something else?
+axios //use fetch instead?
+@apollo/link-error
+deepmerge // wtf is that?
+
+apollo-boost
+apollo-link-error
+apollo-upload-client
+react-image-file-resizer
+next-with-apollo
+react-apollo
+
+react-redux
+redux
+
+
+
+
 
 * TODO
 ** Features (Maybe)
@@ -67,3 +119,4 @@ Likes, subscribers
 - Ask someone to let me open source this under creative commons?
   This project won't make uni any money, but it would be really helpful to me with the job search, and useful to other people.
 - Gitlab? are we supposed to use accounts created for us by the uni?
+

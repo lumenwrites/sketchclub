@@ -1,0 +1,40 @@
+
+// Typography
+$main-font: "Open Sans";
+$logo-font: "Open Sans";
+$text: #3d454b;
+$header: #3d454b;
+$text-dim: rgba(0,0,0,0.44);
+$text-link: #3d454b;
+
+// Big Elements
+$wrapper-width: 700px; //960px;
+$main-bg: #faf4e9;
+$header-bg: white;
+$footer-bg:#333a42;
+$subnav-bg: #fafaf9;
+$post-bg:white;
+$panel-bg: #eeeeee;
+$modal-bg: #faf4e9;
+
+// Small Elements
+$btn-bg: white;
+$btn-bg-hover: #eeeeee;
+$btn-cta: #DA552F;
+$border: #dddddd;
+$border-radius: 3px;
+$input-bg: white;
+$scrollbar-thumb: rgba(110, 110, 110, 0.2);
+
+// Colors
+$orange: #DA552F;
+$blue: #478dc0;
+
+
+@import "./_fonts.scss";
+@import "./_reset.scss";
+@import "./_global.scss";
+@import "./_helpers.scss";
+@import "./_elements.scss";
+@import "./_spinner.scss";
+@import "./_header.scss";
