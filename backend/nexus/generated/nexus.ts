@@ -29,6 +29,15 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  PostCreateInput: { // input type
+    content?: string | null; // String
+    title: string; // String!
+  }
+  UserCreateInput: { // input type
+    email: string; // String!
+    name?: string | null; // String
+    posts?: NexusGenInputs['PostCreateInput'][] | null; // [PostCreateInput!]
+  }
 }
 
 export interface NexusGenEnums {
@@ -143,7 +152,7 @@ export interface NexusGenTypeInterfaces {
 
 export type NexusGenObjectNames = keyof NexusGenObjects;
 
-export type NexusGenInputNames = never;
+export type NexusGenInputNames = keyof NexusGenInputs;
 
 export type NexusGenEnumNames = never;
 

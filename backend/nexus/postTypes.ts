@@ -1,5 +1,6 @@
 import {
   objectType,
+  inputObjectType
 } from 'nexus'
 import { Context } from '../apollo/context'
 
@@ -12,4 +13,12 @@ export const PostType = objectType({
     t.nonNull.string('slug')
     t.string('body')
   }
+})
+
+export const PostCreateInput = inputObjectType({
+  name: 'PostCreateInput',
+  definition(t) {
+    t.nonNull.string('title')
+    t.string('content')
+  },
 })

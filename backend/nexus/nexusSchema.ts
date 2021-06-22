@@ -7,9 +7,9 @@ import { applyMiddleware } from 'graphql-middleware'
 
 import { permissions } from './shield'
 
-import { UserType, AuthPayload } from './userTypes'
+import { UserType, UserCreateInput } from './userTypes'
 import { UserQueries } from './userQueries'
-import { PostType } from './postTypes'
+import { PostType, PostCreateInput } from './postTypes'
 import { PostQueries } from './postQueries'
 import { PostMutations } from './postMutations'
 
@@ -19,9 +19,10 @@ export const DateTime = asNexusMethod(DateTimeResolver, 'date')
 const schemaWithoutPermissions = makeSchema({
   types: [
     UserType,
-    AuthPayload,
+    UserCreateInput,
     UserQueries,
     PostType,
+    PostCreateInput,
     PostQueries,
     PostMutations,
     DateTime,

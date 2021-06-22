@@ -18,6 +18,11 @@ type Post {
   title: String!
 }
 
+input PostCreateInput {
+  content: String
+  title: String!
+}
+
 type Query {
   post(slug: String): Post
   posts(published: Boolean): [Post!]!
@@ -30,4 +35,10 @@ type User {
   id: String!
   posts: [Post!]!
   username: String!
+}
+
+input UserCreateInput {
+  email: String!
+  name: String
+  posts: [PostCreateInput!]
 }

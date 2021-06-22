@@ -21,8 +21,8 @@ model Post {
   slug String @unique
   author User @relation("PostAuthor", fields: [authorId], references: [id])
   authorId String // In the field authorId we will store [id] of the User
-  topic Topic @relation("PostTopic", fields: [topicId], references: [id])
-  topicId String
+  topic Topic? @relation("PostTopic", fields: [topicId], references: [id])
+  topicId String?
   title String
   body String
   images Image[] @relation("ImagePost")
