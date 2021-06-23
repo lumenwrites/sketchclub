@@ -3,6 +3,7 @@ import { useQuery } from "@apollo/client"
 import { GET_POSTS } from "apollo/queries"
 
 import Layout from "components/Layout/Layout"
+import PostCard from "./PostCard"
 
 const Browse = () => {
   const { loading, error, data } = useQuery(GET_POSTS, { variables: { published: true } })
@@ -13,9 +14,10 @@ const Browse = () => {
     <Layout>
       <div className="post-grid">
         {data.posts.map((post, i) => (
-          <p key={post.slug}>{post.body}</p>
+          <PostCard key={post.slug} post={post}/>
         ))}
       </div>
+
     </Layout>
   )
 }

@@ -44,9 +44,9 @@ a {
   &:focus {
     color: $text-link;
   }
-  svg path {
-    fill: $text-link;
-  }
+  // svg path {
+  //   fill: $text-link;
+  // }
 }
 p a {
   font-weight: bold;

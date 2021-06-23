@@ -1,7 +1,11 @@
 import Link from "components/Elements/Link"
 import Image from "next/image"
 
+import { useModal } from "context/ModalContext"
+import PostCreate from "components/Posts/PostCreate"
+
 export default function Header() {
+  const { toggleModal } = useModal()
   return (
     <header>
       <div className="wrapper">
@@ -12,9 +16,10 @@ export default function Header() {
           <span className="bold">sketch</span>daily
         </Link>
         <nav>
-          <Link href="/post/create" className="btn btn-nav">
+          <a className="btn btn-nav" onClick={() => toggleModal(`post-create`)}>
             Upload Sketch
-          </Link>
+          </a>
+          <PostCreate/>
           <Link href="/profile/lumen" className="btn btn-nav">
             My Portfolio
           </Link>

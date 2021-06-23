@@ -10,7 +10,7 @@ import { fab } from "@fortawesome/free-brands-svg-icons"
 
 library.add(fas, far, fab)
 
-export default function Layout({ children, subnav }) {
+export default function Layout({ children, subnav=<></> }) {
   return (
     <div>
       <Header />

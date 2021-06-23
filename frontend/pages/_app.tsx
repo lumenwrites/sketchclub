@@ -1,12 +1,15 @@
 import withApollo from "apollo/client"
 import { ApolloProvider } from "@apollo/client/react"
-
+import CombinedContextsProvider from "context/CombinedContexts"
 import "../styles/style.scss"
+
 
 function App({ Component, pageProps, apollo }) {
   return (
     <ApolloProvider client={apollo}>
-      <Component {...pageProps} />
+      <CombinedContextsProvider>
+        <Component {...pageProps} />
+      </CombinedContextsProvider>
     </ApolloProvider>
   )
 }
