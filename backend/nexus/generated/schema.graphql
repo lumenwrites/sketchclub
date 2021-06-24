@@ -9,11 +9,14 @@ scalar DateTime
 
 type Mutation {
   createPost(body: String, title: String!): Post
+  deletePost(slug: String!): Post
+  updatePost(body: String, published: Boolean, slug: String!, title: String!): Post
 }
 
 type Post {
   body: String
   id: String!
+  published: Boolean
   slug: String!
   title: String!
 }

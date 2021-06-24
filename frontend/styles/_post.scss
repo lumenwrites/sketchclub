@@ -112,6 +112,7 @@
   .buttons {
     .btn {
       // margin-left: 12px; // TODO: weird issue, button grows when I add margin!?
+      width: auto;
     }
     .delete {
       float: left;

@@ -28,7 +28,7 @@ export default function PostCard({ post, onClick }) {
           className="edit"
           onClick={(e) => {
             e.stopPropagation()
-            toggleModal(`post-edit`)
+            toggleModal(`post-edit-${post.slug}`)
           }}
         >
           <FontAwesomeIcon icon={["fas", "edit"]} />

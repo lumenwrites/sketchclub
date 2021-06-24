@@ -12,6 +12,7 @@ export const PostType = objectType({
     t.nonNull.string('title')
     t.nonNull.string('slug')
     t.string('body')
+    t.boolean('published')
   }
 })
 
