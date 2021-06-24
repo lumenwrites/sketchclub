@@ -4,7 +4,7 @@ $main-font: "Open Sans";
 $logo-font: "Open Sans";
 $text: #3d454b;
 $header: #3d454b;
-$text-dim: rgba(0,0,0,0.44);
+$text-dim: rgb(109 95 84 / 57%); //#947C71; // rgba(0,0,0,0.44);
 $text-link: #3d454b;
 
 // Big Elements
@@ -21,7 +21,7 @@ $modal-bg: #faf4e9;
 $btn-bg: white;
 $btn-bg-hover: #eeeeee;
 $btn-cta: #DA552F;
-$border: #dddddd;
+$border: rgb(148 124 113 / 39%); //#dddddd;
 $border-radius: 3px;
 $input-bg: white;
 $scrollbar-thumb: rgba(110, 110, 110, 0.2);

@@ -4,7 +4,7 @@ import SquareImage from "components/Elements/SquareImage"
 
 import { useContext } from "react"
 import { useModal } from "context/ModalContext"
-import PostModal from "./PostModal"
+import PostView from "./PostView"
 import PostEdit from "./PostEdit"
 const { BUCKET_URL } = process.env
 
@@ -34,7 +34,7 @@ export default function PostCard({ post, onClick }) {
           <FontAwesomeIcon icon={["fas", "edit"]} />
         </a>
       </section>
-      <PostModal post={post} />
+      <PostView post={post} />
       <PostEdit post={post} />
     </div>
   )

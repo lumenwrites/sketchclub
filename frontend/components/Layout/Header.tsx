@@ -3,6 +3,7 @@ import Image from "next/image"
 
 import { useModal } from "context/ModalContext"
 import PostCreate from "components/Posts/PostCreate"
+import LoginModal from "components/Users/LoginModal"
 
 export default function Header() {
   const { toggleModal } = useModal()
@@ -23,9 +24,10 @@ export default function Header() {
           <Link href="/profile/lumen" className="btn btn-nav">
             My Portfolio
           </Link>
-          <a onClick={() => console.log("open login modal")} className="btn btn-nav btn-cta">
+          <a className="btn btn-nav btn-cta" onClick={() => toggleModal(`login`)}>
             Login
           </a>
+          <LoginModal/>
         </nav>
       </div>
     </header>
