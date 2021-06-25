@@ -7,6 +7,12 @@ A date-time string at UTC, such as 2007-12-03T10:15:30Z, compliant with the `dat
 """
 scalar DateTime
 
+type File {
+  id: String!
+  name: String!
+  url: String!
+}
+
 input FileInput {
   id: String
   name: String
@@ -14,7 +20,7 @@ input FileInput {
 }
 
 type Mutation {
-  createPost(body: String, title: String!): Post
+  createPost(body: String, images: [FileInput], title: String!): Post
   deletePost(slug: String!): Post
   updatePost(body: String, published: Boolean, slug: String!, title: String!): Post
 }
@@ -22,6 +28,7 @@ type Mutation {
 type Post {
   body: String
   id: String!
+  images: [File]
   published: Boolean
   slug: String!
   title: String!

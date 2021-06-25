@@ -12,7 +12,7 @@ import { UserQueries } from './userQueries'
 import { PostType, PostCreateInput } from './postTypes'
 import { PostQueries } from './postQueries'
 import { PostMutations } from './postMutations'
-import { PresignedUrl, FileInput } from './ImageTypes'
+import { PresignedUrl, File, FileInput } from './ImageTypes'
 import { ImageQueries } from './ImageQueries'
 
 import { DateTimeResolver } from 'graphql-scalars'
@@ -30,6 +30,7 @@ const schemaWithoutPermissions = makeSchema({
     DateTime,
     ImageQueries,
     PresignedUrl,
+    File,
     FileInput
   ],
   outputs: {

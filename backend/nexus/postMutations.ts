@@ -25,6 +25,7 @@ export const PostMutations = extendType({
       args: {
         title: nonNull(stringArg()),
         body: stringArg(),
+        images: list(arg({ type: 'FileInput' }))
       },
       resolve: (_, args, context: Context) => {
         const userId = 'ckq7w90oq00005j9yfr6g7sje' // my userId for now
@@ -35,6 +36,9 @@ export const PostMutations = extendType({
             title: args.title,
             body: args.body,
             slug: slug,
+            images: {
+              create: args.images,
+            },
             authorId: userId,
             published: true, // make it false once Edit post works.
           },

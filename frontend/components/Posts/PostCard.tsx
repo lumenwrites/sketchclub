@@ -10,10 +10,11 @@ const { BUCKET_URL } = process.env
 
 export default function PostCard({ post, onClick }) {
   const { toggleModal } = useModal()
+  // console.log('PostCard', post)
   return (
     <div className="post-card">
       <Link href={`/post/${post.slug}`}>
-        <SquareImage url={`${BUCKET_URL}cowboy.jpg`} />
+        <SquareImage url={`${BUCKET_URL}${post.images[0]?.url}`} />
       </Link>
       <section className="overlay">
         <div className="description" onClick={() => toggleModal(`post-modal-${post.slug}`)}>

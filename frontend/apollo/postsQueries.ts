@@ -8,14 +8,19 @@ export const GET_POSTS = gql`
       title
       body
       slug
+      images {
+        name
+        url
+      }
     }
   }
 `
 export const CREATE_POST = gql`
-    mutation CreatePost($title: String!, $body: String) {
+    mutation CreatePost($title: String!, $body: String, $images: [FileInput]) {
       createPost(
         title: $title
         body: $body
+        images: $images
       ) {
         title
         body
@@ -30,12 +35,14 @@ export const UPDATE_POST = gql`
     $title: String!,
     $body: String,
     $published: Boolean
+    $images: [FileInput]
   ){
     updatePost(
       slug: $slug
       title: $title
       body: $body
       published: $published
+      images: $images
     ) {
       slug
       title

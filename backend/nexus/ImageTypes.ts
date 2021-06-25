@@ -29,3 +29,13 @@ export const FileInput = inputObjectType({
     t.string('id')
   },
 })
+
+// Return image information from the post resolver
+export const File = objectType({
+  name: 'File',
+  definition(t) {
+    t.nonNull.string('id')
+    t.nonNull.string('name')
+    t.nonNull.string('url')
+  },
+})

@@ -9,25 +9,24 @@ import { useUploadFiles } from "hooks/useUploadFiles"
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
   const { inputs, handleChange, setValue, clearForm } = useForm(emptyInputs)
-  const { files, removeFile, uploadFile, uploading } = useUploadFiles()
+  const { files:images, removeFile, uploadFile, uploading } = useUploadFiles()
   const [createPost, createPostRes] = useCreatePost()
   const { toggleModal } = useModal()
   async function handleSubmit() {
     const { title, body } = inputs
-    console.log("submitting post", { title, body })
-    const { data } = await createPost({ variables: { title, body } })
+    console.log("submitting post", { title, body, images })
+    const { data } = await createPost({ variables: { title, body, images } })
     clearForm()
     // toggleModal(`post-edit-${data.createPost.slug}`)
     console.log("Created Post", data.createPost)
   }
-  const images = ["cowboy.jpg", "dinosaur.jpg", "fatso.jpg", "building.jpg"]
   return (
     <Modal name={`post-create`} className={"post-modal edit"}>
       <h1>Create Post</h1>
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
       <h4>Upload Images</h4>
-      <ListImages images={files} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
+      <ListImages images={images} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
       <div className="buttons">
         <div className="right">
           <button type="button" className="btn btn-cta btn-large" onClick={handleSubmit}>

@@ -58,6 +58,11 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  File: { // root type
+    id: string; // String!
+    name: string; // String!
+    url: string; // String!
+  }
   Mutation: {};
   Post: { // root type
     body?: string | null; // String
@@ -90,6 +95,11 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  File: { // field return type
+    id: string; // String!
+    name: string; // String!
+    url: string; // String!
+  }
   Mutation: { // field return type
     createPost: NexusGenRootTypes['Post'] | null; // Post
     deletePost: NexusGenRootTypes['Post'] | null; // Post
@@ -98,6 +108,7 @@ export interface NexusGenFieldTypes {
   Post: { // field return type
     body: string | null; // String
     id: string; // String!
+    images: Array<NexusGenRootTypes['File'] | null> | null; // [File]
     published: boolean | null; // Boolean
     slug: string; // String!
     title: string; // String!
@@ -122,6 +133,11 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  File: { // field return type name
+    id: 'String'
+    name: 'String'
+    url: 'String'
+  }
   Mutation: { // field return type name
     createPost: 'Post'
     deletePost: 'Post'
@@ -130,6 +146,7 @@ export interface NexusGenFieldTypeNames {
   Post: { // field return type name
     body: 'String'
     id: 'String'
+    images: 'File'
     published: 'Boolean'
     slug: 'String'
     title: 'String'
@@ -157,6 +174,7 @@ export interface NexusGenArgTypes {
   Mutation: {
     createPost: { // args
       body?: string | null; // String
+      images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       title: string; // String!
     }
     deletePost: { // args

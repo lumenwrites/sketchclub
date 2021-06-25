@@ -1,6 +1,7 @@
 import { useState } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import SquareImage from "components/Elements/SquareImage"
+const { BUCKET_URL } = process.env
 
 export default function Gallery({ images }) {
   const [currentImage, setCurrentImage] = useState(0)
@@ -20,7 +21,7 @@ export default function Gallery({ images }) {
   return (
     <div className="gallery">
       <div className="current-image">
-        <SquareImage url={`/sketches/${images[currentImage]}`} />
+        <SquareImage url={`${BUCKET_URL}${images[currentImage].url}`} />
         <div className="prev-image" onClick={prevImage}>
           <FontAwesomeIcon icon={["fas", "chevron-left"]} />
         </div>
