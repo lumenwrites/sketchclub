@@ -16,6 +16,22 @@ export const GET_POSTS = gql`
     }
   }
 `
+
+export const GET_POST = gql`
+  query Post($slug: String) {
+    post(slug: $slug) {
+      title
+      body
+      published
+      images {
+        name
+        url
+        id
+      }
+    }
+  }
+`
+
 export const CREATE_POST = gql`
     mutation CreatePost($title: String!, $body: String, $images: [FileInput]) {
       createPost(

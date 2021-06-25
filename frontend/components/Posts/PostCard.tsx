@@ -4,7 +4,7 @@ import SquareImage from "components/Elements/SquareImage"
 
 import { useContext } from "react"
 import { useModal } from "context/ModalContext"
-import PostView from "./PostView"
+import PostViewModal from "./PostViewModal"
 import PostEdit from "./PostEdit"
 const { BUCKET_URL } = process.env
 
@@ -17,7 +17,11 @@ export default function PostCard({ post, onClick }) {
         <SquareImage url={`${BUCKET_URL}${post.images[0]?.url}`} />
       </Link>
       <section className="overlay">
-        <div className="description" onClick={() => toggleModal(`post-modal-${post.slug}`)}>
+        <div className="description" onClick={() => {
+            toggleModal(`post-modal-${post.slug}`)
+            window.history.pushState("object or string", post.title, `/post/${post.slug}`);
+          }
+        }>
           <div className="flex-center">
             <div>
               <div className="title">{post.title}</div>
@@ -35,7 +39,7 @@ export default function PostCard({ post, onClick }) {
           <FontAwesomeIcon icon={["fas", "edit"]} />
         </a>
       </section>
-      <PostView post={post} />
+      <PostViewModal post={post} />
       <PostEdit post={post} />
     </div>
   )
