@@ -4,19 +4,23 @@ import Modal from "components/Elements/Modal"
 import { useModal } from "context/ModalContext"
 import useForm from "hooks/useForm"
 import { useUpdatePost, useDeletePost } from "apollo/postsActions"
+import { useUploadFiles } from "hooks/useUploadFiles"
 
 export default function PostEdit({ post }) {
   const initialInputs = { title: post.title, body: post.body }
   const { inputs, handleChange, setValue } = useForm(initialInputs)
   const [updatePost, updatePostRes] = useUpdatePost()
   const [deletePost, deletePostRes] = useDeletePost()
-  const images = ["cowboy.jpg", "dinosaur.jpg", "fatso.jpg", "building.jpg"]
+  const { files: images, removeFile, uploadFile, uploading } = useUploadFiles(post.images)
   const { toggleModal } = useModal()
-
+  
   async function handleSubmit() {
     const { title, body, published } = inputs
+    // Remove extra fields on from images (like __typename) added by graphql query
+    // I can't just put them back into update because the types allow only specific fields
+    const img = images.map((f) => ({ url: f.url, name: f.name, id: f.id }))
     const { data } = await updatePost({
-      variables: { slug:post.slug, title, body, published }
+      variables: { slug: post.slug, title, body, published, images: img },
     })
     console.log("Updated Post", data.updatePost)
     toggleModal(`post-edit-${post.slug}`)
@@ -33,7 +37,7 @@ export default function PostEdit({ post }) {
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
       <h4>Upload Images</h4>
-      <ListImages images={images} uploadImage={() => {}} uploadingImage={false} removeImage={() => {}} />
+      <ListImages images={images} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
       <div className="buttons">
         <div className="btn btn-large delete" onClick={handleDelete}>
           Delete

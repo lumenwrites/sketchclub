@@ -53,9 +53,14 @@ export const PostMutations = extendType({
         title: nonNull(stringArg()),
         body: stringArg(),
         published: booleanArg(),
+        images: list(arg({ type: 'FileInput' })),
       },
       resolve: async (_, args, context: Context) => {
-        console.log('updatePost', args)
+        // console.log('updatePost', args)
+        // Delete existing images to replace them with new noes
+        await context.prisma.image.deleteMany({
+          where: { post: { slug: args.slug } },
+        })
         try {
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },
@@ -63,6 +68,9 @@ export const PostMutations = extendType({
               title: args.title || undefined,
               body: args.body || undefined,
               published: args.published || undefined,
+              images: {
+                create: args.images,
+              },
             },
           })
         } catch (e) {
@@ -78,7 +86,15 @@ export const PostMutations = extendType({
       args: {
         slug: nonNull(stringArg()),
       },
-      resolve: (_, args, context: Context) => {
+      resolve: async (_, args, context: Context) => {
+        await context.prisma.image.deleteMany({
+          where: {
+            post: {
+              slug: args.slug
+            }
+          },
+        })
+
         return context.prisma.post.delete({
           where: { slug: args.slug || undefined },
         })

@@ -182,6 +182,7 @@ export interface NexusGenArgTypes {
     }
     updatePost: { // args
       body?: string | null; // String
+      images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       published?: boolean | null; // Boolean
       slug: string; // String!
       title: string; // String!

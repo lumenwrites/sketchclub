@@ -22,7 +22,7 @@ input FileInput {
 type Mutation {
   createPost(body: String, images: [FileInput], title: String!): Post
   deletePost(slug: String!): Post
-  updatePost(body: String, published: Boolean, slug: String!, title: String!): Post
+  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, title: String!): Post
 }
 
 type Post {

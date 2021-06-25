@@ -17,6 +17,7 @@ export default function PostCreate() {
     console.log("submitting post", { title, body, images })
     const { data } = await createPost({ variables: { title, body, images } })
     clearForm()
+    toggleModal('post-create') // hide the modal
     // toggleModal(`post-edit-${data.createPost.slug}`)
     console.log("Created Post", data.createPost)
   }
