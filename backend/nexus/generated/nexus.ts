@@ -29,6 +29,11 @@ declare global {
 }
 
 export interface NexusGenInputs {
+  FileInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
+    url?: string | null; // String
+  }
   PostCreateInput: { // input type
     content?: string | null; // String
     title: string; // String!
@@ -60,6 +65,10 @@ export interface NexusGenObjects {
     published?: boolean | null; // Boolean
     slug: string; // String!
     title: string; // String!
+  }
+  PresignedUrl: { // root type
+    filepath?: string | null; // String
+    url?: string | null; // String
   }
   Query: {};
   User: { // root type
@@ -93,7 +102,12 @@ export interface NexusGenFieldTypes {
     slug: string; // String!
     title: string; // String!
   }
+  PresignedUrl: { // field return type
+    filepath: string | null; // String
+    url: string | null; // String
+  }
   Query: { // field return type
+    getPresignedUrl: NexusGenRootTypes['PresignedUrl'] | null; // PresignedUrl
     post: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     users: NexusGenRootTypes['User'][]; // [User!]!
@@ -120,7 +134,12 @@ export interface NexusGenFieldTypeNames {
     slug: 'String'
     title: 'String'
   }
+  PresignedUrl: { // field return type name
+    filepath: 'String'
+    url: 'String'
+  }
   Query: { // field return type name
+    getPresignedUrl: 'PresignedUrl'
     post: 'Post'
     posts: 'Post'
     users: 'User'
@@ -151,6 +170,11 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
+    getPresignedUrl: { // args
+      extension?: string | null; // String
+      filename?: string | null; // String
+      filetype?: string | null; // String
+    }
     post: { // args
       slug?: string | null; // String
     }

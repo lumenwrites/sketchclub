@@ -4,10 +4,12 @@ import Modal from "components/Elements/Modal"
 import { useModal } from "context/ModalContext"
 import useForm from "hooks/useForm"
 import { useCreatePost } from "apollo/postsActions"
+import { useUploadFiles } from "hooks/useUploadFiles"
 
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
   const { inputs, handleChange, setValue, clearForm } = useForm(emptyInputs)
+  const { files, removeFile, uploadFile, uploading } = useUploadFiles()
   const [createPost, createPostRes] = useCreatePost()
   const { toggleModal } = useModal()
   async function handleSubmit() {
@@ -25,7 +27,7 @@ export default function PostCreate() {
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
       <h4>Upload Images</h4>
-      <ListImages images={images} uploadImage={() => {}} uploadingImage={false} removeImage={() => {}} />
+      <ListImages images={files} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
       <div className="buttons">
         <div className="right">
           <button type="button" className="btn btn-cta btn-large" onClick={handleSubmit}>

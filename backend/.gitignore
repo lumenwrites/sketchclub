@@ -3,7 +3,7 @@ dist/
 src/generated/
 *.env*
 *.db
-
+.env
 # misc
 .DS_Store
 *.pem

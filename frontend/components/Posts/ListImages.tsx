@@ -11,16 +11,15 @@ export default function ImageList({ images, uploadImage, uploadingImage, removeI
     var imagesDiv = document.getElementById("images")
     imagesDiv.scrollLeft = imagesDiv.scrollWidth
   }, [uploadingImage, images])
-
   return (
     <div className="images" id="images">
       {images.map((i, idx) => (
-        <PreviewImage key={idx} url={`${BUCKET_URL}${i}`} onClick={() => removeImage(i.url)} />
+        <PreviewImage key={idx} url={`${BUCKET_URL}${i.url}`} onClick={() => removeImage(i.url)} />
       ))}
       {uploadingImage ? (
         <UploadingImage />
       ) : (
-        <FileInput className={"preview-image upload"} onChange={() => {}}>
+        <FileInput className={"preview-image upload"} onChange={(e) => {uploadImage(e.target.files[0])}}>
           <div className="flex-center">
             <FontAwesomeIcon icon={["fas", "upload"]} />
           </div>

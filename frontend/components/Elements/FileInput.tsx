@@ -11,7 +11,11 @@ export default function FileInput({onChange, children, className, accept="*"}) {
         className="hidden"
         accept={accept}
         ref={inputRef}
-        onChange={onChange}
+        onChange={(e) => {
+          if (!e.target.files[0]) return // don't do anything if it's empty
+          onChange(e) // upload the file
+          e.target.value = null // clear the input
+        }}
       />
       {/* Pretty styled custom input. Just triggers a click on the html5 file input. */}
       <div

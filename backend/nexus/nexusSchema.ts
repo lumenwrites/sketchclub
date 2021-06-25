@@ -12,6 +12,8 @@ import { UserQueries } from './userQueries'
 import { PostType, PostCreateInput } from './postTypes'
 import { PostQueries } from './postQueries'
 import { PostMutations } from './postMutations'
+import { PresignedUrl, FileInput } from './ImageTypes'
+import { ImageQueries } from './ImageQueries'
 
 import { DateTimeResolver } from 'graphql-scalars'
 export const DateTime = asNexusMethod(DateTimeResolver, 'date')
@@ -26,6 +28,9 @@ const schemaWithoutPermissions = makeSchema({
     PostQueries,
     PostMutations,
     DateTime,
+    ImageQueries,
+    PresignedUrl,
+    FileInput
   ],
   outputs: {
     schema: __dirname + '/generated/schema.graphql',
