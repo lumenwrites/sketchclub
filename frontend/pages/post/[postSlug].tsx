@@ -1,7 +1,9 @@
 import { useRouter } from "next/router"
 import { useGetPost } from "apollo/postsActions"
 
+import Layout from "components/Layout/Layout"
 import PostView from "components/Posts/PostView"
+import PostEdit from "components/Posts/PostEdit"
 
 export default function post() {
   const router = useRouter()
@@ -9,5 +11,10 @@ export default function post() {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   console.log("view post", data)
-  return <PostView post={data.post} />
+  return (
+    <Layout>
+      <PostView post={data.post} />
+      <PostEdit post={data.post} />
+    </Layout>
+  )
 }

@@ -3,8 +3,9 @@ import Link from "components/Elements/Link"
 import SquareImage from "components/Elements/SquareImage"
 
 import { useContext } from "react"
+import Modal from "components/Elements/Modal"
 import { useModal } from "context/ModalContext"
-import PostViewModal from "./PostViewModal"
+import PostView from "./PostView"
 import PostEdit from "./PostEdit"
 const { BUCKET_URL } = process.env
 
@@ -12,16 +13,22 @@ export default function PostCard({ post, onClick }) {
   const { toggleModal } = useModal()
   // console.log('PostCard', post)
   return (
-    <div className="post-card">
-      <Link href={`/post/${post.slug}`}>
-        <SquareImage url={`${BUCKET_URL}${post.images[0]?.url}`} />
-      </Link>
+    <a
+      className="post-card"
+      href={`/post/${post.slug}`}
+      onClick={(e) => {
+        e.preventDefault()
+      }}
+    >
+      <SquareImage url={`${BUCKET_URL}${post.images[0]?.url}`} />
       <section className="overlay">
-        <div className="description" onClick={() => {
+        <div
+          className="description"
+          onClick={() => {
             toggleModal(`post-modal-${post.slug}`)
-            window.history.pushState("object or string", post.title, `/post/${post.slug}`);
-          }
-        }>
+            window.history.pushState("object or string", post.title, `/post/${post.slug}`)
+          }}
+        >
           <div className="flex-center">
             <div>
               <div className="title">{post.title}</div>
@@ -29,18 +36,23 @@ export default function PostCard({ post, onClick }) {
             </div>
           </div>
         </div>
-        <a
+        {/* 
+                <div
           className="edit"
           onClick={(e) => {
+            e.preventDefault()
             e.stopPropagation()
             toggleModal(`post-edit-${post.slug}`)
           }}
         >
           <FontAwesomeIcon icon={["fas", "edit"]} />
-        </a>
+        </div>
+         */}
       </section>
-      <PostViewModal post={post} />
+      <Modal name={`post-modal-${post.slug}`} className={"post-modal post-view nopadding"}>
+        <PostView post={post} />
+      </Modal>
       <PostEdit post={post} />
-    </div>
+    </a>
   )
 }

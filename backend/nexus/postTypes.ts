@@ -16,7 +16,7 @@ export const PostType = objectType({
     t.list.field('images', {
       type: 'File',
       resolve: (parent, _, context: Context) => {
-        console.log('Return post images', parent.id)
+        // console.log('Return post images', parent.id)
         return context.prisma.post
           .findUnique({
             where: { id: parent.id || undefined },

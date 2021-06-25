@@ -1,22 +1,25 @@
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
+import { useModal } from "context/ModalContext"
 import Gallery from "./Gallery"
 const { BUCKET_URL } = process.env
 
-import Layout from "components/Layout/Layout"
-
 export default function PostView({ post }) {
+  const { toggleModal } = useModal()
+
   return (
-    <Layout>
-      <div className={"post-page post-view"}>
-        <Gallery images={post.images} />
-        <div className="description">
-          <h1>{post.title}</h1>
-          <span className="author">by LilyAldrin</span>
-          <hr />
-          {post.body}
+    <div className={"post-page post-view"}>
+      <Gallery images={post.images} />
+      <div className="description">
+        <h1>{post.title}</h1>
+        <span className="author">by LilyAldrin</span>
+        <div className="btn btn-edit-post" onClick={(e) => toggleModal(`post-edit-${post.slug}`)}>
+          <FontAwesomeIcon icon={["fas", "edit"]} /> Edit Post 
         </div>
-        <div className="clearfix"/>
+        <hr />
+        {post.body}
+
       </div>
-    </Layout>
+      <div className="clearfix" />
+    </div>
   )
 }
