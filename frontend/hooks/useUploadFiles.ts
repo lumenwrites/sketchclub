@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import { useApolloClient } from "@apollo/client"
 import { GET_PRESIGNED_URL } from "apollo/imageQueries"
+import resizeImage from 'utils/resizeImage'
 
 export function useUploadFiles(initial = []) {
   const [files, setFiles] = useState(initial)
@@ -12,7 +13,7 @@ export function useUploadFiles(initial = []) {
 
   async function uploadFile(file) {
     setUploading(true)
-    // TODO: file = await resizeImage(file, 700)
+    file = await resizeImage(file, 480, 480)
     const [filename, extension] = processFilename(file.name)
     const { data } = await client.query({
       query: GET_PRESIGNED_URL,

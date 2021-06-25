@@ -1,14 +1,9 @@
 import {
-  intArg,
-  makeSchema,
   nonNull,
   list,
   extendType,
   stringArg,
-  inputObjectType,
   arg,
-  asNexusMethod,
-  enumType,
   booleanArg,
 } from 'nexus'
 import { Context } from '../apollo/context'
@@ -87,12 +82,9 @@ export const PostMutations = extendType({
         slug: nonNull(stringArg()),
       },
       resolve: async (_, args, context: Context) => {
+        // Must delete all the post's images before deleting the post
         await context.prisma.image.deleteMany({
-          where: {
-            post: {
-              slug: args.slug
-            }
-          },
+          where: { post: { slug: args.slug } },
         })
 
         return context.prisma.post.delete({
