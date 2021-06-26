@@ -33,6 +33,7 @@ export default function PostEdit({ post }) {
   async function handleDelete() {
     const { data } = await deletePost({ variables: { slug: post.slug } })
     toggleModal(`post-edit-${post.slug}`)
+    router.push(`/`) // TODO: redirect to the user's profile, or to the previous page?
   }
 
   return (

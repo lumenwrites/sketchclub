@@ -5,7 +5,7 @@ const { BUCKET_URL } = process.env
 
 export default function PostView({ post }) {
   const { toggleModal } = useModal()
-
+  console.log('post view', post)
   return (
     <div className={"post-page post-view"}>
       <Gallery images={post.images} />

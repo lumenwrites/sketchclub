@@ -33,6 +33,7 @@ type Mutation {
 }
 
 type Post {
+  author: User
   body: String
   id: String!
   images: [File]

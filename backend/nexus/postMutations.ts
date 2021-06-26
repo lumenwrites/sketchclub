@@ -11,6 +11,7 @@ import { Context } from '../apollo/context'
 import slugify from 'slugify'
 import cuid from 'cuid'
 
+import { getUserId } from './shield'
 
 export const PostMutations = extendType({
   type: 'Mutation',
@@ -23,7 +24,6 @@ export const PostMutations = extendType({
         images: list(arg({ type: 'FileInput' }))
       },
       resolve: (_, args, context: Context) => {
-        const userId = 'ckq7w90oq00005j9yfr6g7sje' // my userId for now
         const slug = slugify(args.title) + '-' + cuid()
         console.log('Created post', args, slug)
         return context.prisma.post.create({
@@ -34,7 +34,7 @@ export const PostMutations = extendType({
             images: {
               create: args.images,
             },
-            authorId: userId,
+            authorId: getUserId(context),
             published: true, // make it false once Edit post works.
           },
         })

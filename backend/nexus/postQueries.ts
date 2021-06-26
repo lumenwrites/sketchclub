@@ -30,7 +30,7 @@ export const PostQueries = extendType({
         })
       },
     })
-
+    // TODO: protect the unpublished posts?
     t.nonNull.list.nonNull.field('posts', {
       type: 'Post',
       args: {

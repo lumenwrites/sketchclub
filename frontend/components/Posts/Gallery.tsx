@@ -21,19 +21,23 @@ export default function Gallery({ images }) {
   return (
     <div className="gallery">
       <div className="current-image">
-        <SquareImage url={`${BUCKET_URL}${images[currentImage].url}`} />
-        <div className="prev-image" onClick={prevImage}>
-          <FontAwesomeIcon icon={["fas", "chevron-left"]} />
-        </div>
-        <div className="next-image" onClick={nextImage}>
-          <FontAwesomeIcon icon={["fas", "chevron-right"]} />
-        </div>
+        <SquareImage url={`${BUCKET_URL}${images[currentImage]?.url}`} />
+        {images.length > 1 && (
+          <>
+            <div className="prev-image" onClick={prevImage}>
+              <FontAwesomeIcon icon={["fas", "chevron-left"]} />
+            </div>
+            <div className="next-image" onClick={nextImage}>
+              <FontAwesomeIcon icon={["fas", "chevron-right"]} />
+            </div>
 
-        <div className="dots">
-          {images.map((img, idx) => (
-            <div className={`dot ${idx == currentImage ? "active" : ""}`} key={idx} onClick={() => setCurrentImage(idx)} />
-          ))}
-        </div>
+            <div className="dots">
+              {images.map((img, idx) => (
+                <div className={`dot ${idx == currentImage ? "active" : ""}`} key={idx} onClick={() => setCurrentImage(idx)} />
+              ))}
+            </div>
+          </>
+        )}
       </div>
     </div>
   )

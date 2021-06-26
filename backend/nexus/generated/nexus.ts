@@ -116,6 +116,7 @@ export interface NexusGenFieldTypes {
     updatePost: NexusGenRootTypes['Post'] | null; // Post
   }
   Post: { // field return type
+    author: NexusGenRootTypes['User'] | null; // User
     body: string | null; // String
     id: string; // String!
     images: Array<NexusGenRootTypes['File'] | null> | null; // [File]
@@ -162,6 +163,7 @@ export interface NexusGenFieldTypeNames {
     updatePost: 'Post'
   }
   Post: { // field return type name
+    author: 'User'
     body: 'String'
     id: 'String'
     images: 'File'

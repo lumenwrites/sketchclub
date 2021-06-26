@@ -4,6 +4,8 @@ import { Context } from '../apollo/context'
 import slugify from 'slugify'
 import cuid from 'cuid'
 
+import { getUserId } from './shield'
+
 import AWS from 'aws-sdk'
 const { AWS_ACCESS_KEY, AWS_SECRET, BUCKET_NAME } = process.env
 const s3 = new AWS.S3({
@@ -11,7 +13,7 @@ const s3 = new AWS.S3({
   secretAccessKey: AWS_SECRET,
 })
 
-async function getSignedUrl(filepath:String, filetype:String) {
+async function getSignedUrl(filepath: String, filetype: String) {
   return new Promise((resolve, reject) => {
     var params = { Bucket: BUCKET_NAME, Key: filepath, ContentType: filetype }
     s3.getSignedUrl('putObject', params, (err, url) => {
@@ -32,9 +34,11 @@ export const ImageQueries = extendType({
         filetype: stringArg(),
       },
       resolve: async (_parent, args, context: Context) => {
-        const username = 'testusername'
+        const user = await context.prisma.user.findUnique({
+          where: { id: getUserId(context) }
+        })
         const filename = `${slugify(args.filename)}-${cuid()}.${args.extension}`
-        const filepath = `${username}/images/${filename}` //username/images/filename.jpg
+        const filepath = `${user.username}/images/${filename}` //username/images/filename.jpg
         const url = await getSignedUrl(filepath, args.filetype)
         console.log('Get presigned url for file', url)
         return { url, filepath }

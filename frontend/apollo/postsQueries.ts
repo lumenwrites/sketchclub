@@ -13,6 +13,9 @@ export const GET_POSTS = gql`
         url
         id
       }
+      author {
+        username
+      }
     }
   }
 `
@@ -28,6 +31,9 @@ export const GET_POST = gql`
         name
         url
         id
+      }
+      author {
+        username
       }
     }
   }

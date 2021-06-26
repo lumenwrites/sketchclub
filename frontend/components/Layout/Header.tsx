@@ -35,7 +35,7 @@ export default function Header() {
                 Upload Sketch
               </a>
               <PostCreate />
-              <Link href="/profile/username" className="btn btn-nav">
+              <Link href={`/profile/${username}`} className="btn btn-nav">
                 My Portfolio
               </Link>
               <a className="btn btn-nav" onClick={() => logout()}>
