@@ -13,15 +13,9 @@ export default function PostCard({ post, onClick }) {
   const { toggleModal } = useModal()
   // console.log('PostCard', post)
   return (
-    <a
-      className="post-card"
-      href={`/post/${post.slug}`}
-      onClick={(e) => {
-        e.preventDefault()
-      }}
-    >
+    <div className="post-card">
       <SquareImage url={`${BUCKET_URL}${post.images[0]?.url}`} />
-      <section className="overlay">
+      <a className="overlay" href={`/post/${post.slug}`} onClick={(e) => { e.preventDefault() }}>
         <div
           className="description"
           onClick={() => {
@@ -48,11 +42,11 @@ export default function PostCard({ post, onClick }) {
           <FontAwesomeIcon icon={["fas", "edit"]} />
         </div>
          */}
-      </section>
+      </a>
       <Modal name={`post-modal-${post.slug}`} className={"post-modal post-view nopadding"}>
         <PostView post={post} />
       </Modal>
       <PostEdit post={post} />
-    </a>
+    </div>
   )
 }

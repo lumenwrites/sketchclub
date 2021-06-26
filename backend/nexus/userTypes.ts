@@ -25,6 +25,16 @@ export const UserType = objectType({
   },
 })
 
+// Return the token after Signup/Login
+export const AuthPayload = objectType({
+  name: 'AuthPayload',
+  definition(t) {
+    t.string('token')
+    t.field('user', { type: 'User' })
+  },
+})
+
+// For seeding the database
 export const UserCreateInput = inputObjectType({
   name: 'UserCreateInput',
   definition(t) {
@@ -33,3 +43,4 @@ export const UserCreateInput = inputObjectType({
     t.list.nonNull.field('posts', { type: 'PostCreateInput' })
   },
 })
+

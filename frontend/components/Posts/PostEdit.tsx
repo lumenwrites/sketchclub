@@ -1,3 +1,5 @@
+import Link from "components/Elements/Link"
+import { useRouter } from "next/router"
 import Error from "components/Elements/Error"
 import ListImages from "./ListImages"
 import Modal from "components/Elements/Modal"
@@ -7,13 +9,14 @@ import { useUpdatePost, useDeletePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
 
 export default function PostEdit({ post }) {
+  const router = useRouter()
   const initialInputs = { title: post.title, body: post.body }
   const { inputs, handleChange, setValue } = useForm(initialInputs)
-  const [updatePost, updatePostRes] = useUpdatePost()
+  const [updatePost, updatePostRes] = useUpdatePost(post.slug)
   const [deletePost, deletePostRes] = useDeletePost()
   const { files: images, removeFile, uploadFile, uploading } = useUploadFiles(post.images)
   const { toggleModal } = useModal()
-  
+
   async function handleSubmit() {
     const { title, body, published } = inputs
     // Remove extra fields on from images (like __typename) added by graphql query
@@ -24,6 +27,7 @@ export default function PostEdit({ post }) {
     })
     console.log("Updated Post", data.updatePost)
     toggleModal(`post-edit-${post.slug}`)
+    router.push(`/post/${post.slug}`)
   }
 
   async function handleDelete() {
@@ -43,6 +47,9 @@ export default function PostEdit({ post }) {
           Delete
         </div>
         <div className="right">
+          {/* <Link href={`/post/${post.slug}`} className="btn btn-large">
+            View
+          </Link> */}
           <div className="btn btn-large btn-cta" onClick={handleSubmit}>
             Save
           </div>

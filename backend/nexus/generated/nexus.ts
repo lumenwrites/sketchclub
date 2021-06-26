@@ -58,6 +58,10 @@ export interface NexusGenScalars {
 }
 
 export interface NexusGenObjects {
+  AuthPayload: { // root type
+    token?: string | null; // String
+    user?: NexusGenRootTypes['User'] | null; // User
+  }
   File: { // root type
     id: string; // String!
     name: string; // String!
@@ -95,6 +99,10 @@ export type NexusGenRootTypes = NexusGenObjects
 export type NexusGenAllTypes = NexusGenRootTypes & NexusGenScalars
 
 export interface NexusGenFieldTypes {
+  AuthPayload: { // field return type
+    token: string | null; // String
+    user: NexusGenRootTypes['User'] | null; // User
+  }
   File: { // field return type
     id: string; // String!
     name: string; // String!
@@ -103,6 +111,8 @@ export interface NexusGenFieldTypes {
   Mutation: { // field return type
     createPost: NexusGenRootTypes['Post'] | null; // Post
     deletePost: NexusGenRootTypes['Post'] | null; // Post
+    join: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
+    login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     updatePost: NexusGenRootTypes['Post'] | null; // Post
   }
   Post: { // field return type
@@ -119,8 +129,10 @@ export interface NexusGenFieldTypes {
   }
   Query: { // field return type
     getPresignedUrl: NexusGenRootTypes['PresignedUrl'] | null; // PresignedUrl
+    me: NexusGenRootTypes['User'] | null; // User
     post: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   User: { // field return type
@@ -133,6 +145,10 @@ export interface NexusGenFieldTypes {
 }
 
 export interface NexusGenFieldTypeNames {
+  AuthPayload: { // field return type name
+    token: 'String'
+    user: 'User'
+  }
   File: { // field return type name
     id: 'String'
     name: 'String'
@@ -141,6 +157,8 @@ export interface NexusGenFieldTypeNames {
   Mutation: { // field return type name
     createPost: 'Post'
     deletePost: 'Post'
+    join: 'AuthPayload'
+    login: 'AuthPayload'
     updatePost: 'Post'
   }
   Post: { // field return type name
@@ -157,8 +175,10 @@ export interface NexusGenFieldTypeNames {
   }
   Query: { // field return type name
     getPresignedUrl: 'PresignedUrl'
+    me: 'User'
     post: 'Post'
     posts: 'Post'
+    user: 'User'
     users: 'User'
   }
   User: { // field return type name
@@ -180,6 +200,15 @@ export interface NexusGenArgTypes {
     deletePost: { // args
       slug: string; // String!
     }
+    join: { // args
+      email: string; // String!
+      password: string; // String!
+      username: string; // String!
+    }
+    login: { // args
+      email: string; // String!
+      password: string; // String!
+    }
     updatePost: { // args
       body?: string | null; // String
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
@@ -199,6 +228,9 @@ export interface NexusGenArgTypes {
     }
     posts: { // args
       published?: boolean | null; // Boolean
+    }
+    user: { // args
+      username?: string | null; // String
     }
   }
 }

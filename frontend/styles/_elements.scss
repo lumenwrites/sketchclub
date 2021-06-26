@@ -269,3 +269,9 @@ textarea {
 	}
 }
 
+.error {
+  border: 1px solid $error;
+  background: $error-bg;
+  padding: 10px;
+}
+

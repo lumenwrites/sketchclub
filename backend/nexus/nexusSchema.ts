@@ -7,8 +7,9 @@ import { applyMiddleware } from 'graphql-middleware'
 
 import { permissions } from './shield'
 
-import { UserType, UserCreateInput } from './userTypes'
+import { UserType, UserCreateInput, AuthPayload } from './userTypes'
 import { UserQueries } from './userQueries'
+import { UserMutations } from './userMutations'
 import { PostType, PostCreateInput } from './postTypes'
 import { PostQueries } from './postQueries'
 import { PostMutations } from './postMutations'
@@ -22,7 +23,9 @@ const schemaWithoutPermissions = makeSchema({
   types: [
     UserType,
     UserCreateInput,
+    AuthPayload,
     UserQueries,
+    UserMutations,
     PostType,
     PostCreateInput,
     PostQueries,

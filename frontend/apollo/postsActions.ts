@@ -11,8 +11,11 @@ export const useCreatePost = () => useMutation(CREATE_POST, {
   refetchQueries: [{ query: GET_POSTS, variables: { published: true } }]
 })
 
-export const useUpdatePost = () => useMutation(UPDATE_POST, {
-  refetchQueries: [{ query: GET_POSTS, variables: { published: true } }]
+export const useUpdatePost = (slug) => useMutation(UPDATE_POST, {
+  refetchQueries: [
+    { query: GET_POSTS, variables: { published: true } },
+    { query: GET_POST, variables: { slug: slug } }
+  ]
 })
 
 export const useDeletePost = () => useMutation(DELETE_POST, {

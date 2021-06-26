@@ -22,7 +22,7 @@ function createClient({ headers, initialState }) {
           )
       }),
       new HttpLink({
-        uri: "http://localhost:4020/api", //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
+        uri: "http://localhost:4020/graphql", //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
           credentials: 'include',
         },
