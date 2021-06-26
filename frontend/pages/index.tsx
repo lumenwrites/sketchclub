@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useGetPosts } from "apollo/postsActions"
 
 import Layout from "components/Layout/Layout"

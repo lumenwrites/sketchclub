@@ -1,3 +1,4 @@
+// @ts-nocheck
 import withApollo from "apollo/client"
 import { ApolloProvider } from "@apollo/client/react"
 import CombinedContextsProvider from "context/CombinedContexts"

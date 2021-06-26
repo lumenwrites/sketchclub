@@ -1,3 +1,4 @@
+// @ts-nocheck
 import PostCard from "./PostCard"
 
 const Browse = ({posts}) => {
