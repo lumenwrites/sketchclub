@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { stringArg, extendType } from 'nexus'
 import { Context } from '../apollo/context'
 

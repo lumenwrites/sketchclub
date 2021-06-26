@@ -7,10 +7,10 @@
     "dev": "ts-node-dev --no-notify --respawn --transpile-only server",
     "start": "node dist/server",
     "clean": "rm -rf dist && rm -rf prisma/migrations",
-    "build": "npm -s run clean && npm -s run generate && tsc",
+    "build": "npm -s run clean && npm -s run generate && TSC_COMPILE_ON_ERROR=true tsc",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",
     "generate:prisma": "prisma generate",
-    "generate:nexus": "ts-node --transpile-only src/schema",
+    "generate:nexus": "ts-node --transpile-only nexus/nexusSchema",
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "npx prisma db seed --preview-feature"
   },
@@ -34,7 +34,12 @@
     "slugify": "^1.5.3"
   },
   "devDependencies": {
+    "@babel/cli": "^7.14.5",
+    "@babel/core": "^7.14.6",
+    "@babel/plugin-transform-typescript": "^7.14.6",
+    "@babel/preset-typescript": "^7.14.5",
     "@types/bcryptjs": "^2.4.2",
+    "@types/cookie-parser": "^1.4.2",
     "@types/jsonwebtoken": "^8.5.2",
     "@types/node": "^15.12.4",
     "@types/react": "^17.0.11",

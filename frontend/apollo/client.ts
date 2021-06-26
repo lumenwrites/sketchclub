@@ -5,6 +5,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr'
 
 import withApollo from 'next-with-apollo'
 // import paginationField from './paginationField'
+const { BACKEND_URL } = process.env
 
 function createClient({ headers, initialState }) {
   return new ApolloClient({
@@ -22,7 +23,7 @@ function createClient({ headers, initialState }) {
           )
       }),
       new HttpLink({
-        uri: "http://localhost:4020/graphql", //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
+        uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
           credentials: 'include',
         },

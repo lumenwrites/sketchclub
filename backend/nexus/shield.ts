@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { rule, shield } from 'graphql-shield'
 import { verify } from 'jsonwebtoken'
 import { Context } from '../apollo/context'
