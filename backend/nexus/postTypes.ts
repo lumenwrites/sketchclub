@@ -28,7 +28,7 @@ export const PostType = objectType({
     t.field('author', {
       type: 'User',
       resolve: (parent, _, context: Context) => {
-        console.log('Return post author', parent.id)
+        // console.log('Return post author', parent.id)
         return context.prisma.post
           .findUnique({
             where: { id: parent.id || undefined },
@@ -37,7 +37,7 @@ export const PostType = objectType({
       },
     })
 
-    
+
   }
 })
 

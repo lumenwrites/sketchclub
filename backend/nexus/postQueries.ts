@@ -34,11 +34,27 @@ export const PostQueries = extendType({
     t.nonNull.list.nonNull.field('posts', {
       type: 'Post',
       args: {
+        username: stringArg(),
         published: booleanArg(),
       },
-      resolve: (_parent, args, context: Context) => {
+      resolve: async (_parent, args, context: Context) => {
+        console.log('Get posts', args)
+        // Filter posts by user
+        let authorId
+        if (args.username) {
+          const author = await context.prisma.user.findUnique({
+            where: { username: args.username },
+          })
+          authorId = author.id
+        }
+
         // console.log('Posts resolver', context.prisma.post.findMany())
-        return context.prisma.post.findMany()
+        return context.prisma.post.findMany({
+          where: {
+            authorId: authorId,
+            published: args.published || undefined
+          }
+        })
       },
     })
   }

@@ -1,9 +1,10 @@
 import { gql } from '@apollo/client'
 
 export const GET_POSTS = gql`
-  query Posts($published:Boolean) {
+  query Posts($username: String, $published:Boolean) {
     posts(
       published:$published
+      username:$username
     ) {
       title
       body

@@ -230,6 +230,7 @@ export interface NexusGenArgTypes {
     }
     posts: { // args
       published?: boolean | null; // Boolean
+      username?: string | null; // String
     }
     user: { // args
       username?: string | null; // String

@@ -14,7 +14,9 @@ export default function PostView({ post }) {
       <Gallery images={post.images} />
       <div className="description">
         <h1>{post.title}</h1>
-        <Link className="author" href={`/profile/${post.author.username}`}>by {post.author.username}</Link>
+        <Link className="author" href={`/profile/${post.author.username}`} onClick={(e) => toggleModal("")}>
+          by {post.author.username}
+        </Link>
         {isPostAuthor && (
           <div className="btn btn-edit-post" onClick={(e) => toggleModal(`post-edit-${post.slug}`)}>
             <FontAwesomeIcon icon={["fas", "edit"]} /> Edit Post

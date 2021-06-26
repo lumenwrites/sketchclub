@@ -1,7 +1,9 @@
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_POSTS, GET_POST, CREATE_POST, UPDATE_POST, DELETE_POST } from 'apollo/postsQueries'
 
-export const useGetPosts = () => useQuery(GET_POSTS)
+export const useGetPosts = ({username, published}) => useQuery(GET_POSTS, {
+  variables: {username, published},
+})
 
 export const useGetPost = (slug) => useQuery(GET_POST, {
   variables: { slug },
