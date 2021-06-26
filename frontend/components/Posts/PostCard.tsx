@@ -26,7 +26,7 @@ export default function PostCard({ post, onClick }) {
           <div className="flex-center">
             <div>
               <div className="title">{post.title}</div>
-              <div className="by">by LilyAldrin</div>
+              <div className="by">by {post.author.username} </div>
             </div>
           </div>
         </div>

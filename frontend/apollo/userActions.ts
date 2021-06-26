@@ -5,10 +5,7 @@ import { setCookie, getCookie, eraseCookie } from "utils/cookies"
 
 export const useMe = () => useQuery(ME)
 
-export function isLoggedIn() {
-  const { data, loading, error } = useQuery(ME)
-  return data?.me?.username
-}
+
 // Not used right now. I wanted to update the cookie in LoginModal, and then manually refetch
 // ME query to use the updated token to fetch the user.
 // But for some reason, next.js sends the old cookie value, even after the browser cookies are updated.

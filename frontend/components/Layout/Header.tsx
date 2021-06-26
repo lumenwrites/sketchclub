@@ -1,14 +1,14 @@
 import Link from "components/Elements/Link"
 import Image from "next/image"
 
-import { isLoggedIn, useLogout } from "apollo/userActions"
-
+import { useLogout } from "apollo/userActions"
+import { useAuth } from "context/AuthContext"
 import { useModal } from "context/ModalContext"
 import PostCreate from "components/Posts/PostCreate"
 import LoginModal from "components/Users/LoginModal"
 
 export default function Header() {
-  const username = isLoggedIn()
+  const { username } = useAuth()
   const logout = useLogout()
   const { toggleModal } = useModal()
   return (
