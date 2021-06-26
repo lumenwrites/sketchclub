@@ -94,6 +94,5 @@ export const PostMutations = extendType({
     })
 
 
-
   },
 })
