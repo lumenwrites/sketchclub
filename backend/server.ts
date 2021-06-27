@@ -23,7 +23,7 @@ server.applyMiddleware({
   app,
   cors: {
     origin: "*", // CLIENT_URL,
-    credentials: true
+    credentials: false
   },
 });
 
