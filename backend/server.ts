@@ -21,10 +21,11 @@ const server = new ApolloServer({
 
 server.applyMiddleware({
   app,
-  cors: {
-    origin: "*", // CLIENT_URL,
-    credentials: false
-  },
+  cors: false
+  // cors: {
+  //   origin: "*", // CLIENT_URL,
+  //   credentials: false
+  // },
 });
 
 app.listen({ port: PORT }, () => {
