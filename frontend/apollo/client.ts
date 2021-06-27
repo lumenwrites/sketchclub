@@ -8,6 +8,7 @@ import withApollo from 'next-with-apollo'
 const { BACKEND_URL } = process.env
 
 function createClient({ headers, initialState }) {
+  console.log('[ApolloClient] Connecting to backend:', BACKEND_URL)
   return new ApolloClient({
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
