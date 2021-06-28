@@ -21,7 +21,7 @@ const server = new ApolloServer({
 server.applyMiddleware({
   app,
   cors: {
-    origin: CLIENT_URL,
+    origin: true,
     credentials: true
   },
 })
