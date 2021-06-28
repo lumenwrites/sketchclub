@@ -11,36 +11,38 @@ export function useUploadFiles(initial = []) {
   const initialValues = Object.values(initial).join('');
   useEffect(() => { setFiles(initial) }, [initialValues]);
 
-  async function uploadFile(file) {
-    setUploading(true)
-    file = await resizeImage(file, 480, 480)
-    const [filename, extension] = processFilename(file.name)
+
+
+  async function uploadToS3(file) {
+    // request presigned url
     const { data } = await client.query({
       query: GET_PRESIGNED_URL,
-      variables: { filename, extension, filetype: file.type },
+      variables: { filename: file.name, filetype: file.type},
     })
+    // Filepath is "/username/images/filename.jpg", that will be the actual url stored in the database
+    // url is just a presigned url used for file upload to S3
     const { filepath, url } = data.getPresignedUrl
-    // console.log('presigned url', filepath, url)
     // upload the file
     const res = await fetch(url, {
       method: 'PUT',
-      headers: { "Content-Type": file.type },
+      headers: { "Content-Type": file.type},
       body: file
     })
+    return filepath 
+  }
+
+  async function uploadFile(file) {
+    setUploading(true)
+    const isAnImage = file.type.match(/image.*/)
+    if (isAnImage) file = await resizeImage(file, 480, 480)
+    const url = await uploadToS3(file)
     // console.log('uploaded file', res)
     setUploading(false)
-    setFiles((prev) => [...prev, { name: file.name, url: filepath }])
+    setFiles((prev) => [...prev, { name: file.name, url }])
   }
   function removeFile(url) {
     // console.log('removeImage', url, setImages)
     setFiles((prev) => prev.filter((i) => i.url !== url))
   }
   return { files, setFiles, uploadFile, uploading, removeFile }
-}
-
-function processFilename(filename) {
-  var lines = filename.split(".");   // split all lines into array
-  var extension = lines.pop();   // read and remove extension
-  var name = lines.join(".");     // re-join the remaining lines
-  return [name, extension]
 }

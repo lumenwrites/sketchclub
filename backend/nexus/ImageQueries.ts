@@ -24,6 +24,13 @@ async function getSignedUrl(filepath: String, filetype: String) {
   })
 }
 
+function processFilename(filename) {
+  var lines = filename.split(".");   // split all lines into array
+  var extension = lines.pop();   // read and remove extension
+  var name = lines.join(".");     // re-join the remaining lines
+  return [name, extension]
+}
+
 export const ImageQueries = extendType({
   type: 'Query',
   definition(t) {
@@ -31,14 +38,14 @@ export const ImageQueries = extendType({
       type: 'PresignedUrl',
       args: {
         filename: stringArg(),
-        extension: stringArg(),
         filetype: stringArg(),
       },
       resolve: async (_parent, args, context: Context) => {
         const user = await context.prisma.user.findUnique({
           where: { id: getUserId(context) }
         })
-        const filename = `${slugify(args.filename)}-${cuid()}.${args.extension}`
+        const [name, extension] = processFilename(args.filename)
+        const filename = `${slugify(name)}-${cuid()}.${extension}`
         const filepath = `${user.username}/images/${filename}` //username/images/filename.jpg
         const url = await getSignedUrl(filepath, args.filetype)
         console.log('Get presigned url for file', url)

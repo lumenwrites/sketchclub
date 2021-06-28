@@ -2,15 +2,13 @@ import Resizer from "react-image-file-resizer"
 
 // https://www.npmjs.com/package/react-image-file-resizer
 export default async function resizeImage(file, maxSize = 480, minSize=480) {
-  if (!file.type.match(/image.*/)) return file
-
   const resizeFile = (file) =>
     new Promise((resolve) => {
       Resizer.imageFileResizer(
         file,
         maxSize,
         maxSize,
-        "image/jpeg",
+        "WEBP", //"image/jpeg",
         100, //quality
         0, // rotation
         (uri) => {
@@ -23,7 +21,8 @@ export default async function resizeImage(file, maxSize = 480, minSize=480) {
     })
 
   const blob = await resizeFile(file)
-  file = new File([dataURItoBlob(blob)], file.name)
+  const name = file.name.split('.').slice(0, -1).join('.') // without extension
+  file = new File([dataURItoBlob(blob)], `${name}.webp`, { type: 'image/webp' })
   return file
 }
 

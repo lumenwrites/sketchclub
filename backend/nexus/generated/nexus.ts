@@ -221,7 +221,6 @@ export interface NexusGenArgTypes {
   }
   Query: {
     getPresignedUrl: { // args
-      extension?: string | null; // String
       filename?: string | null; // String
       filetype?: string | null; // String
     }
