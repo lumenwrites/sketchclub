@@ -8,19 +8,19 @@ import withApollo from 'next-with-apollo'
 const { BACKEND_URL } = process.env
 
 function createClient({ headers, initialState }) {
-  console.log('[ApolloClient] Connecting to backend:', BACKEND_URL)
+  console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
   return new ApolloClient({
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors)
           graphQLErrors.forEach(({ message, locations, path }) =>
             console.log(
-              `[GraphQL error]: Message: ${message}, Location: ${locations}, Path: ${path}`
+              `[Apollo Client] GraphQL error: ${message}, Location: ${locations}, Path: ${path}`
             )
           );
         if (networkError)
           console.log(
-            `[Network error]: ${networkError}. Backend is unreachable. Is it running?`
+            `[Apollo Client] Network Error when connecting to GraphQL: ${networkError}.`
           )
       }),
       new HttpLink({
