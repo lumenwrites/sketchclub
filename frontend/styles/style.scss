@@ -4,28 +4,29 @@ $main-font: "Open Sans";
 $logo-font: "Open Sans";
 $text: #3d454b;
 $header: #3d454b;
-$text-dim: rgb(109 95 84 / 57%); //#947C71; // rgba(0,0,0,0.44);
-$text-link: #3d454b;
+$text-dim: #65676b; // rgb(109 95 84 / 57%); //#947C71; // rgba(0,0,0,0.44);
+$text-link: #3d454b;// #DA552F; //#216fdb; // 
 
 // Big Elements
 $wrapper-width: 700px; //960px;
-$main-bg: #faf4e9;
+$main-bg: #faf4e9; // tan // #f1f2f5; // facebook neutral 
+$modal-bg: white;
 $header-bg: white;
 $footer-bg:#333a42;
 $subnav-bg: #fafaf9;
 $post-bg:white;
 $panel-bg: #eeeeee;
-$modal-bg: #faf4e9;
+
 
 // Small Elements
 $btn-bg: white;
 $btn-bg-hover: #eeeeee;
-$btn-cta: #DA552F;
-$border: rgb(148 124 113 / 39%); //#dddddd;
+$btn-cta:#DA552F;// #1977f2; //Facebook Blue
+$border: #ced0d4; //#65676b; // rgb(148 124 113 / 39%); //#dddddd;
 $border-radius: 3px;
 $input-bg: white;
 $scrollbar-thumb: rgba(110, 110, 110, 0.2);
-$error: #DA552F;
+$error: #f02849; // #DA552F;
 $error-bg: #da542f3b;
 // Colors
 $orange: #DA552F;

@@ -7,21 +7,25 @@ import withApollo from 'next-with-apollo'
 // import paginationField from './paginationField'
 const { BACKEND_URL } = process.env
 
+// https://www.apollographql.com/docs/react/networking/authentication/
 function createClient({ headers, initialState }) {
   console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
   return new ApolloClient({
+    // ssrMode: true, //https://www.apollographql.com/docs/react/performance/server-side-rendering/
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
-        if (graphQLErrors)
+        if (graphQLErrors) {
           graphQLErrors.forEach(({ message, locations, path }) =>
             console.log(
               `[Apollo Client] GraphQL error: ${message}, Location: ${locations}, Path: ${path}`
             )
-          );
-        if (networkError)
+          )
+        }
+        if (networkError) {
           console.log(
             `[Apollo Client] Network Error when connecting to GraphQL: ${networkError}.`
           )
+        }
       }),
       new HttpLink({
         uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,

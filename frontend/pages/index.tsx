@@ -8,6 +8,7 @@ import Browse from "components/Posts/Browse"
 export default function profile() {
   const { loading, error, data } = useGetPosts({published:true})
   if (loading) return <p>Loading...</p>
+  // console.log('browse error', error)
   if (error) return <p>Error :(</p>
   // console.log('browse posts', data)
   return (
@@ -16,3 +17,5 @@ export default function profile() {
     </Layout>
   )
 }
+
+

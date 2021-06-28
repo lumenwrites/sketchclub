@@ -62,11 +62,14 @@
     width: 33.33%;
     float: left;
     padding: 10px;
+    
     h1 {
       text-align: left;
       font-size: 1.2em;
+      font-weight: bold;
     }
     .author {
+      font-weight: bold;
     }
   }
 }

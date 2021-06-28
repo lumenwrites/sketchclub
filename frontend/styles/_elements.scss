@@ -239,7 +239,9 @@ input {
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     color: $text-dim;
+    // font-weight: 100;
     opacity: 1; /* Firefox */
+    opacity: 80%;
   }
 }
 
@@ -266,6 +268,7 @@ textarea {
 		/* Chrome, Firefox, Opera, Safari 10.1+ */
 		color: $text-dim;
 		opacity: 1; /* Firefox */
+    opacity: 80%;
 	}
 }
 

@@ -6,7 +6,7 @@
   "scripts": {
     "dev": "ts-node-dev --no-notify --respawn --transpile-only server",
     "start": "node dist/server",
-    "serve": "NODE_ENV=production pm2 start dist/server",
+    "serve": "NODE_ENV=production pm2 start dist/server.js",
     "clean": "rm -rf dist && rm -rf prisma/migrations",
     "build": "npm -s run clean && npm -s run generate && tsc",
     "generate": "npm -s run generate:prisma && npm -s run generate:nexus",

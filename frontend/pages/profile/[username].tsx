@@ -12,7 +12,7 @@ export default function profile() {
   const { loading, error, data } = useGetPosts({ username })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
-  console.log('profile posts', data)
+  // console.log('profile posts', data)
   return (
     <Layout>
       <Browse posts={data.posts}/>

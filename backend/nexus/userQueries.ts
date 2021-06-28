@@ -16,7 +16,7 @@ export const UserQueries = extendType({
         const user = await context.prisma.user.findUnique({
           where: { id: userId },
         })
-        console.log('nexus ME query return user', user.username)
+        // console.log('nexus ME query return user', user.username)
         return user
       },
     })
