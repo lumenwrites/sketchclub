@@ -1,7 +1,6 @@
+import { hash } from 'bcryptjs'
 import { PrismaClient, Prisma } from '@prisma/client'
-
 const prisma = new PrismaClient()
-
 
 const userData: Prisma.UserCreateInput[] = [
   {
@@ -29,11 +28,12 @@ const userData: Prisma.UserCreateInput[] = [
 
 async function main() {
   console.log(`Seeding the db...`)
-  for (const u of userData) {
-    const user = await prisma.user.create({
-      data: u,
+  for (let user of userData) {
+    user.password = await hash(user.password, 10)
+    const createdUser = await prisma.user.create({
+      data: user,
     })
-    console.log(`Created user with id: ${user.id}`)
+    console.log(`Created user with id: ${createdUser.id}`)
   }
   console.log(`Seeding finished.`)
 }

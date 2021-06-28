@@ -8,14 +8,10 @@
     "skipLibCheck": true,
     "types": []
   },
-  "include": ["./**/*"],
+  "include": [
+    "**/*.ts",
+  ],
   "exclude": [
-    "./node_modules/**",
-    "node_modules",
-    "./node_modules",
-    "./node_modules/*",
-    "./node_modules/@types/node/index.d.ts",
-    "./node_modules/.prisma/*",
-    "node_modules/*"
+    "node_modules"
   ]
 }
