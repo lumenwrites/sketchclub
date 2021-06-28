@@ -1,5 +1,8 @@
 import { useRouter } from "next/router"
 import { useGetPost } from "apollo/postsActions"
+// For SSR
+import { fetchQuery } from "apollo/fetchQuery"
+import { GET_POST } from "apollo/postsQueries"
 
 import Layout from "components/Layout/Layout"
 import PostView from "components/Posts/PostView"
@@ -16,4 +19,17 @@ export default function post() {
       <PostEdit post={data.post} />
     </Layout>
   )
+}
+
+export async function getServerSideProps({params}) {
+  // console.log('params', params.postSlug)
+  const { data } = await fetchQuery({
+    query: GET_POST,
+    variables: { slug: params.postSlug }
+  })
+  return {
+    props: {
+      post: data.post,
+    }, // will be passed to the page component as props
+  }
 }

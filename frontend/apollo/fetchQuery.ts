@@ -7,6 +7,6 @@ export const client = new ApolloClient({
 });
 
 export async function fetchQuery(query) {
-  const { data } = await client.query({ query })
+  const { data } = await client.query(query)
   return { data }
 }

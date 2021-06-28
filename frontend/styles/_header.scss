@@ -1,12 +1,12 @@
 header {
   background: $header-bg;
   padding: 8px 24px;
-  height: 48px;
-  
+  // height: 48px;
+
   .logo {
     line-height: 32px;
     font-weight: lighter;
-    
+
     float: left;
     width: 220px;
     display: block;
@@ -16,7 +16,8 @@ header {
     color: $text;
     font-weight: 100;
 
-    .logo-image, .logo-image img {
+    .logo-image,
+    .logo-image img {
       width: 32px;
       height: 32px;
       float: left;
@@ -30,6 +31,19 @@ header {
     .dropdown .menu {
       left: 4px;
       top: calc(100% + 5px); // not sure why 5
+    }
+    @media (max-width: 400px) {
+      float: left;
+      white-space: nowrap;
+      overflow: hidden;
+      overflow-x: auto;
+      width: 100%;
+      margin-top: 5px;
+      .btn-nav {
+        display: inline-block;
+        margin-left: 0;
+        margin-right: 12px;
+      }
     }
   }
 }

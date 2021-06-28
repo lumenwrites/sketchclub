@@ -1,6 +1,9 @@
 // @ts-nocheck
 import { useRouter } from "next/router"
 import { useGetPosts } from "apollo/postsActions"
+// For SSR
+import { fetchQuery } from "apollo/fetchQuery"
+import { GET_POSTS } from "apollo/postsQueries"
 
 import Layout from "components/Layout/Layout"
 import Browse from "components/Posts/Browse"
@@ -18,4 +21,17 @@ export default function profile() {
       <Browse posts={data.posts}/>
     </Layout>
   )
+}
+
+export async function getServerSideProps({params}) {
+  // console.log('params', params.username)
+  const { data } = await fetchQuery({
+    query: GET_POSTS,
+    variables: { profile: params.username }
+  })
+  return {
+    props: {
+      posts: data.posts,
+    }, // will be passed to the page component as props
+  }
 }

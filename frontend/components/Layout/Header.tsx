@@ -44,6 +44,7 @@ export default function Header() {
             </>
           )}
         </nav>
+        <div className="clearfix"/>
       </div>
     </header>
   )
