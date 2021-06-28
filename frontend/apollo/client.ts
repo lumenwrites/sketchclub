@@ -4,6 +4,7 @@ import { onError } from '@apollo/link-error'
 import { getDataFromTree } from '@apollo/client/react/ssr'
 
 import withApollo from 'next-with-apollo'
+import https from 'https'
 // import paginationField from './paginationField'
 const { BACKEND_URL } = process.env
 
@@ -31,6 +32,7 @@ function createClient({ headers, initialState }) {
         uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
           credentials: 'include',
+          agent: new https.Agent({ rejectUnauthorized: false })
         },
         // pass the headers along from this request. This enables SSR with logged in state
         headers: { ...headers }, // , authorization: "asdf"

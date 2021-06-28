@@ -6,7 +6,7 @@ const { APP_SECRET } = process.env
 
 export function getUserId(context: Context) {
   const authToken = context.req.cookies['Authorization']
-  // console.log('authCookie', authToken)
+  console.log('authCookie', authToken)
   if (authToken) {
     const verifiedToken = verify(authToken, APP_SECRET) as Token
     // console.log('verifiedToken', verifiedToken)
