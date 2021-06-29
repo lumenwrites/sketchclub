@@ -47,7 +47,11 @@ header {
     }
   }
 }
-
+.subheader {
+  padding: 20px;
+  font-size: 1.2em;
+  background: #fdd4a7;
+}
 .subnav {
   background: $header-bg;
   padding: 8px 24px;

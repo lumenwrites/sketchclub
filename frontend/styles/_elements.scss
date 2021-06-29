@@ -13,9 +13,13 @@
   &:focus {
     color: $text;
   }
-  svg path {
-    fill: $text;
+  svg {
+    margin-right: 5px;
+    color: $text-dim;
   }
+  // svg path {
+  //   fill: $text;
+  // }
   &:hover {
     background: $btn-bg-hover;
     color: $text;

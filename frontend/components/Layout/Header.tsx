@@ -1,5 +1,6 @@
 import Link from "components/Elements/Link"
 import Image from "next/image"
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 
 import { useLogout } from "apollo/userActions"
 import { useAuth } from "context/AuthContext"
@@ -32,6 +33,7 @@ export default function Header() {
           {username && (
             <>
               <a className="btn btn-nav" onClick={() => toggleModal(`post-create`)}>
+                {/* <FontAwesomeIcon icon={["fas", "upload"]} /> */}
                 Upload Sketch
               </a>
               <PostCreate />
@@ -44,7 +46,7 @@ export default function Header() {
             </>
           )}
         </nav>
-        <div className="clearfix"/>
+        <div className="clearfix" />
       </div>
     </header>
   )

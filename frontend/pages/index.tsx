@@ -6,7 +6,7 @@ import { GET_POSTS } from "apollo/postsQueries"
 
 import Layout from "components/Layout/Layout"
 import Browse from "components/Posts/Browse"
-
+import Topics from "components/Topics/Topics"
 
 export default function browse({ posts }) {
   const { loading, error, data } = useGetPosts({ published: true })
@@ -16,6 +16,9 @@ export default function browse({ posts }) {
   // console.log("ssr posts", posts)
   return (
     <Layout>
+      <Topics topic="Today's Topic: Your favorite cartoon character."/>
+      <Browse posts={data.posts} />
+      <Topics topic="A fantasy dwelling."/>
       <Browse posts={data.posts} />
     </Layout>
   )

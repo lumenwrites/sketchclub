@@ -7,7 +7,7 @@ import { GET_POSTS } from "apollo/postsQueries"
 
 import Layout from "components/Layout/Layout"
 import Browse from "components/Posts/Browse"
-
+import ProfileHeader from "components/Users/ProfileHeader"
 
 export default function profile() {
   const router = useRouter()
@@ -17,7 +17,7 @@ export default function profile() {
   if (error) return <p>Error :(</p>
   // console.log('profile posts', data)
   return (
-    <Layout>
+    <Layout subnav={<ProfileHeader/>}>
       <Browse posts={data.posts}/>
     </Layout>
   )
