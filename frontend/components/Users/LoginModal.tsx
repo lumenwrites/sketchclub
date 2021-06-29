@@ -6,7 +6,7 @@ import useForm from "hooks/useForm"
 import { useState } from "react"
 
 const emptyJoinInputs = { username: "", email: "", password: "" }
-const emptyLoginInputs = { email: "user2@gmail.com", password: "user2" }
+const emptyLoginInputs = { email: "user2@gmail.com", password: "pass2" }
 
 export default function LoginModal() {
   const [join, joinRes] = useJoin()

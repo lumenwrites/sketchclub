@@ -25,6 +25,7 @@ model Post {
   topicId String?
   title String
   body String
+  tags Tag[]
   images Image[] @relation("ImagePost")
   published Boolean  @default(false)
   createdAt DateTime @default(now())
@@ -37,6 +38,15 @@ model Image {
   postId String
   name String
   url String
+}
+
+// Many to many relations:
+// https://www.prisma.io/docs/support/help-articles/working-with-many-to-many-relations
+model Tag {
+  id String @id @default(cuid())
+  posts Post[]
+  name String
+  slug String
 }
 
 model Topic {

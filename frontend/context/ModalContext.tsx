@@ -14,7 +14,7 @@ export function useModal() {
 // Wrap it around components that should have access to this context
 export function ModalContextProvider({ children }) {
   // This hook is used to actually save the modal state and change it
-  const [modal, setModal] = useState("")
+  const [modal, setModal] = useState("post-create")
   const [returnpage, setReturnPage] = useState("/")
   
   function toggleModal(modalName) {

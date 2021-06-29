@@ -232,7 +232,7 @@ input {
   margin-top: 12px;
   height: 32px;
   padding: 12px;
-  line-height: 24;
+  line-height: 24px;
   float: left;
   border-radius: 0;
   border: none;
@@ -242,6 +242,7 @@ input {
   padding-left: 12px;
   &::placeholder {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
+    font-family: $main-font;
     color: $text-dim;
     // font-weight: 100;
     opacity: 1; /* Firefox */
@@ -282,3 +283,54 @@ textarea {
   padding: 10px;
 }
 
+.tags-input {
+    color: $text;
+    background: $input-bg;
+    width: 100%;
+    margin-top: 12px;
+    height: 32px;
+    float: left;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    display: flex;
+    .tag {
+      white-space: nowrap;      
+      margin: 2px;
+      background: $panel-bg;
+      font-size: 0.8em;
+      height: 26px;
+      line-height: 26px;
+      padding: 0 5px;
+      cursor: pointer;
+      border-radius: $border-radius;
+
+      svg {
+        margin:0 2px 0 5px;
+        font-size: 0.8em;
+        color: $text-dim;
+      }
+    }
+    input {
+      margin: 0;
+      border: none;
+      font-size: 0.8em;
+      //outline: 1px solid $border;
+      height: 30px;
+      &::placeholder {
+        /* Chrome, Firefox, Opera, Safari 10.1+ */
+        font-family: $main-font;
+        color: $text-dim;
+        // font-weight: 100;
+        opacity: 1; /* Firefox */
+        opacity: 80%;
+      }
+    }
+    &::placeholder {
+      /* Chrome, Firefox, Opera, Safari 10.1+ */
+      color: $text-dim;
+      // font-weight: 100;
+      opacity: 1; /* Firefox */
+      opacity: 80%;
+    }
+
+}

@@ -13,7 +13,6 @@ function createClient({ headers, initialState }) {
   console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
   return new ApolloClient({
     ssrMode: true, //https://www.apollographql.com/docs/react/performance/server-side-rendering/
-    credentials: 'include',
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
@@ -32,7 +31,7 @@ function createClient({ headers, initialState }) {
       new HttpLink({
         uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
-          // credentials: 'include',
+          credentials: 'include',
           agent: new https.Agent({ rejectUnauthorized: false })
         },
         // pass the headers along from this request. This enables SSR with logged in state

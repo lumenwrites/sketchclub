@@ -38,6 +38,11 @@ export interface NexusGenInputs {
     content?: string | null; // String
     title: string; // String!
   }
+  TagInput: { // input type
+    id?: string | null; // String
+    name?: string | null; // String
+    slug?: string | null; // String
+  }
   UserCreateInput: { // input type
     email: string; // String!
     name?: string | null; // String
@@ -80,6 +85,11 @@ export interface NexusGenObjects {
     url?: string | null; // String
   }
   Query: {};
+  TagType: { // root type
+    id?: string | null; // String
+    name?: string | null; // String
+    slug?: string | null; // String
+  }
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
@@ -136,6 +146,11 @@ export interface NexusGenFieldTypes {
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
+  TagType: { // field return type
+    id: string | null; // String
+    name: string | null; // String
+    slug: string | null; // String
+  }
   User: { // field return type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
@@ -183,6 +198,11 @@ export interface NexusGenFieldTypeNames {
     user: 'User'
     users: 'User'
   }
+  TagType: { // field return type name
+    id: 'String'
+    name: 'String'
+    slug: 'String'
+  }
   User: { // field return type name
     createdAt: 'DateTime'
     email: 'String'
@@ -216,6 +236,7 @@ export interface NexusGenArgTypes {
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       published?: boolean | null; // Boolean
       slug: string; // String!
+      tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
     }
   }

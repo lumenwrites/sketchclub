@@ -48,3 +48,22 @@ export const PostCreateInput = inputObjectType({
     t.string('content')
   },
 })
+
+export const TagInput = inputObjectType({
+  name: 'TagInput',
+  definition(t) {
+    t.string('name')
+    t.string('slug')
+    t.string('id')
+  },
+})
+
+// Return image information from the post resolver
+export const TagType = objectType({
+  name: 'TagType',
+  definition(t) {
+    t.string('name')
+    t.string('slug')
+    t.string('id')
+  },
+})

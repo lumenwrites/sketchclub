@@ -49,6 +49,7 @@ export const PostMutations = extendType({
         title: nonNull(stringArg()),
         body: stringArg(),
         published: booleanArg(),
+        tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' })),
       },
       resolve: async (_, args, context: Context) => {
@@ -57,6 +58,18 @@ export const PostMutations = extendType({
         await context.prisma.image.deleteMany({
           where: { post: { slug: args.slug } },
         })
+        // Create tags if they don't exist yet
+        const tags = await Promise.all(
+          args.tags.map((tag) =>
+            prisma.tag.upsert({
+              create: omit(tag, "id"),
+              update: tag,
+              where: tag,
+            })
+          )
+        )
+        console.log('upserted tags', tags)
+
         try {
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },
@@ -64,6 +77,10 @@ export const PostMutations = extendType({
               title: args.title || undefined,
               body: args.body || undefined,
               published: args.published || undefined,
+              // tags: {
+              //   upsert: updatedImages
+              // }
+
               images: {
                 create: args.images,
               },
