@@ -12,6 +12,7 @@ export default function Header() {
   const { username } = useAuth()
   const logout = useLogout()
   const { toggleModal } = useModal()
+  console.log('[Header] Fetched logged in user', username)
   return (
     <header>
       <div className="wrapper">
