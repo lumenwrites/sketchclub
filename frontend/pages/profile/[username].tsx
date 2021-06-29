@@ -23,15 +23,15 @@ export default function profile() {
   )
 }
 
-export async function getServerSideProps({params}) {
-  // console.log('params', params.username)
-  const { data } = await fetchQuery({
-    query: GET_POSTS,
-    variables: { profile: params.username }
-  })
-  return {
-    props: {
-      posts: data.posts,
-    }, // will be passed to the page component as props
-  }
-}
+// export async function getServerSideProps({params}) {
+//   // console.log('params', params.username)
+//   const { data } = await fetchQuery({
+//     query: GET_POSTS,
+//     variables: { profile: params.username }
+//   })
+//   return {
+//     props: {
+//       posts: data.posts,
+//     }, // will be passed to the page component as props
+//   }
+// }

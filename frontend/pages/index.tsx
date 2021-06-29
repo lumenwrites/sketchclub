@@ -24,14 +24,14 @@ export default function browse({ posts }) {
   )
 }
 
-export async function getServerSideProps(context) {
-  const { data } = await fetchQuery({
-    query: GET_POSTS,
-    variables: { published: true }
-  })
-  return {
-    props: {
-      posts: data.posts,
-    }, // will be passed to the page component as props
-  }
-}
+// export async function getServerSideProps(context) {
+//   const { data } = await fetchQuery({
+//     query: GET_POSTS,
+//     variables: { published: true }
+//   })
+//   return {
+//     props: {
+//       posts: data.posts,
+//     }, // will be passed to the page component as props
+//   }
+// }

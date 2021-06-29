@@ -21,15 +21,15 @@ export default function post() {
   )
 }
 
-export async function getServerSideProps({params}) {
-  // console.log('params', params.postSlug)
-  const { data } = await fetchQuery({
-    query: GET_POST,
-    variables: { slug: params.postSlug }
-  })
-  return {
-    props: {
-      post: data.post,
-    }, // will be passed to the page component as props
-  }
-}
+// export async function getServerSideProps({params}) {
+//   // console.log('params', params.postSlug)
+//   const { data } = await fetchQuery({
+//     query: GET_POST,
+//     variables: { slug: params.postSlug }
+//   })
+//   return {
+//     props: {
+//       post: data.post,
+//     }, // will be passed to the page component as props
+//   }
+// }
