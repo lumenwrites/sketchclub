@@ -7,6 +7,7 @@ import withApollo from 'next-with-apollo'
 import https from 'https'
 // import paginationField from './paginationField'
 const { BACKEND_URL } = process.env
+import { getCookie } from 'utils/cookies'
 
 // https://www.apollographql.com/docs/react/networking/authentication/
 function createClient({ headers, initialState }) {
@@ -35,7 +36,10 @@ function createClient({ headers, initialState }) {
           agent: new https.Agent({ rejectUnauthorized: false })
         },
         // pass the headers along from this request. This enables SSR with logged in state
-        headers: { ...headers }, // , authorization: "asdf"
+        headers: {
+          ...headers,
+          Authorization: typeof window === 'undefined' ? '' : getCookie("Authorization")
+        },
       }),
     ]),
     cache: new InMemoryCache({

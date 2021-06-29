@@ -10,7 +10,7 @@ export const useGetPost = (slug) => useQuery(GET_POST, {
 })
 
 export const useCreatePost = () => useMutation(CREATE_POST, {
-  context: { headers: { cookies: typeof window === 'undefined' ? '' : document.cookie } },
+//  context: { headers: { cookies: typeof window === 'undefined' ? '' : document.cookie } },
   refetchQueries: [{ query: GET_POSTS, variables: { published: true } }]
 })
 
