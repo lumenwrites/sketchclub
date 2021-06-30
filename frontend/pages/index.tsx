@@ -7,6 +7,7 @@ import { GET_POSTS } from "apollo/postsQueries"
 import Layout from "components/Layout/Layout"
 import Browse from "components/Posts/Browse"
 import Topic from "components/Topics/Topic"
+import Subnav from "components/Layout/Subnav"
 
 export default function browse({ posts }) {
   const { loading, error, data } = useGetPosts({ published: true })
@@ -14,11 +15,14 @@ export default function browse({ posts }) {
   if (error) return <p>Error :(</p>
   // console.log('browse posts', data)
   // console.log("ssr posts", posts)
+  const topic = (
+    <>
+      {/* <Subnav/> */}
+      <Topic topic={{ name: "Your favorite cartoon character.", slug: "your-favorite-cartoon-character" }} />
+    </>
+  )
   return (
-    <Layout>
-      <Topic topic="Today's Topic: Your favorite cartoon character."/>
-      <Browse posts={data.posts} />
-      <Topic topic="A fantasy dwelling."/>
+    <Layout subnav={topic}>
       <Browse posts={data.posts} />
     </Layout>
   )

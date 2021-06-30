@@ -18,7 +18,7 @@ export default function Layout({ children, subnav=<></> }) {
       <div className="wrapper">{children}</div>
 
       <Head>
-        <title>Sketch Daily</title>
+        <title>Sketch Club</title>
       </Head>
     </div>
   )

@@ -1,5 +1,1 @@
-export var topics = `
-one
-two
-three
-`
+export const topics = ["Your Favorite Animal", "Design a Cartoon Character", "Exotic Bird", "Peaceful Village", "Ancient Artifact", "Zombies", "Inventor's Workshop", "At the Pirate's Tavern of the Very Long Ellustriously Topic Titles", "At the Pirate's Tavern", "At the Pirate's Tavern", "At the Pirate's Tavern"]

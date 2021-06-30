@@ -2,9 +2,8 @@ import { useState, useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import slugify from "slugify"
 import allTags from "./tags"
-import tagsList from "./tags"
 
-export default function TagsInput({ tags, setTags }) {
+export default function TagsInput({ tags, setTags, customTags = false, placeholder = "Add up to 5 tags..." }) {
   const [val, setVal] = useState("")
   const inputRef = useRef(null)
   // Remove already selected tags from the list
@@ -13,6 +12,8 @@ export default function TagsInput({ tags, setTags }) {
   listTags = listTags.filter((tag) => tag.name.toLowerCase().includes(val.toLowerCase()))
 
   function handleChange(e) {
+    const lastChar = e.target.value.slice(-1)
+    if (lastChar === ",") return
     setVal(e.target.value)
   }
   function handleKeyDown(e) {
@@ -22,13 +23,25 @@ export default function TagsInput({ tags, setTags }) {
     }
     if (e.key === "," || e.key === "Enter" || e.key === "Tab") {
       e.preventDefault()
-      addTag(listTags[0])
+      if (customTags) {
+        addTag({
+          name: val.trim(),
+          slug: slugify(val, { lower: true, strict: true }),
+        })
+      } else {
+        addTag(listTags[0])
+      }
     }
   }
+
   function removeTag(tag) {
     setTags((prev) => prev.filter((t) => t.slug !== tag.slug))
   }
   function addTag(tag) {
+    console.log("Add tag", tag)
+    if (!tag || !tag.name || !tag.slug) return
+    if (tags.find((t) => t.slug === tag.slug)) return
+
     setTags((prev) => [...prev, tag])
     setVal("")
     inputRef?.current?.focus()
@@ -38,8 +51,8 @@ export default function TagsInput({ tags, setTags }) {
       return <div className="tag-item">No tags matching this search.</div>
     }
     return listTags.map((tag, i) => (
-      <div className={`tag-item`}key={tag.slug} onClick={() => addTag(tag)}>
-        {tag.name}
+      <div className={`tag-item`} key={tag.slug} onClick={() => addTag(tag)}>
+        {tag.slug === allTags[0].slug ? `Today's Challenge: ${tag.name}` : tag.name}
       </div>
     ))
   }
@@ -51,36 +64,9 @@ export default function TagsInput({ tags, setTags }) {
           <FontAwesomeIcon icon={["fas", "times"]} />
         </div>
       ))}
-      {tags.length < 5 && <input ref={inputRef} placeholder="Add up to 5 tags..." value={val} onChange={handleChange} onKeyDown={handleKeyDown} />}
+      {tags.length < 5 && <input ref={inputRef} placeholder={placeholder} value={val} onChange={handleChange} onKeyDown={handleKeyDown} />}
       {tags.length < 5 && <div className="tags-list">{renderAllTags()}</div>}
       {/*  value={val} onChange={handleChange}  */}
     </div>
   )
 }
-
-// For adding custom tags
-// function handleChange(e) {
-//   const lastChar = e.target.value.slice(-1)
-//   if (lastChar === ",") return
-//   setVal(e.target.value)
-// }
-// function handleKeyDown(e) {
-//   // Remove previous tag
-//   if (e.key === "Backspace" && val.length === 0) {
-//     setTags((prev) => [...prev].splice(0, prev.length - 1))
-//   }
-//   // Add tag
-//   if (e.key === "," || e.key === "Enter") {
-//     const tag = {
-//       name: val.trim(),
-//       slug: slugify(val, { lower: true, strict: true }),
-//     }
-//     setTags((prev) => {
-//       const alreadyInArray = prev.find((elm) => elm.slug === tag.slug)
-//       const isBlank = !tag.name || !tag.slug
-//       if (alreadyInArray || isBlank) return prev
-//       return [...prev, tag]
-//     })
-//     setVal("")
-//   }
-// }

@@ -1,6 +1,6 @@
 header {
   background: $header-bg;
-  padding: 8px 24px;
+  padding: 8px 0; //24px;
   // height: 48px;
 
   .logo {
@@ -8,7 +8,7 @@ header {
     font-weight: lighter;
 
     float: left;
-    width: 220px;
+    width: 170px;
     display: block;
 
     font-family: $logo-font;
@@ -32,7 +32,7 @@ header {
       left: 4px;
       top: calc(100% + 5px); // not sure why 5
     }
-    @media (max-width: 400px) {
+    @media (max-width: 700px) {
       float: left;
       white-space: nowrap;
       overflow: hidden;
@@ -53,13 +53,24 @@ header {
   background: #fdd4a7;
 }
 .subnav {
-  background: $header-bg;
-  padding: 8px 24px;
-  input {
-    width: calc(100% - 144px);
+  background: $subnav-bg;
+  padding: 2px 24px;
+  .search, .tags-input {
+    margin-top:0;
   }
-  .btn {
-    margin-left: 4px;
-    width: 140px;
+
+  .tags-input {
+    // If I want to combine search bar and category dropwown into one thing.
+    width: 100%;
+  }
+}
+.search {
+  width: calc(100% - 170px - 350px); // calc(100% - 200px - 10px); // - dropdown width - margin
+  float: left;
+  margin-right: 10px;
+  margin-top:0;
+  @media (max-width: 700px) {
+    width: 100%;
+    margin-top: 5px;
   }
 }

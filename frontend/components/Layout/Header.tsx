@@ -12,7 +12,7 @@ export default function Header() {
   const { username } = useAuth()
   const logout = useLogout()
   const { toggleModal } = useModal()
-  console.log('[Header] Fetched logged in user', username)
+  console.log("[Header] Fetched logged in user", username)
   return (
     <header>
       <div className="wrapper">
@@ -20,9 +20,11 @@ export default function Header() {
           <div className="logo-image">
             <Image src="/logo.png" width={32} height={32} />
           </div>
-          <span className="bold">sketch</span>daily
+          <span className="bold">sketch</span>club
         </Link>
+        <input className="search" placeholder="Search..."></input>
         <nav>
+          
           {!username && (
             <>
               <a className="btn btn-nav btn-cta" onClick={() => toggleModal(`login`)}>
@@ -39,9 +41,11 @@ export default function Header() {
               </a>
               <PostCreate />
               <Link href={`/profile/${username}`} className="btn btn-nav">
+                {/* <FontAwesomeIcon icon={["fas", "user"]} /> */}
                 My Portfolio
               </Link>
               <a className="btn btn-nav" onClick={() => logout()}>
+                {/* <FontAwesomeIcon icon={["fas", "sign-out-alt"]} /> */}
                 Logout
               </a>
             </>

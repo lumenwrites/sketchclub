@@ -1,10 +1,55 @@
-.topic {
-  padding: 20px;
-  text-align: center;
-  font-size: 1.2em;
-  //background: #fdd4a7;
-  padding: 5px;
-  margin: 10px 0;
-  color: #53170d;
-  border-bottom: 2px solid #d2b17d;
+.topics {
+  white-space: nowrap;
+  overflow: hidden;
+  overflow-x: auto;
+  background: $main-bg; //rgb(253 212 167 / 78%);
+  width: 100%;
+  line-height: 0;
+  //display: inline-flex;
+  // transform: rotateX(180deg); // put scrollbar at the top
+  .topic {
+    // transform: rotateX(180deg); // put scrollbar at the top
+    margin: 2px;
+    margin-bottom: 0;
+    border: 1px solid $border;
+    border-radius: $border-radius;
+    padding: 4px 24px;
+    display: inline-block;
+    font-size: 0.8em;
+    background: white;
+    cursor: pointer;
+    width: 150px; // 180px;
+    white-space: initial;
+    text-align: center;
+    height: 70px;
+    position: relative;
+    line-height: initial;
+    .flex-center {
+      // Instead of padding
+      left: 12px;
+      right: 12px;
+      width: auto;
+    }
+    p {
+      margin: 0;
+    }
+    &.active {
+      border: 1px solid $btn-cta;
+    }
+  }
+  .today {
+    font-weight: bold;
+  }
 }
+// .topic {
+//   padding: 20px;
+//   text-align: center;
+//   font-size: 1.2em;
+//   background: rgb(253 212 167 / 78%);
+
+//   color: #53170d;
+//   display: block;
+//   // margin: 10px 0;
+//   // padding: 5px;
+//   //border-bottom: 2px solid #d2b17d;
+// }

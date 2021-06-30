@@ -8,12 +8,8 @@ import { useCreatePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
 import TagsInput from "components/Elements/TagsInput"
 
-const defaultTags = [
-  {
-    name: "Digital Art",
-    slug: "digital",
-  },
-]
+const defaultTags = []
+
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
   const { inputs, handleChange, setValue, clearForm } = useForm(emptyInputs)
@@ -36,6 +32,7 @@ export default function PostCreate() {
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
       <TagsInput tags={tags} setTags={setTags} />
+      <div className="clearfix"/>
       <h4>Upload Images</h4>
       <ListImages images={images} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
       <div className="buttons">
