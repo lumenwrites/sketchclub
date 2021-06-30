@@ -10,15 +10,9 @@ import TagsInput from "components/Elements/TagsInput"
 
 const defaultTags = [
   {
-    name: "Character Design",
-    slug: "character-design"
-  }, {
-    name: "Landscape",
-    slug: "landscape"
-  }, {
-    name: "Still Life",
-    slug: "still-life"
-  }
+    name: "Digital Art",
+    slug: "digital",
+  },
 ]
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
