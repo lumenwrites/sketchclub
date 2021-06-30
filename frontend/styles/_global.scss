@@ -21,6 +21,7 @@ main {
 .wrapper {
   max-width: $wrapper-width;
   margin: auto;
+  padding: 0 20px;
 }
 
 ::-webkit-scrollbar {
@@ -40,7 +41,7 @@ main {
 ::-webkit-scrollbar-thumb {
   background-color: $scrollbar-thumb;
   border: 2px solid transparent !important;
-  border-radius: 9px;
+  border-radius: 4px;
   background-clip: content-box;
 }
 

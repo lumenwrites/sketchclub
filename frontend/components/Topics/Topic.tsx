@@ -9,7 +9,7 @@ export default function Topic() {
       <Link className={`topic ${i === 0 && "active"}`} href={`/tag/${slugify(topic)}`}>
         <div className="flex-center">
           <div>
-            {i === 0 && <p className="today">Today's Challenge:</p>}
+            {i === 0 && <p className="today">This Week's Topic:</p>}
             <p>{topic}</p>
           </div>
         </div>

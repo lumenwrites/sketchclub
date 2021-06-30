@@ -122,8 +122,8 @@
   border-radius: 2px;
   padding: 16px 32px;
   box-shadow: 2px 2px 10px rgba(0, 0, 0, 0.2);
-  max-width: $wrapper-width;
-  width: 100%;
+  width: calc(100% - 40px);
+  max-width: $modal-width;
   &.narrow {
     width: 400px;
   }

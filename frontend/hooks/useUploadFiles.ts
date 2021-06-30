@@ -34,7 +34,7 @@ export function useUploadFiles(initial = []) {
   async function uploadFile(file) {
     setUploading(true)
     const isAnImage = file.type.match(/image.*/)
-    if (isAnImage) file = await resizeImage(file, 480, 480)
+    if (isAnImage) file = await resizeImage(file, 620, 620)
     const url = await uploadToS3(file)
     // console.log('uploaded file', res)
     setUploading(false)
