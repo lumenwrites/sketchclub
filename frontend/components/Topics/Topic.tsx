@@ -6,7 +6,7 @@ export default function Topic() {
   // console.log('topics',topics.trim().split('\n'))
   function renderTopics() {
     return topics.map((topic, i) => (
-      <Link className={`topic ${i === 0 && "active"}`} href={`/tag/${slugify(topic)}`}>
+      <Link key={i} className={`topic ${i === 0 && "active"}`} href={`/tag/${slugify(topic)}`}>
         <div className="flex-center">
           <div>
             {i === 0 && <p className="today">This Week's Topic:</p>}

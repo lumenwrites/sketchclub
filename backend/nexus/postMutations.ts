@@ -59,16 +59,16 @@ export const PostMutations = extendType({
           where: { post: { slug: args.slug } },
         })
         // Create tags if they don't exist yet
-        const tags = await Promise.all(
-          args.tags.map((tag) =>
-            prisma.tag.upsert({
-              create: omit(tag, "id"),
-              update: tag,
-              where: tag,
-            })
-          )
-        )
-        console.log('upserted tags', tags)
+        // const tags = await Promise.all(
+        //   args.tags?.map((tag) =>
+        //     prisma.tag.upsert({
+        //       create: omit(tag, "id"),
+        //       update: tag,
+        //       where: tag,
+        //     })
+        //   )
+        // )
+        // console.log('upserted tags', tags)
 
         try {
           return context.prisma.post.update({

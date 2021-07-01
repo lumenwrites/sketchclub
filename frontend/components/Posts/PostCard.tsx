@@ -43,7 +43,7 @@ export default function PostCard({ post, onClick }) {
         </div>
          */}
       </a>
-      <Modal name={`post-modal-${post.slug}`} className={"post-modal post-view nopadding"}>
+      <Modal name={`post-modal-${post.slug}`} className={"post-modal nopadding"}>
         <PostView post={post} />
       </Modal>
       <PostEdit post={post} />
