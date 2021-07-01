@@ -1,12 +1,16 @@
-
 .post-view {
   background: white;
+  display: flex;
+  @media (max-width: 700px) {
+    display: block;
+  }
   .gallery {
     width: 66.66%;
-    @media (max-width: 480px) {
+    float: left;
+    @media (max-width: 700px) {
       width: 100%;
     }
-    float: left;
+    
     .current-image {
       position: relative;
       .next-image,
@@ -59,21 +63,34 @@
 
   .description {
     width: 33.33%;
-    position: relative;
-    .scrollable {
-      position: absolute;
-      top: 0;
-      right: 0;
-      bottom: 0;
-      // width: 335px;
-    }
-    @media (max-width: 480px) {
+    float: left;
+    @media (max-width: 700px) {
       width: 100%;
     }
-    overflow: hidden;
-    overflow-y: auto;
-    float: left;
-    padding: 10px;
+    .header {
+      border-bottom: 1px solid $border;
+      padding: 0 10px;
+    }
+    .scrollable {
+      //https://jsbin.com/yivonew/edit?html,css,output
+      position: relative;
+      overflow: hidden;
+      overflow-y: auto;
+      width: 100%;
+      height: calc(100% - 92px - 124px); // - header height - post-comment height
+      // width: 335px;
+      .scrollable-contents {
+        position: absolute;
+        @media (max-width: 700px) {
+          position: initial;
+        }
+        left: 0;
+        top: 0;
+        right: 0;
+        bottom: 0px;
+        padding: 0 10px;
+      }
+    }
 
     h1 {
       text-align: left;
@@ -89,6 +106,7 @@
     .btn-user-profile {
       width: 100%;
       text-align: center;
+      margin-top: 5px;
     }
     .buttons {
       margin-top: 5px;
@@ -96,14 +114,12 @@
       justify-content: space-between;
       .btn {
         width: 100%;
-        text-align: center;
-        .btn-label {
-          @media (max-width: 700px) {
-            display: none;
-          }
-        }
+        text-align: center; 
       }
-      .btn-label {
+      @media (max-width: 700px) {
+        .btn-label {
+            display: none;
+        }
       }
       .btn-upvote {
       }
@@ -111,6 +127,7 @@
         margin-left: 5px;
       }
     }
+
     .stats {
       margin-top: 5px;
       font-size: 0.9em;
@@ -146,6 +163,10 @@
   position: absolute;
   background: white;
   width: 33.33%;
+  @media (max-width: 700px) {
+    position: initial;
+    width: 100%;
+  }
   right: 0;
   bottom: 0;
   padding: 0 10px 10px 10px;
