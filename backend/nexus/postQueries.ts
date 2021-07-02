@@ -28,6 +28,7 @@ export const PostQueries = extendType({
         username: stringArg(),
         published: booleanArg(),
         searchString: stringArg(),
+        tagSlug: stringArg(),
         // TODO: Pagination
         // TODO: Filter by tags
       },
@@ -41,21 +42,25 @@ export const PostQueries = extendType({
           })
           authorId = author.id
         }
+        const tagFilter = args.tagSlug ? {
+          tags: { some: { slug: args.tagSlug } }
+        } : {}
+        console.log('tag filter', tagFilter)
         // Search through posts
-        const search = args.searchString
-        ? {
+        const search = args.searchString ? {
           OR: [
-            { title: { contains: args.searchString } },
-            { body: { contains: args.searchString } },
+            { title: { contains: args.searchString, mode: "insensitive", } },
+            { body: { contains: args.searchString, mode: "insensitive", } },
+            { tags: { some: { name: { contains: args.searchString, mode: "insensitive", } } } }
           ],
-        }
-        : {}
+        } : {}
         // console.log('Posts resolver', context.prisma.post.findMany())
         return context.prisma.post.findMany({
           where: {
             authorId: authorId,
             published: args.published || undefined,
-            ...search
+            ...search,
+            ...tagFilter,
           }
         })
       },
@@ -70,7 +75,6 @@ export const PostQueries = extendType({
         return context.prisma.tag.findMany()
       },
     })
-
 
 
 

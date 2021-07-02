@@ -5,9 +5,8 @@ import { Context } from '../apollo/context'
 const { APP_SECRET } = process.env
 
 export function getUserId(context: Context) {
-  //const authToken = context.req.cookies['Authorization']
   const authToken = context.req.cookies['Authorization'] || context.req.headers['authorization'];
-  console.log('authCookie', authToken)
+  // console.log('authCookie', authToken)
   if (authToken) {
     const verifiedToken = verify(authToken, APP_SECRET) as Token
     // console.log('verifiedToken', verifiedToken)
@@ -21,7 +20,7 @@ const rules = {
   }),
   isPostOwner: rule()(async (_parent, args, context) => {
     const userId = getUserId(context)
-    console.log('check owner', args, userId)
+    //console.log('[shield] check post owner', args, userId)
     const author = await context.prisma.post
       .findUnique({
         where: { slug: args.slug }
@@ -39,7 +38,7 @@ export const permissions = shield({
   },
   Mutation: {
     // If nexus always sends me the old cookies, then this shouldn't work. And yet it does.
-    // createPost: rules.isAuthenticatedUser,
+    createPost: rules.isAuthenticatedUser,
     updatePost: rules.isPostOwner,
     deletePost: rules.isPostOwner,
   },
