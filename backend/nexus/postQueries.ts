@@ -27,6 +27,9 @@ export const PostQueries = extendType({
       args: {
         username: stringArg(),
         published: booleanArg(),
+        searchString: stringArg(),
+        // TODO: Pagination
+        // TODO: Filter by tags
       },
       resolve: async (_parent, args, context: Context) => {
         console.log('Get posts', args)
@@ -38,12 +41,21 @@ export const PostQueries = extendType({
           })
           authorId = author.id
         }
-
+        // Search through posts
+        const search = args.searchString
+        ? {
+          OR: [
+            { title: { contains: args.searchString } },
+            { body: { contains: args.searchString } },
+          ],
+        }
+        : {}
         // console.log('Posts resolver', context.prisma.post.findMany())
         return context.prisma.post.findMany({
           where: {
             authorId: authorId,
-            published: args.published || undefined
+            published: args.published || undefined,
+            ...search
           }
         })
       },

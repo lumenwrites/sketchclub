@@ -31,7 +31,7 @@ export const PostMutations = extendType({
         images: list(arg({ type: 'FileInput' }))
       },
       resolve: async (_, args, context: Context) => {
-        console.log('tags', omit(args.tags[0], "id"))
+        // console.log('tags', omit(args.tags[0], "id"))
         // Create tags if they don't exist
         // const tags = await Promise.all(
         //   args.tags.map((tag) =>
@@ -60,8 +60,7 @@ export const PostMutations = extendType({
               //       name: "test",
               //       slug: "test"
               // }
-              // disconnect: post.issues,
-              // set: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
+              // connect: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
             },
             authorId: getUserId(context),
             published: true, // make it false once Edit post works.
