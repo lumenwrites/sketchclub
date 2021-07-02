@@ -31,20 +31,7 @@ export const PostMutations = extendType({
         images: list(arg({ type: 'FileInput' }))
       },
       resolve: async (_, args, context: Context) => {
-        // console.log('tags', omit(args.tags[0], "id"))
-        // Create tags if they don't exist
-        // const tags = await Promise.all(
-        //   args.tags.map((tag) =>
-        //     context.prisma.tag.upsert({
-        //       create: omit(tag, "id"),
-        //       update: tag,
-        //       where: { id: tag.id || "" },
-        //     })
-        //   )
-        // )
-        const existingTags = args.tags?.filter(t => ('id' in t))
-        const newTags = args.tags?.filter(t => !('id' in t))
-        console.log('Created post', existingTags, newTags) // args, slug,
+        console.log('Creating post', args.title)
         return context.prisma.post.create({
           data: {
             title: args.title,
@@ -53,16 +40,10 @@ export const PostMutations = extendType({
             images: {
               create: args.images,
             },
-            // Can't figure out how to set the tags, none of these options work
             tags: {
-              set: existingTags,
-              create: newTags
-              // create: {
-              //       name: "test",
-              //       slug: "test"
-              // }
-              // set: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
-              // connect: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
+              // Existing tags have id, connect them. New tags don't, create them.
+              connect: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
+              create: args.tags?.filter(t => !('id' in t))
             },
             author: { connect: { id: getUserId(context) } },
             // authorId: getUserId(context),
@@ -82,7 +63,7 @@ export const PostMutations = extendType({
         title: nonNull(stringArg()),
         body: stringArg(),
         published: booleanArg(),
-        // tags: list(arg({ type: 'TagInput' })),
+        tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' })),
       },
       resolve: async (_, args, context: Context) => {
@@ -91,17 +72,7 @@ export const PostMutations = extendType({
         await context.prisma.image.deleteMany({
           where: { post: { slug: args.slug } },
         })
-        // Create tags if they don't exist yet
-        // const tags = await Promise.all(
-        //   args.tags?.map((tag) =>
-        //     prisma.tag.upsert({
-        //       create: omit(tag, "id"),
-        //       update: tag,
-        //       where: tag,
-        //     })
-        //   )
-        // )
-        // console.log('upserted tags', tags)
+        console.log('updatePost', args.slug)
         try {
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },
@@ -109,10 +80,11 @@ export const PostMutations = extendType({
               title: args.title || undefined,
               body: args.body || undefined,
               published: args.published || undefined,
-              // tags: {
-              //   upsert: updatedImages
-              // }
-
+              tags: {
+                // Existing tags have id, replace them. New tags don't, create them.
+                set: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
+                create: args.tags?.filter(t => !('id' in t))
+              },
               images: {
                 create: args.images,
               },

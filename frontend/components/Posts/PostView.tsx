@@ -17,7 +17,7 @@ export default function PostView({ post }) {
             {post.body}
             <hr/>
             <div className="tags">
-              {post.tags.map(tag => (<div className="tag">{tag.name}</div>))}
+              {post.tags.map(tag => (<Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag">{tag.name}</Link>))}
             </div>
             {/* <Comments /> */}
           </div>

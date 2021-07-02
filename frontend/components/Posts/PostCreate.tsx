@@ -8,19 +8,17 @@ import { useCreatePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
 import TagsInput from "components/Elements/TagsInput"
 
-const defaultTags = []
-
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
   const { inputs, handleChange, setValue, clearForm } = useForm(emptyInputs)
   const { files: images, removeFile, uploadFile, uploading } = useUploadFiles()
-  const [tags, setTags] = useState(defaultTags)
+  const [tags, setTags] = useState([])
   const [createPost, createPostRes] = useCreatePost()
   const { toggleModal } = useModal()
   async function handleSubmit() {
     const { title, body } = inputs
-    console.log("submitting post", { title, body, images })
-    const { data } = await createPost({ variables: { title, body, images } })
+    console.log("submitting post", { title, body, images, tags })
+    const { data } = await createPost({ variables: { title, body, images, tags } })
     clearForm()
     toggleModal("post-create") // hide the modal
     // toggleModal(`post-edit-${data.createPost.slug}`)

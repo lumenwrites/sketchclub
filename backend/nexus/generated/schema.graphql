@@ -29,7 +29,7 @@ type Mutation {
   deletePost(slug: String!): Post
   join(email: String!, password: String!, username: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, title: String!): Post
+  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, tags: [TagInput], title: String!): Post
 }
 
 type Post {

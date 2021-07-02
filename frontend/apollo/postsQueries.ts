@@ -51,15 +51,21 @@ export const GET_POST = gql`
 `
 
 export const CREATE_POST = gql`
-    mutation CreatePost($title: String!, $body: String, $images: [FileInput]) {
+    mutation CreatePost($title: String!, $body: String, $tags: [TagInput], $images: [FileInput]) {
       createPost(
         title: $title
         body: $body
+        tags: $tags
         images: $images
       ) {
         title
         body
         slug
+        tags {
+          name
+          slug
+          id
+        }
       }
     }
 `
@@ -69,7 +75,8 @@ export const UPDATE_POST = gql`
     $slug: String!,
     $title: String!,
     $body: String,
-    $published: Boolean
+    $published: Boolean,
+    $tags: [TagInput], 
     $images: [FileInput]
   ){
     updatePost(
@@ -77,12 +84,18 @@ export const UPDATE_POST = gql`
       title: $title
       body: $body
       published: $published
+      tags: $tags
       images: $images
     ) {
       slug
       title
       body
       published
+      tags {
+        name
+        slug
+        id
+      }
     }
   }
 `

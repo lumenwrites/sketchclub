@@ -241,6 +241,7 @@ export interface NexusGenArgTypes {
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       published?: boolean | null; // Boolean
       slug: string; // String!
+      tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
     }
   }
