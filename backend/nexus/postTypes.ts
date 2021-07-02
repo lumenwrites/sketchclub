@@ -13,6 +13,7 @@ export const PostType = objectType({
     t.nonNull.string('title')
     t.nonNull.string('slug')
     t.string('body')
+    t.int('score')
     t.boolean('published')
     t.list.field('images', {
       type: 'File',
@@ -45,6 +46,17 @@ export const PostType = objectType({
           .author()
       },
     })
+
+    t.list.field('upvoters', {
+      type: 'User',
+      resolve: (parent, _, context: Context) => {
+        // console.log('Return post images', parent.id)
+        return context.prisma.post
+          .findUnique({ where: { id: parent.id || undefined }})
+          .upvoters()
+      },
+    })
+
 
 
   }

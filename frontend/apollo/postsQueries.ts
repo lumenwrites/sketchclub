@@ -45,6 +45,10 @@ export const GET_POST = gql`
         slug
         id
       }
+      score
+      upvoters {
+        username
+      }
       author {
         username
       }
@@ -109,7 +113,16 @@ export const DELETE_POST = gql`
     }
   }
 `
-
+export const UPVOTE_POST = gql`
+  mutation Upvote($slug: String!) {
+    upvote(slug: $slug) {
+      score
+      upvoters {
+        username
+      }
+    }
+  }
+`
 
 export const GET_TAGS = gql`
   query Tags {

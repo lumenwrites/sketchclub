@@ -41,6 +41,7 @@ export const permissions = shield({
     createPost: rules.isAuthenticatedUser,
     updatePost: rules.isPostOwner,
     deletePost: rules.isPostOwner,
+    upvote: rules.isAuthenticatedUser,
   },
 },{
   allowExternalErrors: true

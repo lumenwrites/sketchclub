@@ -4,6 +4,7 @@ import { useAuth } from "context/AuthContext"
 import Link from "components/Elements/Link"
 import Gallery from "./Gallery"
 const { BUCKET_URL } = process.env
+import { useUpvotePost } from "apollo/postsActions"
 
 export default function PostView({ post }) {
   const { toggleModal } = useModal()
@@ -16,27 +17,32 @@ export default function PostView({ post }) {
           <div className="scrollable-contents">
             <h1>{post.title}</h1>
             {post.body}
-            <hr/>
-            <div className="tags">
-              {post.tags.map(tag => (<Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag" onClick={()=>toggleModal(`post-view`)}>{tag.name}</Link>))}
-            </div>
+            <hr />
+            <Tags tags={post.tags}/>
             {/* <Comments /> */}
           </div>
         </div>
       </div>
       {/* <PostComment /> */}
-      <div className="clearfix"/>
+      <div className="clearfix" />
     </div>
   )
 }
 
+
+
 function Header({ post }) {
+  //console.log('post.slug', post.slug)
+  const [upvotePost] = useUpvotePost(post.slug)
   const { toggleModal } = useModal()
   const { username } = useAuth()
   const isPostAuthor = post.author.username == username
-  function handleUpvote(e) {
+  const hasUpvoted = post.upvoters.find(u => u.username === username)
+  async function handleUpvote(e) {
     if (!username) return toggleModal(`login`)
-    // TODO: upvote here
+    console.log('upvoting', post.slug)
+    const { data } = await upvotePost({ variables: { slug: post.slug } })
+    console.log('upvoted', data)
   }
   return (
     <div className="header">
@@ -44,9 +50,11 @@ function Header({ post }) {
         <FontAwesomeIcon icon={["fas", "user"]} /> <b>{post.author.username}</b>
       </Link>
       <div className="buttons">
-        <div className="btn btn-upvote" onClick={handleUpvote}>
+        <div className={`btn btn-upvote ${hasUpvoted ? "upvoted":""}`} onClick={handleUpvote}>
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          <span className="btn-label">Upvote</span>
+          <span className="btn-label">
+            {hasUpvoted ? "Unupvote" : "Upvote"}
+          </span>
         </div>
         {isPostAuthor && (
           <div className="btn btn-edit-post" onClick={(e) => toggleModal(`post-edit-${post.slug}`)}>
@@ -58,7 +66,7 @@ function Header({ post }) {
       <div className="stats">
         <div className="stat">
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          {` 12 `}
+          {post.upvoters.length}
           <span className="stat-label">Upvotes</span>
         </div>
         <div className="stat">
@@ -76,13 +84,26 @@ function Header({ post }) {
   )
 }
 
+function Tags({tags}) {
+  return (
+    <div className="tags">
+    {tags.map((tag) => (
+      <Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag" onClick={() => toggleModal(`post-view`)}>
+        {tag.name}
+      </Link>
+    ))}
+  </div>
+  )
+}
+
 function Comments() {
   return (
     <div className="comments">
       <h2>Comments:</h2>
       <div className="comment">
         <div className="author">Cindy</div>
-        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a wacom tablet.
+        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a
+        wacom tablet.
       </div>
       <div className="comment">
         <div className="author">Jessy</div>
@@ -90,7 +111,8 @@ function Comments() {
       </div>
       <div className="comment">
         <div className="author">Cindy</div>
-        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a wacom tablet.
+        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a
+        wacom tablet.
       </div>
       <div className="comment">
         <div className="author">Kyle</div>
@@ -98,7 +120,8 @@ function Comments() {
       </div>
       <div className="comment">
         <div className="author">Cindy</div>
-        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a wacom tablet.
+        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a
+        wacom tablet.
       </div>
       <div className="comment">
         <div className="author">CrazyPanda</div>
@@ -106,7 +129,8 @@ function Comments() {
       </div>
       <div className="comment">
         <div className="author">Cindy</div>
-        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a wacom tablet.
+        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a
+        wacom tablet.
       </div>
       <div className="comment">
         <div className="author">CrazyPanda</div>
@@ -114,7 +138,8 @@ function Comments() {
       </div>
       <div className="comment">
         <div className="author">Cindy</div>
-        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a wacom tablet.
+        What software did you use? Is it Photoshop? Or Procreate? I'm trying to decide between getting an ipad and or a
+        wacom tablet.
       </div>
       <div className="comment">
         <div className="author">CrazyPanda</div>

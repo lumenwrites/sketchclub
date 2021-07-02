@@ -115,6 +115,38 @@ export const PostMutations = extendType({
       },
     })
 
+    t.field('upvote', {
+      type: 'Post',
+      args: {
+        slug: nonNull(stringArg()),
+      },
+      resolve: async (_, args, context: Context) => {
+        const userId = getUserId(context)
+        const post = await context.prisma.post.findUnique({
+          where: { slug: args.slug || undefined },
+          include: { upvoters: true },
+        })
+        const hasUpvoted = post?.upvoters.find(u => u.id === userId)
+        console.log('upvoters', userId, hasUpvoted)
+        if (hasUpvoted) { // Unupvote
+          return context.prisma.post.update({
+            where: { slug: args.slug || undefined },
+            data: {
+              upvoters: { disconnect: { id: getUserId(context) } },
+              score: { decrement: 1},
+            },
+          }) 
+        }
+        return context.prisma.post.update({
+          where: { slug: args.slug || undefined },
+          data: {
+            upvoters: { connect: { id: getUserId(context) } },
+            score: { increment: 1},
+          },
+        })
+      },
+    })
+
 
   },
 })

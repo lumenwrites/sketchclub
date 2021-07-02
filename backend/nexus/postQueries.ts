@@ -16,6 +16,7 @@ export const PostQueries = extendType({
         slug: stringArg(),
       },
       resolve: (_parent, args, context: Context) => {
+        console.log('getPost', args)
         return context.prisma.post.findUnique({
           where: { slug: args.slug || undefined },
         })
@@ -42,10 +43,10 @@ export const PostQueries = extendType({
           })
           authorId = author.id
         }
+        // Filter by tag
         const tagFilter = args.tagSlug ? {
           tags: { some: { slug: args.tagSlug } }
         } : {}
-        console.log('tag filter', tagFilter)
         // Search through posts
         const search = args.searchString ? {
           OR: [

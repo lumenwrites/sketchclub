@@ -127,6 +127,11 @@
         }
       }
       .btn-upvote {
+        &.upvoted {
+          background: $panel-bg;
+          border: 1px solid $panel-bg;
+          opacity: 70%;
+        }
       }
       .btn-edit-post {
         margin-left: 5px;

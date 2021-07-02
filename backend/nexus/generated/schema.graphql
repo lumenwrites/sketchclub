@@ -30,6 +30,7 @@ type Mutation {
   join(email: String!, password: String!, username: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
   updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, tags: [TagInput], title: String!): Post
+  upvote(slug: String!): Post
 }
 
 type Post {
@@ -38,9 +39,11 @@ type Post {
   id: String!
   images: [File]
   published: Boolean
+  score: Int
   slug: String!
   tags: [TagType]
   title: String!
+  upvoters: [User]
 }
 
 input PostCreateInput {

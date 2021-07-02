@@ -77,6 +77,7 @@ export interface NexusGenObjects {
     body?: string | null; // String
     id: string; // String!
     published?: boolean | null; // Boolean
+    score?: number | null; // Int
     slug: string; // String!
     title: string; // String!
   }
@@ -124,6 +125,7 @@ export interface NexusGenFieldTypes {
     join: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     login: NexusGenRootTypes['AuthPayload'] | null; // AuthPayload
     updatePost: NexusGenRootTypes['Post'] | null; // Post
+    upvote: NexusGenRootTypes['Post'] | null; // Post
   }
   Post: { // field return type
     author: NexusGenRootTypes['User'] | null; // User
@@ -131,9 +133,11 @@ export interface NexusGenFieldTypes {
     id: string; // String!
     images: Array<NexusGenRootTypes['File'] | null> | null; // [File]
     published: boolean | null; // Boolean
+    score: number | null; // Int
     slug: string; // String!
     tags: Array<NexusGenRootTypes['TagType'] | null> | null; // [TagType]
     title: string; // String!
+    upvoters: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   PresignedUrl: { // field return type
     filepath: string | null; // String
@@ -178,6 +182,7 @@ export interface NexusGenFieldTypeNames {
     join: 'AuthPayload'
     login: 'AuthPayload'
     updatePost: 'Post'
+    upvote: 'Post'
   }
   Post: { // field return type name
     author: 'User'
@@ -185,9 +190,11 @@ export interface NexusGenFieldTypeNames {
     id: 'String'
     images: 'File'
     published: 'Boolean'
+    score: 'Int'
     slug: 'String'
     tags: 'TagType'
     title: 'String'
+    upvoters: 'User'
   }
   PresignedUrl: { // field return type name
     filepath: 'String'
@@ -243,6 +250,9 @@ export interface NexusGenArgTypes {
       slug: string; // String!
       tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
+    }
+    upvote: { // args
+      slug: string; // String!
     }
   }
   Query: {
