@@ -45,7 +45,7 @@ export default function LoginModal() {
   }
 
   return (
-    <Modal name={`login`} className={"post-modal narrow"}>
+    <Modal name={`login`} className={"login-modal narrow"}>
       <Error error={error}/>
       <h2>Join</h2>
       <input placeholder="Your username (no spaces)..." name="username" autoComplete="on" value={joinInputs.username} onChange={joinHandleChange} />

@@ -14,6 +14,11 @@ import cuid from 'cuid'
 
 import { getUserId } from './shield'
 
+function omit(obj, key) {
+  const { [key]: omitted, ...rest } = obj;
+  return rest;
+}
+
 export const PostMutations = extendType({
   type: 'Mutation',
   definition(t) {
@@ -22,21 +27,47 @@ export const PostMutations = extendType({
       args: {
         title: nonNull(stringArg()),
         body: stringArg(),
+        tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' }))
       },
-      resolve: (_, args, context: Context) => {
-        const slug = slugify(args.title) + '-' + cuid()
-        console.log('Created post', args, slug)
+      resolve: async (_, args, context: Context) => {
+        console.log('tags', omit(args.tags[0], "id"))
+        // Create tags if they don't exist
+        // const tags = await Promise.all(
+        //   args.tags.map((tag) =>
+        //     context.prisma.tag.upsert({
+        //       create: omit(tag, "id"),
+        //       update: tag,
+        //       where: { id: tag.id || "" },
+        //     })
+        //   )
+        // )
+        const existingTags = args.tags?.filter(t => ('id' in t))
+        const newTags = args.tags?.filter(t => !('id' in t))
+        console.log('Created post', existingTags, newTags) // args, slug,
         return context.prisma.post.create({
           data: {
             title: args.title,
             body: args.body,
-            slug: slug,
+            slug: `${slugify(args.title)}-${cuid()}`,
             images: {
               create: args.images,
             },
+            tags: {
+              set: existingTags,
+              create: newTags
+              // create: {
+              //       name: "test",
+              //       slug: "test"
+              // }
+              // disconnect: post.issues,
+              // set: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
+            },
             authorId: getUserId(context),
             published: true, // make it false once Edit post works.
+            // include: {
+            //   tags: true
+            // }
           },
         })
       },
@@ -49,7 +80,7 @@ export const PostMutations = extendType({
         title: nonNull(stringArg()),
         body: stringArg(),
         published: booleanArg(),
-        tags: list(arg({ type: 'TagInput' })),
+        // tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' })),
       },
       resolve: async (_, args, context: Context) => {
@@ -69,7 +100,6 @@ export const PostMutations = extendType({
         //   )
         // )
         // console.log('upserted tags', tags)
-
         try {
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },

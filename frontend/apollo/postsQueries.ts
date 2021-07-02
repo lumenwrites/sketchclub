@@ -14,6 +14,11 @@ export const GET_POSTS = gql`
         url
         id
       }
+      tags {
+        name
+        slug
+        id
+      }
       author {
         username
       }
@@ -31,6 +36,11 @@ export const GET_POST = gql`
       images {
         name
         url
+        id
+      }
+      tags {
+        name
+        slug
         id
       }
       author {
@@ -81,6 +91,17 @@ export const DELETE_POST = gql`
   mutation DeletePost($slug: String!) {
     deletePost(slug: $slug) {
       slug
+    }
+  }
+`
+
+
+export const GET_TAGS = gql`
+  query Tags {
+    tags {
+      name
+      slug
+      id
     }
   }
 `

@@ -21,15 +21,39 @@ model Post {
   slug String @unique
   author User @relation("PostAuthor", fields: [authorId], references: [id])
   authorId String // In the field authorId we will store [id] of the User
-  topic Topic? @relation("PostTopic", fields: [topicId], references: [id])
-  topicId String?
   title String
   body String
   tags Tag[]
+  topics Topic[]
   images Image[] @relation("ImagePost")
   published Boolean  @default(false)
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
+}
+
+// Explicitly creating many to many table: (doesn't change anything)
+// model PostTags {
+//   id     String @id @default(cuid())
+//   post   Post? @relation(fields: [postId], references: [id])
+//   tag    Tag?  @relation(fields: [tagId], references: [id])
+//   postId String?
+//   tagId  String?
+// }
+
+// Many to many relations:
+// https://www.prisma.io/docs/support/help-articles/working-with-many-to-many-relations
+model Tag {
+  id String @id @default(cuid())
+  posts Post[]
+  name String
+  slug String @unique
+}
+
+model Topic {
+  id String @id @default(cuid())
+  posts Post[]
+  name String
+  slug String @unique
 }
 
 model Image {
@@ -40,17 +64,3 @@ model Image {
   url String
 }
 
-// Many to many relations:
-// https://www.prisma.io/docs/support/help-articles/working-with-many-to-many-relations
-model Tag {
-  id String @id @default(cuid())
-  posts Post[]
-  name String
-  slug String
-}
-
-model Topic {
-  id String @id
-  title String @unique
-  posts Post[] @relation("PostTopic")
-}

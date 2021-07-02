@@ -6,30 +6,25 @@ import Gallery from "./Gallery"
 const { BUCKET_URL } = process.env
 
 export default function PostView({ post }) {
-
   return (
     <div className={"post-view"}>
       <Gallery images={post.images} />
-
       <div className="description">
-        <Header post={post}/>
+        <Header post={post} />
         <div className="scrollable">
           <div className="scrollable-contents">
             <h1>{post.title}</h1>
             {post.body}
-            <hr />
-            <Comments />
-          </div> {/* End scrollable contents */}
-        </div> {/* End scrollable */}
-      </div> {/* End description */}
-      <div className="clearfix" />
-      <div className="post-comment">
-        <textarea placeholder="Leave a comment..." name="comment" value={""} onChange={() => {}}></textarea>
-        <div className="btn right btn-cta" onClick={() => {}}>
-          Post Comment
+            <hr/>
+            <div className="tags">
+              {post.tags.map(tag => (<div className="tag">{tag.name}</div>))}
+            </div>
+            {/* <Comments /> */}
+          </div>
         </div>
       </div>
-      <div className="clearfix" />
+      {/* <PostComment /> */}
+      <div className="clearfix"/>
     </div>
   )
 }
@@ -44,9 +39,9 @@ function Header({ post }) {
   }
   return (
     <div className="header">
-      <div className="btn btn-user-profile" onClick={(e) => toggleModal(`post-edit-${post.slug}`)}>
+      <Link className="btn btn-user-profile" href={`/profile/${post.author.username}`}>
         <FontAwesomeIcon icon={["fas", "user"]} /> <b>{post.author.username}</b>
-      </div>
+      </Link>
       <div className="buttons">
         <div className="btn btn-upvote" onClick={handleUpvote}>
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
@@ -70,11 +65,11 @@ function Header({ post }) {
           {` 508 `}
           <span className="stat-label">Views</span>
         </div>
-        <div className="stat">
+        {/* <div className="stat">
           <FontAwesomeIcon icon={["fas", "comments"]} />
           {` 4 `}
           <span className="stat-label">Comments</span>
-        </div>
+        </div> */}
       </div>
     </div>
   )
@@ -123,6 +118,17 @@ function Comments() {
       <div className="comment">
         <div className="author">CrazyPanda</div>
         Cool hat.
+      </div>
+    </div>
+  )
+}
+
+function PostComment() {
+  return (
+    <div className="post-comment">
+      <textarea placeholder="Leave a comment..." name="comment" value={""} onChange={() => {}}></textarea>
+      <div className="btn right btn-cta" onClick={() => {}}>
+        Post Comment
       </div>
     </div>
   )

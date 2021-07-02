@@ -132,6 +132,7 @@ export interface NexusGenFieldTypes {
     images: Array<NexusGenRootTypes['File'] | null> | null; // [File]
     published: boolean | null; // Boolean
     slug: string; // String!
+    tags: Array<NexusGenRootTypes['TagType'] | null> | null; // [TagType]
     title: string; // String!
   }
   PresignedUrl: { // field return type
@@ -143,6 +144,7 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User'] | null; // User
     post: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    tags: NexusGenRootTypes['TagType'][]; // [TagType!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
@@ -184,6 +186,7 @@ export interface NexusGenFieldTypeNames {
     images: 'File'
     published: 'Boolean'
     slug: 'String'
+    tags: 'TagType'
     title: 'String'
   }
   PresignedUrl: { // field return type name
@@ -195,6 +198,7 @@ export interface NexusGenFieldTypeNames {
     me: 'User'
     post: 'Post'
     posts: 'Post'
+    tags: 'TagType'
     user: 'User'
     users: 'User'
   }
@@ -217,6 +221,7 @@ export interface NexusGenArgTypes {
     createPost: { // args
       body?: string | null; // String
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
+      tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
     }
     deletePost: { // args
@@ -236,7 +241,6 @@ export interface NexusGenArgTypes {
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       published?: boolean | null; // Boolean
       slug: string; // String!
-      tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
     }
   }

@@ -39,7 +39,7 @@ export const permissions = shield({
   },
   Mutation: {
     // If nexus always sends me the old cookies, then this shouldn't work. And yet it does.
-    createPost: rules.isAuthenticatedUser,
+    // createPost: rules.isAuthenticatedUser,
     updatePost: rules.isPostOwner,
     deletePost: rules.isPostOwner,
   },

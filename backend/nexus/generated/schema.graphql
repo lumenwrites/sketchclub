@@ -25,11 +25,11 @@ input FileInput {
 }
 
 type Mutation {
-  createPost(body: String, images: [FileInput], title: String!): Post
+  createPost(body: String, images: [FileInput], tags: [TagInput], title: String!): Post
   deletePost(slug: String!): Post
   join(email: String!, password: String!, username: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, tags: [TagInput], title: String!): Post
+  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, title: String!): Post
 }
 
 type Post {
@@ -39,6 +39,7 @@ type Post {
   images: [File]
   published: Boolean
   slug: String!
+  tags: [TagType]
   title: String!
 }
 
@@ -57,6 +58,7 @@ type Query {
   me: User
   post(slug: String): Post
   posts(published: Boolean, username: String): [Post!]!
+  tags: [TagType!]!
   user(username: String): User
   users: [User!]!
 }
