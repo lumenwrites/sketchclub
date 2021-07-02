@@ -53,6 +53,7 @@ export const PostMutations = extendType({
             images: {
               create: args.images,
             },
+            // Can't figure out how to set the tags, none of these options work
             tags: {
               set: existingTags,
               create: newTags
@@ -60,6 +61,7 @@ export const PostMutations = extendType({
               //       name: "test",
               //       slug: "test"
               // }
+              // set: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
               // connect: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
             },
             author: { connect: { id: getUserId(context) } },
