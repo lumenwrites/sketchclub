@@ -62,7 +62,8 @@ export const PostMutations = extendType({
               // }
               // connect: [{id:"ckqldp05l0003ae9y8v8i6tdk"}]
             },
-            authorId: getUserId(context),
+            author: { connect: { id: getUserId(context) } },
+            // authorId: getUserId(context),
             published: true, // make it false once Edit post works.
             // include: {
             //   tags: true
