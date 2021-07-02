@@ -13,7 +13,7 @@ export default function tag() {
   const router = useRouter()
   const { tagSlug } = router.query
   console.log('tag', tagSlug)
-  const { loading, error, data } = useGetPosts({ tagSlug })
+  const { loading, error, data } = useGetPosts({ tagSlug, searchString: router.query.search })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   // console.log('profile posts', data)

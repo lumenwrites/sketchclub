@@ -6,6 +6,7 @@ import Gallery from "./Gallery"
 const { BUCKET_URL } = process.env
 
 export default function PostView({ post }) {
+  const { toggleModal } = useModal()
   return (
     <div className={"post-view"}>
       <Gallery images={post.images} />
@@ -17,7 +18,7 @@ export default function PostView({ post }) {
             {post.body}
             <hr/>
             <div className="tags">
-              {post.tags.map(tag => (<Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag">{tag.name}</Link>))}
+              {post.tags.map(tag => (<Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag" onClick={()=>toggleModal(`post-view`)}>{tag.name}</Link>))}
             </div>
             {/* <Comments /> */}
           </div>

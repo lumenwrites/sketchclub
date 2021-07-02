@@ -38,7 +38,7 @@ export default function TagsInput({ tags, setTags, customTags = false, placehold
     setTags((prev) => prev.filter((t) => t.slug !== tag.slug))
   }
   function addTag(tag) {
-    console.log("Add tag", tag)
+    // console.log("Add tag", tag)
     if (!tag || !tag.name || !tag.slug) return
     if (tags.find((t) => t.slug === tag.slug)) return
 

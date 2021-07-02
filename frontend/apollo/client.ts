@@ -15,7 +15,7 @@ const { BACKEND_URL } = process.env
 function createClient({ headers, initialState }) {
   console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
   return new ApolloClient({
-    // ssrMode: true, //https://www.apollographql.com/docs/react/performance/server-side-rendering/
+    ssrMode: true, //https://www.apollographql.com/docs/react/performance/server-side-rendering/
     link: ApolloLink.from([
       onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
