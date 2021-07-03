@@ -68,8 +68,9 @@ export const PostQueries = extendType({
             published: args.published || undefined,
             ...search,
             ...tagFilter,
-            ...topicFilter
-          }
+            ...topicFilter,
+          },
+          orderBy: [ { score: 'desc' } ],      
         })
       },
     })
@@ -90,7 +91,9 @@ export const PostQueries = extendType({
       },
       resolve: async (_parent, args, context: Context) => {
         // console.log('Posts resolver', context.prisma.post.findMany())
-        return context.prisma.topic.findMany()
+        return context.prisma.topic.findMany({
+          orderBy: [ { createdAt: 'desc' } ]
+        })
       },
     })
 
