@@ -40,10 +40,16 @@ export const PostType = objectType({
       resolve: (parent, _, context: Context) => {
         // console.log('Return post author', parent.id)
         return context.prisma.post
-          .findUnique({
-            where: { id: parent.id || undefined },
-          })
+          .findUnique({ where: { id: parent.id || undefined }})
           .author()
+      },
+    })
+    t.field('topic', {
+      type: 'TopicType',
+      resolve: (parent, _, context: Context) => {
+        return context.prisma.post
+          .findUnique({ where: { id: parent.id || undefined }})
+          .topic()
       },
     })
 
@@ -79,12 +85,22 @@ export const TagInput = inputObjectType({
   },
 })
 
-// Return image information from the post resolver
+// Return tag information from the post resolver
 export const TagType = objectType({
   name: 'TagType',
   definition(t) {
     t.string('name')
     t.string('slug')
     t.string('id')
+  },
+})
+
+export const TopicType = objectType({
+  name: 'TopicType',
+  definition(t) {
+    t.string('name')
+    t.string('slug')
+    t.string('id')
+    t.field('createdAt', { type: 'DateTime' })
   },
 })

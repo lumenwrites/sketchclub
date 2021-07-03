@@ -1,9 +1,9 @@
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_POSTS, GET_POST, CREATE_POST, UPDATE_POST, DELETE_POST, UPVOTE_POST } from 'apollo/postsQueries'
-import { GET_TAGS } from 'apollo/postsQueries'
+import { GET_TOPICS, GET_TAGS } from 'apollo/postsQueries'
 
-export const useGetPosts = ({ username, published, searchString, tagSlug }) => useQuery(GET_POSTS, {
-  variables: {username, published, tagSlug, searchString},
+export const useGetPosts = ({ username, published, searchString, tagSlug, topicSlug }) => useQuery(GET_POSTS, {
+  variables: {username, published, tagSlug, topicSlug, searchString},
 })
 
 export const useGetPost = (slug) => useQuery(GET_POST, {
@@ -33,4 +33,4 @@ export const useUpvotePost = (slug) => useMutation(UPVOTE_POST, {
   ]
 })
 
-export const useGetTags = () => useQuery(GET_TAGS)
+export const useGetTopics = () => useQuery(GET_TOPICS)

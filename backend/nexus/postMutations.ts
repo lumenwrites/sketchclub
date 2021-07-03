@@ -27,11 +27,13 @@ export const PostMutations = extendType({
       args: {
         title: nonNull(stringArg()),
         body: stringArg(),
+        topicId: stringArg(),
         tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' }))
       },
       resolve: async (_, args, context: Context) => {
-        console.log('Creating post', args.title)
+        console.log('Creating post', args.topicId)
+        const connectTopic = args.topicId ? { connect: { id: args.topicId } } : undefined
         return context.prisma.post.create({
           data: {
             title: args.title,
@@ -45,6 +47,7 @@ export const PostMutations = extendType({
               connect: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
               create: args.tags?.filter(t => !('id' in t))
             },
+            topic: connectTopic,
             author: { connect: { id: getUserId(context) } },
             // authorId: getUserId(context),
             published: true, // make it false once Edit post works.
@@ -63,6 +66,7 @@ export const PostMutations = extendType({
         title: nonNull(stringArg()),
         body: stringArg(),
         published: booleanArg(),
+        topicId: stringArg(),
         tags: list(arg({ type: 'TagInput' })),
         images: list(arg({ type: 'FileInput' })),
       },
@@ -85,6 +89,7 @@ export const PostMutations = extendType({
                 set: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
                 create: args.tags?.filter(t => !('id' in t))
               },
+              topic: { connect: { id: topicId } },
               images: {
                 create: args.images,
               },
@@ -133,15 +138,15 @@ export const PostMutations = extendType({
             where: { slug: args.slug || undefined },
             data: {
               upvoters: { disconnect: { id: getUserId(context) } },
-              score: { decrement: 1},
+              score: { decrement: 1 },
             },
-          }) 
+          })
         }
         return context.prisma.post.update({
           where: { slug: args.slug || undefined },
           data: {
             upvoters: { connect: { id: getUserId(context) } },
-            score: { increment: 1},
+            score: { increment: 1 },
           },
         })
       },

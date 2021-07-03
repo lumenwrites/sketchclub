@@ -2,16 +2,16 @@ import { topics } from "./topics"
 import { useRouter } from "next/router"
 import Link from "components/Elements/Link"
 import slugify from "slugify"
-import { useGetTags } from "apollo/postsActions"
+import { useGetTopics } from "apollo/postsActions"
 
 export default function Topic() {
   const router = useRouter()
   // console.log('topics',topics.trim().split('\n'))
-  const { loading, error, data } = useGetTags()
+  const { loading, error, data } = useGetTopics()
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   function renderTopics() {
-    return data.tags.map((topic, i) => {
+    return data.topics.map((topic, i) => {
       let isActive = ""
       if (router.query.tagSlug === topic.slug) isActive = "active"
       if (!router.query.tagSlug && i === 0) isActive = "active"

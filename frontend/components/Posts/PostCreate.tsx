@@ -7,18 +7,28 @@ import useForm from "hooks/useForm"
 import { useCreatePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
 import TagsInput from "components/Elements/TagsInput"
+import TopicsInput from "components/Elements/TopicsInput"
 
 export default function PostCreate() {
   const emptyInputs = { title: "", body: "" }
   const { inputs, handleChange, setValue, clearForm } = useForm(emptyInputs)
   const { files: images, removeFile, uploadFile, uploading } = useUploadFiles()
   const [tags, setTags] = useState([])
+  const [topic, setTopic] = useState(null)
   const [createPost, createPostRes] = useCreatePost()
   const { toggleModal } = useModal()
   async function handleSubmit() {
     const { title, body } = inputs
-    console.log("submitting post", { title, body, images, tags })
-    const { data } = await createPost({ variables: { title, body, images, tags } })
+    console.log("submitting post", { title, body, images, tags, topic })
+    const { data } = await createPost({
+      variables: {
+        title,
+        body,
+        images,
+        tags,
+        topicId: topic?.id
+      }
+    })
     clearForm()
     toggleModal("post-create") // hide the modal
     // toggleModal(`post-edit-${data.createPost.slug}`)
@@ -29,6 +39,7 @@ export default function PostCreate() {
       <h1>Create Post</h1>
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
+      <TopicsInput topic={topic} setTopic={setTopic} />
       <TagsInput tags={tags} setTags={setTags} />
       <div className="clearfix"/>
       <h4>Upload Images</h4>

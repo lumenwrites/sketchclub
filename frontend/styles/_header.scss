@@ -28,10 +28,6 @@ header {
 
   nav {
     float: right;
-    .dropdown .menu {
-      left: 4px;
-      top: calc(100% + 5px); // not sure why 5
-    }
     @media (max-width: 700px) {
       float: left;
       white-space: nowrap;

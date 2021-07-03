@@ -91,6 +91,12 @@ export interface NexusGenObjects {
     name?: string | null; // String
     slug?: string | null; // String
   }
+  TopicType: { // root type
+    createdAt?: NexusGenScalars['DateTime'] | null; // DateTime
+    id?: string | null; // String
+    name?: string | null; // String
+    slug?: string | null; // String
+  }
   User: { // root type
     createdAt: NexusGenScalars['DateTime']; // DateTime!
     email: string; // String!
@@ -137,6 +143,7 @@ export interface NexusGenFieldTypes {
     slug: string; // String!
     tags: Array<NexusGenRootTypes['TagType'] | null> | null; // [TagType]
     title: string; // String!
+    topic: NexusGenRootTypes['TopicType'] | null; // TopicType
     upvoters: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   PresignedUrl: { // field return type
@@ -149,10 +156,17 @@ export interface NexusGenFieldTypes {
     post: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
     tags: NexusGenRootTypes['TagType'][]; // [TagType!]!
+    topics: NexusGenRootTypes['TopicType'][]; // [TopicType!]!
     user: NexusGenRootTypes['User'] | null; // User
     users: NexusGenRootTypes['User'][]; // [User!]!
   }
   TagType: { // field return type
+    id: string | null; // String
+    name: string | null; // String
+    slug: string | null; // String
+  }
+  TopicType: { // field return type
+    createdAt: NexusGenScalars['DateTime'] | null; // DateTime
     id: string | null; // String
     name: string | null; // String
     slug: string | null; // String
@@ -194,6 +208,7 @@ export interface NexusGenFieldTypeNames {
     slug: 'String'
     tags: 'TagType'
     title: 'String'
+    topic: 'TopicType'
     upvoters: 'User'
   }
   PresignedUrl: { // field return type name
@@ -206,10 +221,17 @@ export interface NexusGenFieldTypeNames {
     post: 'Post'
     posts: 'Post'
     tags: 'TagType'
+    topics: 'TopicType'
     user: 'User'
     users: 'User'
   }
   TagType: { // field return type name
+    id: 'String'
+    name: 'String'
+    slug: 'String'
+  }
+  TopicType: { // field return type name
+    createdAt: 'DateTime'
     id: 'String'
     name: 'String'
     slug: 'String'
@@ -230,6 +252,7 @@ export interface NexusGenArgTypes {
       images?: Array<NexusGenInputs['FileInput'] | null> | null; // [FileInput]
       tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
+      topicId?: string | null; // String
     }
     deletePost: { // args
       slug: string; // String!
@@ -250,6 +273,7 @@ export interface NexusGenArgTypes {
       slug: string; // String!
       tags?: Array<NexusGenInputs['TagInput'] | null> | null; // [TagInput]
       title: string; // String!
+      topicId?: string | null; // String
     }
     upvote: { // args
       slug: string; // String!
@@ -267,6 +291,7 @@ export interface NexusGenArgTypes {
       published?: boolean | null; // Boolean
       searchString?: string | null; // String
       tagSlug?: string | null; // String
+      topicSlug?: string | null; // String
       username?: string | null; // String
     }
     user: { // args

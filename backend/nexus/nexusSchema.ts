@@ -10,7 +10,7 @@ import { permissions } from './shield'
 import { UserType, UserCreateInput, AuthPayload } from './userTypes'
 import { UserQueries } from './userQueries'
 import { UserMutations } from './userMutations'
-import { PostType, PostCreateInput, TagInput, TagType } from './postTypes'
+import { PostType, PostCreateInput, TagInput, TagType, TopicType } from './postTypes'
 import { PostQueries } from './postQueries'
 import { PostMutations } from './postMutations'
 import { PresignedUrl, File, FileInput } from './ImageTypes'
@@ -32,6 +32,7 @@ const schemaWithoutPermissions = makeSchema({
     PostMutations,
     TagInput,
     TagType,
+    TopicType,
     DateTime,
     ImageQueries,
     PresignedUrl,

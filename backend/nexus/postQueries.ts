@@ -30,6 +30,7 @@ export const PostQueries = extendType({
         published: booleanArg(),
         searchString: stringArg(),
         tagSlug: stringArg(),
+        topicSlug: stringArg(),
         // TODO: Pagination
       },
       resolve: async (_parent, args, context: Context) => {
@@ -46,12 +47,17 @@ export const PostQueries = extendType({
         const tagFilter = args.tagSlug ? {
           tags: { some: { slug: args.tagSlug } }
         } : {}
+        // Filter by topic
+        const topicFilter = args.topicSlug ? {
+          topic: { slug: { contains: args.topicSlug } }
+        } : {}
         // Search through posts
         const search = args.searchString ? {
           OR: [
             { title: { contains: args.searchString, mode: "insensitive", } },
             { body: { contains: args.searchString, mode: "insensitive", } },
-            { tags: { some: { name: { contains: args.searchString, mode: "insensitive", } } } }
+            { tags: { some: { name: { contains: args.searchString, mode: "insensitive", } } } },
+            { topic: { name: { contains: args.searchString, mode: "insensitive", } } }
             // TODO: search in username too
           ],
         } : {}
@@ -62,6 +68,7 @@ export const PostQueries = extendType({
             published: args.published || undefined,
             ...search,
             ...tagFilter,
+            ...topicFilter
           }
         })
       },
@@ -77,6 +84,15 @@ export const PostQueries = extendType({
       },
     })
 
+    t.nonNull.list.nonNull.field('topics', {
+      type: 'TopicType',
+      args: {
+      },
+      resolve: async (_parent, args, context: Context) => {
+        // console.log('Posts resolver', context.prisma.post.findMany())
+        return context.prisma.topic.findMany()
+      },
+    })
 
 
 

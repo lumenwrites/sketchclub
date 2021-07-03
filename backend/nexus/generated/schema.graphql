@@ -25,11 +25,11 @@ input FileInput {
 }
 
 type Mutation {
-  createPost(body: String, images: [FileInput], tags: [TagInput], title: String!): Post
+  createPost(body: String, images: [FileInput], tags: [TagInput], title: String!, topicId: String): Post
   deletePost(slug: String!): Post
   join(email: String!, password: String!, username: String!): AuthPayload
   login(email: String!, password: String!): AuthPayload
-  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, tags: [TagInput], title: String!): Post
+  updatePost(body: String, images: [FileInput], published: Boolean, slug: String!, tags: [TagInput], title: String!, topicId: String): Post
   upvote(slug: String!): Post
 }
 
@@ -43,6 +43,7 @@ type Post {
   slug: String!
   tags: [TagType]
   title: String!
+  topic: TopicType
   upvoters: [User]
 }
 
@@ -60,8 +61,9 @@ type Query {
   getPresignedUrl(filename: String, filetype: String): PresignedUrl
   me: User
   post(slug: String): Post
-  posts(published: Boolean, searchString: String, tagSlug: String, username: String): [Post!]!
+  posts(published: Boolean, searchString: String, tagSlug: String, topicSlug: String, username: String): [Post!]!
   tags: [TagType!]!
+  topics: [TopicType!]!
   user(username: String): User
   users: [User!]!
 }
@@ -73,6 +75,13 @@ input TagInput {
 }
 
 type TagType {
+  id: String
+  name: String
+  slug: String
+}
+
+type TopicType {
+  createdAt: DateTime
   id: String
   name: String
   slug: String

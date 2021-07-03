@@ -25,7 +25,8 @@ model Post {
   title String
   body String
   tags Tag[]
-  topics Topic[]
+  topic Topic? @relation("PostTopic", fields: [topicId], references: [id])
+  topicId String?
   images Image[] @relation("ImagePost")
   score Int @default(0)
   upvoters User[]
@@ -54,9 +55,10 @@ model Tag {
 
 model Topic {
   id String @id @default(cuid())
-  posts Post[]
+  posts Post[]  @relation("PostTopic")
   name String
   slug String @unique
+  createdAt DateTime @default(now())
 }
 
 model Image {

@@ -18,7 +18,7 @@ export default function PostView({ post }) {
             <h1>{post.title}</h1>
             {post.body}
             <hr />
-            <Tags tags={post.tags}/>
+            <Tags topic={post.topic} tags={post.tags} />
             {/* <Comments /> */}
           </div>
         </div>
@@ -29,16 +29,13 @@ export default function PostView({ post }) {
   )
 }
 
-
-
 function Header({ post }) {
   //console.log('post.slug', post.slug)
   const [upvotePost] = useUpvotePost(post.slug)
   const { toggleModal } = useModal()
   const { username } = useAuth()
   const isPostAuthor = post.author.username == username
-  const hasUpvoted = post.upvoters?.find(u => u.username === username)
-  console.log('upvoters le', post.upvoters?.length)
+  const hasUpvoted = post.upvoters?.find((u) => u.username === username)
   async function handleUpvote(e) {
     if (!username) return toggleModal(`login`)
     // console.log('upvoting', post.slug)
@@ -51,11 +48,9 @@ function Header({ post }) {
         <FontAwesomeIcon icon={["fas", "user"]} /> <b>{post.author.username}</b>
       </Link>
       <div className="buttons">
-        <div className={`btn btn-upvote ${hasUpvoted ? "upvoted":""}`} onClick={handleUpvote}>
+        <div className={`btn btn-upvote ${hasUpvoted ? "upvoted" : ""}`} onClick={handleUpvote}>
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          <span className="btn-label">
-            {hasUpvoted ? "Unupvote" : "Upvote"}
-          </span>
+          <span className="btn-label">{hasUpvoted ? "Unupvote" : "Upvote"}</span>
         </div>
         {isPostAuthor && (
           <div className="btn btn-edit-post" onClick={(e) => toggleModal(`post-edit-${post.slug}`)}>
@@ -85,16 +80,21 @@ function Header({ post }) {
   )
 }
 
-function Tags({ tags }) {
+function Tags({ topic, tags }) {
   const { toggleModal } = useModal()
   return (
     <div className="tags">
-    {tags.map((tag) => (
-      <Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag" onClick={() => toggleModal(`post-view`)}>
-        {tag.name}
-      </Link>
-    ))}
-  </div>
+      {topic && (
+        <Link href={`/topic/${topic.slug}`} className="tag topic" onClick={() => toggleModal(`post-view`)}>
+          {topic.name}
+        </Link>
+      )}
+      {tags.map((tag) => (
+        <Link href={`/tag/${tag.slug}`} key={tag.slug} className="tag" onClick={() => toggleModal(`post-view`)}>
+          {tag.name}
+        </Link>
+      ))}
+    </div>
   )
 }
 

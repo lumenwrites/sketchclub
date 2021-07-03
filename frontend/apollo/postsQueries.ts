@@ -1,12 +1,19 @@
 import { gql } from '@apollo/client'
 
 export const GET_POSTS = gql`
-  query Posts($username: String, $published:Boolean, $searchString:String, $tagSlug:String) {
+  query Posts(
+      $username: String,
+      $published:Boolean,
+      $searchString:String,
+      $tagSlug:String,
+      $topicSlug:String
+    ) {
     posts(
       published:$published
       username:$username
       searchString:$searchString
       tagSlug:$tagSlug
+      topicSlug:$topicSlug
     ) {
       title
       body
@@ -20,6 +27,12 @@ export const GET_POSTS = gql`
         name
         slug
         id
+      }
+      topic {
+        id
+        name
+        slug
+        createdAt
       }
       score
       upvoters {
@@ -49,6 +62,12 @@ export const GET_POST = gql`
         slug
         id
       }
+      topic {
+        id
+        name
+        slug
+        createdAt
+      }
       score
       upvoters {
         username
@@ -61,11 +80,18 @@ export const GET_POST = gql`
 `
 
 export const CREATE_POST = gql`
-    mutation CreatePost($title: String!, $body: String, $tags: [TagInput], $images: [FileInput]) {
+    mutation CreatePost(
+      $title: String!,
+      $body: String,
+      $tags: [TagInput],
+      $topicId: String,
+      $images: [FileInput]
+    ) {
       createPost(
         title: $title
         body: $body
         tags: $tags
+        topicId: $topicId
         images: $images
       ) {
         title
@@ -75,6 +101,12 @@ export const CREATE_POST = gql`
           name
           slug
           id
+        }
+        topic {
+          id
+          name
+          slug
+          createdAt
         }
       }
     }
@@ -86,7 +118,8 @@ export const UPDATE_POST = gql`
     $title: String!,
     $body: String,
     $published: Boolean,
-    $tags: [TagInput], 
+    $tags: [TagInput],
+    $topicId:String,
     $images: [FileInput]
   ){
     updatePost(
@@ -95,6 +128,7 @@ export const UPDATE_POST = gql`
       body: $body
       published: $published
       tags: $tags
+      topicId: $topicId
       images: $images
     ) {
       slug
@@ -134,6 +168,17 @@ export const GET_TAGS = gql`
       name
       slug
       id
+    }
+  }
+`
+
+export const GET_TOPICS = gql`
+  query Tags {
+    topics {
+      id
+      name
+      slug
+      createdAt
     }
   }
 `

@@ -7,10 +7,10 @@ async function addTopic() {
     name: process.argv[2],
     slug: slugify(process.argv[2], { lower: true, strict: true })
   }
-  const createTag = await prisma.tag.create({
+  const createTopic = await prisma.topic.create({
     data: topic,
   })
-  console.log(`Created topic: ${createTag.slug}`)
+  console.log(`Created topic: ${createTopic.slug}`)
   //console.log(topic)
 }
 
