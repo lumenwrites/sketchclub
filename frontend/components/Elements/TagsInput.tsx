@@ -2,8 +2,10 @@ import { useState, useRef } from "react"
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import slugify from "slugify"
 import allTags from "./tags"
+import { useGetTags } from "apollo/postsActions"
 
 export default function TagsInput({ tags, setTags, customTags = false, placeholder = "Add up to 5 tags..." }) {
+  const { loading, error, data } = useGetTags()
   const [val, setVal] = useState("")
   const inputRef = useRef(null)
   // Remove already selected tags from the list
@@ -47,15 +49,22 @@ export default function TagsInput({ tags, setTags, customTags = false, placehold
     inputRef?.current?.focus()
   }
   function renderAllTags() {
+    const todaysChallenge = {
+      name: `Today's Challenge: ${data.tags[0]?.name}`,
+      slug: data.tags[0]?.slug
+    }
+    console.log('todaysChallenge', todaysChallenge)
     if (listTags.length === 0) {
       return <div className="tag-item">No tags matching this search.</div>
     }
-    return listTags.map((tag, i) => (
+    return [todaysChallenge, ...listTags].map((tag, i) => (
       <div className={`tag-item`} key={tag.slug} onClick={() => addTag(tag)}>
-        {tag.slug === allTags[0].slug ? `Today's Challenge: ${tag.name}` : tag.name}
+        {tag.name}
       </div>
     ))
   }
+  if (loading) return <p>Loading...</p>
+  if (error) return <p>Error :(</p>
   return (
     <div className="tags-input">
       {tags.map((tag, i) => (

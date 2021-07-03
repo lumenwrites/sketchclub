@@ -16,7 +16,7 @@ export default function browse({ posts }) {
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   // console.log('browse posts', data)
-  // console.log("ssr posts", posts)
+  //console.log("ssr posts", posts)
   return (
     <Layout subnav={<Topic/>}>
       <Browse posts={data.posts} />
@@ -27,8 +27,9 @@ export default function browse({ posts }) {
 export async function getServerSideProps(context) {
   const { data } = await fetchQuery({
     query: GET_POSTS,
-    variables: { published: true }
+    variables: { published: true, searchString: context.query.search }
   })
+  //console.log('server side props')
   return {
     props: {
       posts: data.posts,

@@ -37,12 +37,13 @@ function Header({ post }) {
   const { toggleModal } = useModal()
   const { username } = useAuth()
   const isPostAuthor = post.author.username == username
-  const hasUpvoted = post.upvoters.find(u => u.username === username)
+  const hasUpvoted = post.upvoters?.find(u => u.username === username)
+  console.log('upvoters le', post.upvoters?.length)
   async function handleUpvote(e) {
     if (!username) return toggleModal(`login`)
-    console.log('upvoting', post.slug)
+    // console.log('upvoting', post.slug)
     const { data } = await upvotePost({ variables: { slug: post.slug } })
-    console.log('upvoted', data)
+    // console.log('upvoted', data)
   }
   return (
     <div className="header">
@@ -66,7 +67,7 @@ function Header({ post }) {
       <div className="stats">
         <div className="stat">
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          {post.upvoters.length}
+          {post.upvoters?.length || 0}
           <span className="stat-label">Upvotes</span>
         </div>
         <div className="stat">
@@ -84,7 +85,8 @@ function Header({ post }) {
   )
 }
 
-function Tags({tags}) {
+function Tags({ tags }) {
+  const { toggleModal } = useModal()
   return (
     <div className="tags">
     {tags.map((tag) => (

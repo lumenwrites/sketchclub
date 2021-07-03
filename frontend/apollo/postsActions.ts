@@ -28,6 +28,7 @@ export const useDeletePost = () => useMutation(DELETE_POST, {
 
 export const useUpvotePost = (slug) => useMutation(UPVOTE_POST, {
   refetchQueries: [
+    { query: GET_POSTS, variables: { published: true } },
     { query: GET_POST, variables: { slug: slug } }
   ]
 })

@@ -12,7 +12,7 @@ import ProfileHeader from "components/Users/ProfileHeader"
 export default function profile() {
   const router = useRouter()
   const { username } = router.query
-  const { loading, error, data } = useGetPosts({ username })
+  const { loading, error, data } = useGetPosts({ username, searchString: router.query.search })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   // console.log('profile posts', data)
@@ -23,15 +23,15 @@ export default function profile() {
   )
 }
 
-// export async function getServerSideProps({params}) {
-//   // console.log('params', params.username)
-//   const { data } = await fetchQuery({
-//     query: GET_POSTS,
-//     variables: { profile: params.username }
-//   })
-//   return {
-//     props: {
-//       posts: data.posts,
-//     }, // will be passed to the page component as props
-//   }
-// }
+export async function getServerSideProps(context) {
+  //console.log('ssr context', context)
+  const { data } = await fetchQuery({
+    query: GET_POSTS,
+    variables: { profile: context.query.username, searchString: context.query.search }
+  })
+  return {
+    props: {
+      posts: data.posts,
+    }, // will be passed to the page component as props
+  }
+}

@@ -1,9 +1,9 @@
 const tagsList = [
   // Contest
-  {
-    name: "Your Favorite Cartoon Character",
-    slug: "your-favorite-character",
-  },
+  // {
+  //   name: "Your Favorite Cartoon Character",
+  //   slug: "your-favorite-character",
+  // },
   // Medium
   {
     name: "Digital Art",

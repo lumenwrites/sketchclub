@@ -16,7 +16,7 @@ export const PostQueries = extendType({
         slug: stringArg(),
       },
       resolve: (_parent, args, context: Context) => {
-        console.log('getPost', args)
+        //console.log('getPost', args)
         return context.prisma.post.findUnique({
           where: { slug: args.slug || undefined },
         })
@@ -31,7 +31,6 @@ export const PostQueries = extendType({
         searchString: stringArg(),
         tagSlug: stringArg(),
         // TODO: Pagination
-        // TODO: Filter by tags
       },
       resolve: async (_parent, args, context: Context) => {
         console.log('Get posts', args)
@@ -53,6 +52,7 @@ export const PostQueries = extendType({
             { title: { contains: args.searchString, mode: "insensitive", } },
             { body: { contains: args.searchString, mode: "insensitive", } },
             { tags: { some: { name: { contains: args.searchString, mode: "insensitive", } } } }
+            // TODO: search in username too
           ],
         } : {}
         // console.log('Posts resolver', context.prisma.post.findMany())

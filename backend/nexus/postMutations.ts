@@ -126,8 +126,8 @@ export const PostMutations = extendType({
           where: { slug: args.slug || undefined },
           include: { upvoters: true },
         })
-        const hasUpvoted = post?.upvoters.find(u => u.id === userId)
-        console.log('upvoters', userId, hasUpvoted)
+        const hasUpvoted = post?.upvoters?.find(u => u.id === userId)
+        // console.log('upvoters', userId, hasUpvoted)
         if (hasUpvoted) { // Unupvote
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },

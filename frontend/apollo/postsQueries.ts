@@ -21,6 +21,10 @@ export const GET_POSTS = gql`
         slug
         id
       }
+      score
+      upvoters {
+        username
+      }
       author {
         username
       }

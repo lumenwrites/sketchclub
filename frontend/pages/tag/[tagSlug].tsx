@@ -24,15 +24,15 @@ export default function tag() {
   )
 }
 
-// export async function getServerSideProps({params}) {
-//   // console.log('params', params.username)
-//   const { data } = await fetchQuery({
-//     query: GET_POSTS,
-//     variables: { profile: params.username }
-//   })
-//   return {
-//     props: {
-//       posts: data.posts,
-//     }, // will be passed to the page component as props
-//   }
-// }
+export async function getServerSideProps(context) {
+  //console.log('ssr context', context)
+  const { data } = await fetchQuery({
+    query: GET_POSTS,
+    variables: { tagSlug: context.query.tagSlug, searchString: context.query.search }
+  })
+  return {
+    props: {
+      posts: data.posts,
+    }, // will be passed to the page component as props
+  }
+}
