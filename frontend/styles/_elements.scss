@@ -394,3 +394,8 @@ textarea {
     display: block;
   }
 }
+
+svg {
+  // Initially fontawesome icons are huge, before js loads. This should fix that.
+  width: 1em; 
+}

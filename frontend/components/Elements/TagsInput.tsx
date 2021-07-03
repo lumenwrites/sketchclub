@@ -49,9 +49,12 @@ export default function TagsInput({ tags, setTags, customTags = false, placehold
     inputRef?.current?.focus()
   }
   function renderAllTags() {
-    const todaysChallenge = {
-      name: `Today's Challenge: ${data.tags[0]?.name}`,
-      slug: data.tags[0]?.slug
+    let todaysChallenge
+    if (data.tags[0]) {
+      todaysChallenge = {
+        name: `Today's Challenge: ${data.tags[0].name}`,
+        slug: data.tags[0].slug
+      }
     }
     console.log('todaysChallenge', todaysChallenge)
     if (listTags.length === 0) {
