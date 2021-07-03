@@ -39,8 +39,8 @@ export default function PostCreate() {
       <h1>Create Post</h1>
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
-      <TopicsInput topic={topic} setTopic={setTopic} />
       <TagsInput tags={tags} setTags={setTags} />
+      <TopicsInput topic={topic} setTopic={setTopic} />
       <div className="clearfix"/>
       <h4>Upload Images</h4>
       <ListImages images={images} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />

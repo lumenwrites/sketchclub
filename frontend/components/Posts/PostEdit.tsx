@@ -9,12 +9,14 @@ import useForm from "hooks/useForm"
 import { useUpdatePost, useDeletePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
 import TagsInput from "components/Elements/TagsInput"
+import TopicsInput from "components/Elements/TopicsInput"
 
 export default function PostEdit({ post }) {
   const router = useRouter()
   const initialInputs = { title: post.title, body: post.body }
   const { inputs, handleChange, setValue } = useForm(initialInputs)
   const [tags, setTags] = useState(post.tags)
+  const [topic, setTopic] = useState(post.topic)
   const { files: images, removeFile, uploadFile, uploading } = useUploadFiles(post.images)
   const [updatePost, updatePostRes] = useUpdatePost(post.slug)
   const [deletePost, deletePostRes] = useDeletePost()
@@ -28,7 +30,7 @@ export default function PostEdit({ post }) {
     const img = images.map((f) => ({ url: f.url, name: f.name, id: f.id }))
     const tgs = tags.map((t) => ({ name: t.name, slug: t.slug, id: t.id }))
     const { data } = await updatePost({
-      variables: { slug: post.slug, title, body, published, tags: tgs, images: img },
+      variables: { slug: post.slug, title, body, published, tags: tgs, images: img, topicId: topic?.id },
     })
     console.log("Updated Post", data.updatePost)
     toggleModal(`post-edit-${post.slug}`)
@@ -47,6 +49,7 @@ export default function PostEdit({ post }) {
       <input placeholder="Post Title" name="title" value={inputs.title} onChange={handleChange} />
       <textarea placeholder="Post Description..." name="body" value={inputs.body} onChange={handleChange}></textarea>
       <TagsInput tags={tags} setTags={setTags} />
+      <TopicsInput topic={topic} setTopic={setTopic} />
       <h4>Upload Images</h4>
       <ListImages images={images} uploadImage={uploadFile} uploadingImage={uploading} removeImage={removeFile} />
       <div className="buttons">

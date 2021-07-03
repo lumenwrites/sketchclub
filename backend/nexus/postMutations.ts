@@ -77,6 +77,8 @@ export const PostMutations = extendType({
           where: { post: { slug: args.slug } },
         })
         console.log('updatePost', args.slug)
+        const setTopic = args.topicId ? { connect: { id: args.topicId } } : { disconnect: true }
+        console.log('setTopic', setTopic)
         try {
           return context.prisma.post.update({
             where: { slug: args.slug || undefined },
@@ -89,7 +91,7 @@ export const PostMutations = extendType({
                 set: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
                 create: args.tags?.filter(t => !('id' in t))
               },
-              topic: { connect: { id: topicId } },
+              topic: setTopic,
               images: {
                 create: args.images,
               },

@@ -269,7 +269,7 @@ input {
     /* Chrome, Firefox, Opera, Safari 10.1+ */
     font-family: $main-font;
     color: $text-dim;
-    // font-weight: 100;
+    font-weight: 100;
     opacity: 1; /* Firefox */
     opacity: 80%;
   }
@@ -278,6 +278,7 @@ input {
 textarea {
   font-size: 1em; // need it for some reason
   //font-size: 0.8em;
+  font-weight: 100;
   color: $text;
   font-family: $main-font;
   background: $input-bg;
@@ -353,7 +354,7 @@ textarea {
       /* Chrome, Firefox, Opera, Safari 10.1+ */
       font-family: $main-font;
       color: $text-dim;
-      // font-weight: 100;
+      font-weight: 100;
       opacity: 1; /* Firefox */
       opacity: 80%;
     }
