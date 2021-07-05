@@ -31,11 +31,11 @@ function createClient({ headers, initialState }) {
         }
       }),
       new ApolloLink((operation, forward) => {
-        console.log('getContext', operation.getContext())
+        // console.log('getContext', operation.getContext())
         // operation.setContext({
         //   headers: { Authorization: typeof window === 'undefined' ? '' : getCookie("Authorization") },
         // })
-        console.log('getContext', operation.getContext())
+        // console.log('getContext', operation.getContext())
         return forward(operation)
       }),
       new HttpLink({

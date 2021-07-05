@@ -25,6 +25,7 @@ export default function LoginModal() {
       console.log("Joined", data)
       toggleModal("login")
       clearJoin()
+      location.reload()
     } catch (e) {
       console.log('Failed to join', e)
       setError("User already exists.")
@@ -39,6 +40,7 @@ export default function LoginModal() {
       console.log("Logged in", data)
       toggleModal("login")
       clearLogin()
+      location.reload()
       //router.reload(window.location.pathname)
     } catch (e) {
       console.log('Failed to log in', e)
