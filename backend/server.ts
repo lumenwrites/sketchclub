@@ -27,5 +27,6 @@ server.applyMiddleware({
 })
 
 app.listen({ port: PORT }, () => {
+  console.log('S', process.env.APP_SECRET)
   console.log(`Server running at http://localhost:${PORT}${server.graphqlPath}`);
 })
