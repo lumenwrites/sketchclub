@@ -61,7 +61,7 @@ type Query {
   getPresignedUrl(filename: String, filetype: String): PresignedUrl
   me: User
   post(slug: String): Post
-  posts(published: Boolean, searchString: String, tagSlug: String, topicSlug: String, username: String): [Post!]!
+  posts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): [Post!]!
   tags: [TagType!]!
   topics: [TopicType!]!
   user(username: String): User

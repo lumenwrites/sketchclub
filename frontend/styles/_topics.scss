@@ -35,6 +35,10 @@
     &.active {
       border: 1px solid $btn-cta;
     }
+    &:hover {
+      background: $btn-bg-hover;
+      color: $text;
+    }
   }
   .today {
     font-weight: bold;

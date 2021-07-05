@@ -6,7 +6,7 @@ const Browse = ({ posts }) => {
   if (posts.length === 0) {
     return (
       <div className="no-results">
-        <div className="flex-center">No posts here yet. Be the first one to create one!</div>
+        <div className="flex-center">No posts here yet. Be the first to create one!</div>
       </div>
     )
   }

@@ -1,3 +1,4 @@
+import { useRouter } from 'next/router'
 import Error from "components/Elements/Error"
 import Modal from "components/Elements/Modal"
 import { useModal } from "context/ModalContext"
@@ -15,6 +16,7 @@ export default function LoginModal() {
   const { inputs: loginInputs, handleChange: loginHandleChange, clearForm: clearLogin } = useForm(emptyLoginInputs)
   const { toggleModal } = useModal()
   const [error, setError] = useState("")
+  const router = useRouter()
 
   async function handleJoin() {
     try {
@@ -37,6 +39,7 @@ export default function LoginModal() {
       console.log("Logged in", data)
       toggleModal("login")
       clearLogin()
+      //router.reload(window.location.pathname)
     } catch (e) {
       console.log('Failed to log in', e)
       setError("Wrong Username/Password.")

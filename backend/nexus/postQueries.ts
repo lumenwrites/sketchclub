@@ -1,6 +1,7 @@
 // @ts-nocheck
 import {
   stringArg,
+  intArg,
   extendType,
   booleanArg,
 } from 'nexus'
@@ -31,7 +32,8 @@ export const PostQueries = extendType({
         searchString: stringArg(),
         tagSlug: stringArg(),
         topicSlug: stringArg(),
-        // TODO: Pagination
+        skip: intArg(),
+        take: intArg(),
       },
       resolve: async (_parent, args, context: Context) => {
         console.log('Get posts', args)
@@ -61,6 +63,12 @@ export const PostQueries = extendType({
             // TODO: search in username too
           ],
         } : {}
+        // Sort by hot
+        // https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d
+        // https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9
+        // const age = new Date() - date
+        // const gravity = 1.8
+        // const rankScore = (score - 1) / (age + 2) ** gravity
         // console.log('Posts resolver', context.prisma.post.findMany())
         return context.prisma.post.findMany({
           where: {
@@ -70,7 +78,9 @@ export const PostQueries = extendType({
             ...tagFilter,
             ...topicFilter,
           },
-          orderBy: [ { score: 'desc' } ],      
+          orderBy: [{ score: 'desc' }],
+          take: args.take || undefined,
+          skip: args.skip || undefined,
         })
       },
     })
@@ -92,7 +102,7 @@ export const PostQueries = extendType({
       resolve: async (_parent, args, context: Context) => {
         // console.log('Posts resolver', context.prisma.post.findMany())
         return context.prisma.topic.findMany({
-          orderBy: [ { createdAt: 'desc' } ]
+          orderBy: [{ createdAt: 'desc' }]
         })
       },
     })

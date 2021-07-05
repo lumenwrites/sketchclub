@@ -6,7 +6,9 @@ export const GET_POSTS = gql`
       $published:Boolean,
       $searchString:String,
       $tagSlug:String,
-      $topicSlug:String
+      $topicSlug:String,
+      $skip: Int,
+      $take: Int
     ) {
     posts(
       published:$published
@@ -14,6 +16,8 @@ export const GET_POSTS = gql`
       searchString:$searchString
       tagSlug:$tagSlug
       topicSlug:$topicSlug
+      skip: $skip
+      take: $take
     ) {
       title
       body

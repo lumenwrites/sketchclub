@@ -290,7 +290,9 @@ export interface NexusGenArgTypes {
     posts: { // args
       published?: boolean | null; // Boolean
       searchString?: string | null; // String
+      skip?: number | null; // Int
       tagSlug?: string | null; // String
+      take?: number | null; // Int
       topicSlug?: string | null; // String
       username?: string | null; // String
     }

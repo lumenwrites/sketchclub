@@ -10,7 +10,6 @@ import https from 'https'
 const { BACKEND_URL } = process.env
 
 
-
 // https://www.apollographql.com/docs/react/networking/authentication/
 function createClient({ headers, initialState }) {
   console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
@@ -31,12 +30,20 @@ function createClient({ headers, initialState }) {
           )
         }
       }),
+      new ApolloLink((operation, forward) => {
+        console.log('getContext', operation.getContext())
+        // operation.setContext({
+        //   headers: { Authorization: typeof window === 'undefined' ? '' : getCookie("Authorization") },
+        // })
+        console.log('getContext', operation.getContext())
+        return forward(operation)
+      }),
       new HttpLink({
         uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
           credentials: 'include',
           // Vercel deploy kept giving me CORS errors.
-          // Setting NODE_TLS_REJECT_UNAUTHORIZED=0, but vercel rejected it because it was insecure for them.
+          // Setting NODE_TLS_REJECT_UNAUTHORIZED=0 would solve that, but vercel rejected it because it was insecure for them.
           // Setting this parameter is some kind of narrower equivalent that makes it work for me.
           agent: new https.Agent({ rejectUnauthorized: false })
         },
@@ -47,7 +54,7 @@ function createClient({ headers, initialState }) {
           // normal cookies don't work somehow for some reason (CORS?) when trying to connect from Vercel to DO, and this is a workaround.
           Authorization: typeof window === 'undefined' ? '' : getCookie("Authorization")
         },
-      }),
+      })
     ]),
     cache: new InMemoryCache({
       typePolicies: {

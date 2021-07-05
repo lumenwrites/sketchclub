@@ -52,3 +52,22 @@
     }
   }
 }
+
+.pagination {
+  margin-top: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .page-num {
+    border-radius: $border-radius;
+    cursor: pointer;
+    padding: 4px 8px;
+    margin: 0 2px;
+    background: $panel-bg;
+    border: 1px solid $panel-bg;
+    &.active, &:hover {
+      border: 1px solid $border;
+      background: white;
+    }
+  }
+}
