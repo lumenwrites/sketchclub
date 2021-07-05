@@ -155,6 +155,7 @@ export interface NexusGenFieldTypes {
     me: NexusGenRootTypes['User'] | null; // User
     post: NexusGenRootTypes['Post'] | null; // Post
     posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    postsCount: number[]; // [Int!]!
     tags: NexusGenRootTypes['TagType'][]; // [TagType!]!
     topics: NexusGenRootTypes['TopicType'][]; // [TopicType!]!
     user: NexusGenRootTypes['User'] | null; // User
@@ -220,6 +221,7 @@ export interface NexusGenFieldTypeNames {
     me: 'User'
     post: 'Post'
     posts: 'Post'
+    postsCount: 'Int'
     tags: 'TagType'
     topics: 'TopicType'
     user: 'User'

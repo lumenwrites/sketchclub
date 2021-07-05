@@ -81,7 +81,19 @@ export const PostQueries = extendType({
           orderBy: [{ score: 'desc' }],
           take: args.take || undefined,
           skip: args.skip || undefined,
+          
         })
+      },
+    })
+
+    t.nonNull.list.nonNull.field('postsCount', {
+      type: 'Int',
+      args: {
+      },
+      resolve: async (_parent, args, context: Context) => {
+        const postCount = await context.prisma.post.count({ where: {published: true}})
+        console.log(postCount)
+        return [postCount]
       },
     })
 

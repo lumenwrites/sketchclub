@@ -62,6 +62,7 @@ type Query {
   me: User
   post(slug: String): Post
   posts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): [Post!]!
+  postsCount: [Int!]!
   tags: [TagType!]!
   topics: [TopicType!]!
   user(username: String): User

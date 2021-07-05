@@ -13,9 +13,15 @@ import Pagination from "components/Elements/Pagination"
 
 export default function browse({ posts }) {
   const router = useRouter()
-  const { loading, error, data } = useGetPosts({ published: true, searchString: router.query.search }) // , skip:0, take:1
+  const { loading, error, data } = useGetPosts({
+    published: true,
+    searchString: router.query.search,
+    skip: parseInt(process.env.POSTS_PER_PAGE) * (parseInt(router.query.page) - 1 || 0),
+    take: parseInt(process.env.POSTS_PER_PAGE)
+  })
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
+  // console.log('skip', process.env.POSTS_PER_PAGE  * (parseInt(router.query.page) - 1 || 0))
   // console.log('browse posts', data)
   //console.log("ssr posts", posts)
   return (
@@ -29,8 +35,14 @@ export default function browse({ posts }) {
 export async function getServerSideProps(context) {
   const { data } = await fetchQuery({
     query: GET_POSTS,
-    variables: { published: true, searchString: context.query.search }
+    variables: {
+      published: true,
+      searchString: context.query.search,
+      skip: parseInt(process.env.POSTS_PER_PAGE) * (parseInt(context.query.page) - 1 || 0),
+      take: parseInt(process.env.POSTS_PER_PAGE)
+    }
   })
+  //console.log('skip', process.env.POSTS_PER_PAGE  * (parseInt(context.query.page) - 1 || 0))
   //console.log('server side props')
   return {
     props: {

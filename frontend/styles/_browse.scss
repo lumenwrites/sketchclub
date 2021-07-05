@@ -69,5 +69,14 @@
       border: 1px solid $border;
       background: white;
     }
+    &.disabled {
+      cursor: initial;
+      color: $text-dim;
+      opacity: 50%;
+      &:hover {
+        border: 1px solid $panel-bg;
+        background: $panel-bg;
+      }
+    }
   }
 }
