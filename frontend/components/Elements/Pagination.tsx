@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useQuery } from "@apollo/client"
 import { gql } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
