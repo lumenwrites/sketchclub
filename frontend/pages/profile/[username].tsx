@@ -8,6 +8,7 @@ import { GET_POSTS } from "apollo/postsQueries"
 import Layout from "components/Layout/Layout"
 import Browse from "components/Posts/Browse"
 import ProfileHeader from "components/Users/ProfileHeader"
+import Pagination from "components/Elements/Pagination"
 
 export default function profile() {
   const { loading, error, data } = useGetPosts()
@@ -16,7 +17,8 @@ export default function profile() {
   // console.log('profile posts', data)
   return (
     <Layout subnav={<ProfileHeader/>}>
-      <Browse posts={data.getPosts.posts}/>
+      <Browse posts={data.getPosts.posts} />
+      <Pagination postCount={data.getPosts.postCount}/>
     </Layout>
   )
 }

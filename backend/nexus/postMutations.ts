@@ -38,7 +38,7 @@ export const PostMutations = extendType({
           data: {
             title: args.title,
             body: args.body,
-            slug: `${slugify(args.title)}-${cuid()}`,
+            slug: `${slugify(args.title, { lower: true, strict: true })}-${cuid()}`,
             images: {
               create: args.images,
             },

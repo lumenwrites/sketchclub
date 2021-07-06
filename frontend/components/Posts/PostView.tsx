@@ -62,7 +62,7 @@ function Header({ post }) {
       <div className="stats">
         <div className="stat">
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          {post.upvoters?.length || 0}
+          {post.upvoters?.length || post.score || 0}
           <span className="stat-label">Upvotes</span>
         </div>
         <div className="stat">
