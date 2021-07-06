@@ -28,6 +28,7 @@ model Post {
   topic Topic? @relation("PostTopic", fields: [topicId], references: [id])
   topicId String?
   images Image[] @relation("ImagePost")
+  rank Float @default(0)
   score Int @default(0)
   upvoters User[]
   published Boolean  @default(false)

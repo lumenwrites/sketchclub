@@ -7,6 +7,7 @@ import {
 } from 'nexus'
 import { Context } from '../apollo/context'
 
+
 // Test Query
 export const PostQueries = extendType({
   type: 'Query',
@@ -63,13 +64,7 @@ export const PostQueries = extendType({
             // TODO: search in username too
           ],
         } : {}
-        // Sort by hot
-        // https://medium.com/hacking-and-gonzo/how-hacker-news-ranking-algorithm-works-1d9b0cf2c08d
-        // https://medium.com/hacking-and-gonzo/how-reddit-ranking-algorithms-work-ef111e33d0d9
-        // const age = new Date() - date
-        // const gravity = 1.8
-        // const rankScore = (score - 1) / (age + 2) ** gravity
-        // console.log('Posts resolver', context.prisma.post.findMany())
+
         const allFilters = {
           authorId: authorId,
           published: args.published || undefined,
@@ -80,7 +75,7 @@ export const PostQueries = extendType({
         const [posts, postCount] = await context.prisma.$transaction([
           context.prisma.post.findMany({
             where: allFilters,
-            orderBy: [{ score: 'desc' }],
+            orderBy: [{ rank: 'desc' }],
             take: args.take || undefined,
             skip: args.skip || undefined,
           }),
@@ -98,7 +93,7 @@ export const PostQueries = extendType({
       args: {
       },
       resolve: async (_parent, args, context: Context) => {
-        const postCount = await context.prisma.post.count({ where: {published: true}})
+        const postCount = await context.prisma.post.count({ where: { published: true } })
         console.log(postCount)
         return [postCount]
       },
