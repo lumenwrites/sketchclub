@@ -15,7 +15,7 @@
     "prisma:migrate": "prisma migrate dev",
     "prisma:seed": "npx prisma db seed --preview-feature",
     "prisma:rank": "ts-node-dev  --no-notify --respawn --transpile-only ./prisma/updateRank.ts",
-    "startRankPostsJob": "pm2 start npm run prisma:rank --cron '*/5 * * * *'"
+    "startRankPostsJob": "pm2 start npm --name 'rankPosts'-- run prisma:rank --cron '*/5 * * * *'"
   },
   "author": "",
   "license": "ISC",
