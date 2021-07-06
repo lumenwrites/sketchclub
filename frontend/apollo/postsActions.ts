@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_POSTS, GET_POST, CREATE_POST, UPDATE_POST, DELETE_POST, UPVOTE_POST } from 'apollo/postsQueries'
 import { GET_TOPICS, GET_TAGS } from 'apollo/postsQueries'
