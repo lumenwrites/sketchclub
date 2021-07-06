@@ -24,7 +24,7 @@ export const PostQueries = extendType({
       },
     })
     // TODO: protect the unpublished posts?
-    t.nonNull.list.nonNull.field('posts', {
+    t.nonNull.field('getPosts', { // list.nonNull
       type: 'PostsWithCount',
       args: {
         username: stringArg(),
@@ -88,7 +88,7 @@ export const PostQueries = extendType({
             where: allFilters
           })
         ])
-        console.log([posts, postCount])
+        console.log({ posts, postCount })
         return { posts, postCount }
       },
     })

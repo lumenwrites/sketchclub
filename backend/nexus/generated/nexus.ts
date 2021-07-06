@@ -83,7 +83,7 @@ export interface NexusGenObjects {
   }
   PostsWithCount: { // root type
     count?: number | null; // Int
-    posts?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    posts?: NexusGenRootTypes['Post'] | null; // Post
   }
   PresignedUrl: { // root type
     filepath?: string | null; // String
@@ -152,17 +152,17 @@ export interface NexusGenFieldTypes {
   }
   PostsWithCount: { // field return type
     count: number | null; // Int
-    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+    posts: NexusGenRootTypes['Post'] | null; // Post
   }
   PresignedUrl: { // field return type
     filepath: string | null; // String
     url: string | null; // String
   }
   Query: { // field return type
+    getPosts: NexusGenRootTypes['PostsWithCount']; // PostsWithCount!
     getPresignedUrl: NexusGenRootTypes['PresignedUrl'] | null; // PresignedUrl
     me: NexusGenRootTypes['User'] | null; // User
     post: NexusGenRootTypes['Post'] | null; // Post
-    posts: NexusGenRootTypes['PostsWithCount'][]; // [PostsWithCount!]!
     postsCount: number[]; // [Int!]!
     tags: NexusGenRootTypes['TagType'][]; // [TagType!]!
     topics: NexusGenRootTypes['TopicType'][]; // [TopicType!]!
@@ -229,10 +229,10 @@ export interface NexusGenFieldTypeNames {
     url: 'String'
   }
   Query: { // field return type name
+    getPosts: 'PostsWithCount'
     getPresignedUrl: 'PresignedUrl'
     me: 'User'
     post: 'Post'
-    posts: 'PostsWithCount'
     postsCount: 'Int'
     tags: 'TagType'
     topics: 'TopicType'
@@ -294,14 +294,7 @@ export interface NexusGenArgTypes {
     }
   }
   Query: {
-    getPresignedUrl: { // args
-      filename?: string | null; // String
-      filetype?: string | null; // String
-    }
-    post: { // args
-      slug?: string | null; // String
-    }
-    posts: { // args
+    getPosts: { // args
       published?: boolean | null; // Boolean
       searchString?: string | null; // String
       skip?: number | null; // Int
@@ -309,6 +302,13 @@ export interface NexusGenArgTypes {
       take?: number | null; // Int
       topicSlug?: string | null; // String
       username?: string | null; // String
+    }
+    getPresignedUrl: { // args
+      filename?: string | null; // String
+      filetype?: string | null; // String
+    }
+    post: { // args
+      slug?: string | null; // String
     }
     user: { // args
       username?: string | null; // String

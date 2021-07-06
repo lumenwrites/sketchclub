@@ -54,7 +54,7 @@ input PostCreateInput {
 
 type PostsWithCount {
   count: Int
-  posts: [Post]
+  posts: Post
 }
 
 type PresignedUrl {
@@ -63,10 +63,10 @@ type PresignedUrl {
 }
 
 type Query {
+  getPosts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): PostsWithCount!
   getPresignedUrl(filename: String, filetype: String): PresignedUrl
   me: User
   post(slug: String): Post
-  posts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): [PostsWithCount!]!
   postsCount: [Int!]!
   tags: [TagType!]!
   topics: [TopicType!]!
