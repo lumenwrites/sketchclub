@@ -10,7 +10,7 @@ export const GET_POSTS = gql`
       $skip: Int,
       $take: Int
     ) {
-    posts(
+    getPosts(
       published:$published
       username:$username
       searchString:$searchString
@@ -19,32 +19,35 @@ export const GET_POSTS = gql`
       skip: $skip
       take: $take
     ) {
-      title
-      body
-      slug
-      images {
-        name
-        url
-        id
-      }
-      tags {
-        name
+      posts {
+        title
+        body
         slug
-        id
+        images {
+          name
+          url
+          id
+        }
+        tags {
+          name
+          slug
+          id
+        }
+        topic {
+          id
+          name
+          slug
+          createdAt
+        }
+        score
+        upvoters {
+          username
+        }
+        author {
+          username
+        }
       }
-      topic {
-        id
-        name
-        slug
-        createdAt
-      }
-      score
-      upvoters {
-        username
-      }
-      author {
-        username
-      }
+      postCount
     }
   }
 `

@@ -1,17 +1,14 @@
 // @ts-nocheck
-import { useQuery } from "@apollo/client"
 import { gql } from '@apollo/client'
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome"
 import { useRouter } from "next/router"
 
-export default function Pagination() {
+export default function Pagination({postCount}) {
   const router = useRouter()
-  const { loading, error, data } = useQuery(gql`{postsCount}`)
   const currentPage = parseInt(router.query.page) || 1
-  const postsCount = data?.postsCount[0]
   const postsPerPage = parseInt(process.env.POSTS_PER_PAGE)
-  const pageCount = Math.ceil(postsCount / postsPerPage)
-  console.log({pageCount})
+  const pageCount = Math.ceil(postCount / postsPerPage)
+
   function goToPage(pageNumber) {
     if (pageNumber === 0 || pageNumber > pageCount) return
     let { page, ...originalQuery } = router.query
@@ -30,8 +27,7 @@ export default function Pagination() {
     ))
     return pageNumbers
   }
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+
   return (
     <div className="pagination">
 

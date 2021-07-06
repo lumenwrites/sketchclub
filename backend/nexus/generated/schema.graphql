@@ -53,8 +53,8 @@ input PostCreateInput {
 }
 
 type PostsWithCount {
-  count: Int
-  posts: Post
+  postCount: Int
+  posts: [Post]
 }
 
 type PresignedUrl {

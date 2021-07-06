@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { useRouter } from "next/router"
 import { useGetPosts } from "apollo/postsActions"
 // For SSR
 import { fetchQuery } from "apollo/fetchQuery"
@@ -10,16 +9,13 @@ import Browse from "components/Posts/Browse"
 import Topic from "components/Topics/Topic"
 
 export default function topic() {
-  const router = useRouter()
-  const { topicSlug } = router.query
-  console.log('topicSlug', topicSlug)
-  const { loading, error, data } = useGetPosts({ topicSlug, searchString: router.query.search })
+  const { loading, error, data } = useGetPosts()
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
   // console.log('profile posts', data)
   return (
     <Layout subnav={<Topic/>}>
-      <Browse posts={data.posts}/>
+      <Browse posts={data.getPosts.posts}/>
     </Layout>
   )
 }

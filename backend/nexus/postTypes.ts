@@ -65,16 +65,14 @@ export const PostType = objectType({
     })
 
 
-
   }
 })
 
 export const PostsWithCount = objectType({
   name: 'PostsWithCount',
   definition(t) {
-    t.field('posts', { type: 'Post' })
-    //t.list.field('posts', { type: 'Post' })
-    t.int('count')
+    t.list.field('posts', { type: 'Post' })
+    t.int('postCount')
   },
 })
 

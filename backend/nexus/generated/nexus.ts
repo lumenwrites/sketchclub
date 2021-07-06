@@ -82,8 +82,8 @@ export interface NexusGenObjects {
     title: string; // String!
   }
   PostsWithCount: { // root type
-    count?: number | null; // Int
-    posts?: NexusGenRootTypes['Post'] | null; // Post
+    postCount?: number | null; // Int
+    posts?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
   }
   PresignedUrl: { // root type
     filepath?: string | null; // String
@@ -151,8 +151,8 @@ export interface NexusGenFieldTypes {
     upvoters: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
   PostsWithCount: { // field return type
-    count: number | null; // Int
-    posts: NexusGenRootTypes['Post'] | null; // Post
+    postCount: number | null; // Int
+    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
   }
   PresignedUrl: { // field return type
     filepath: string | null; // String
@@ -221,7 +221,7 @@ export interface NexusGenFieldTypeNames {
     upvoters: 'User'
   }
   PostsWithCount: { // field return type name
-    count: 'Int'
+    postCount: 'Int'
     posts: 'Post'
   }
   PresignedUrl: { // field return type name

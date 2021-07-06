@@ -1,5 +1,4 @@
 // @ts-nocheck
-import { useRouter } from "next/router"
 import { useGetPosts } from "apollo/postsActions"
 // For SSR
 import { fetchQuery } from "apollo/fetchQuery"
@@ -10,29 +9,26 @@ import Browse from "components/Posts/Browse"
 import Topic from "components/Topics/Topic"
 
 export default function tag() {
-  const router = useRouter()
-  const { tagSlug } = router.query
-  console.log('tag', tagSlug)
-  const { loading, error, data } = useGetPosts({ tagSlug, searchString: router.query.search })
+  const { loading, error, data } = useGetPosts()
   if (loading) return <p>Loading...</p>
   if (error) return <p>Error :(</p>
-  // console.log('profile posts', data)
+  // console.log('tag posts', data)
   return (
     <Layout subnav={<Topic/>}>
-      <Browse posts={data.posts}/>
+      <Browse posts={data.getPosts.posts}/>
     </Layout>
   )
 }
 
-export async function getServerSideProps(context) {
-  //console.log('ssr context', context)
-  const { data } = await fetchQuery({
-    query: GET_POSTS,
-    variables: { tagSlug: context.query.tagSlug, searchString: context.query.search }
-  })
-  return {
-    props: {
-      posts: data.posts,
-    }, // will be passed to the page component as props
-  }
-}
+// export async function getServerSideProps(context) {
+//   //console.log('ssr context', context)
+//   const { data } = await fetchQuery({
+//     query: GET_POSTS,
+//     variables: { tagSlug: context.query.tagSlug, searchString: context.query.search }
+//   })
+//   return {
+//     props: {
+//       posts: data.getPosts,
+//     }, // will be passed to the page component as props
+//   }
+// }
