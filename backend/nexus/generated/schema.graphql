@@ -52,6 +52,11 @@ input PostCreateInput {
   title: String!
 }
 
+type PostsWithCount {
+  count: Int
+  posts: [Post]
+}
+
 type PresignedUrl {
   filepath: String
   url: String
@@ -61,7 +66,7 @@ type Query {
   getPresignedUrl(filename: String, filetype: String): PresignedUrl
   me: User
   post(slug: String): Post
-  posts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): [Post!]!
+  posts(published: Boolean, searchString: String, skip: Int, tagSlug: String, take: Int, topicSlug: String, username: String): [PostsWithCount!]!
   postsCount: [Int!]!
   tags: [TagType!]!
   topics: [TopicType!]!

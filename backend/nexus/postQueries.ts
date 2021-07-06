@@ -25,7 +25,7 @@ export const PostQueries = extendType({
     })
     // TODO: protect the unpublished posts?
     t.nonNull.list.nonNull.field('posts', {
-      type: 'Post',
+      type: 'PostsWithCount',
       args: {
         username: stringArg(),
         published: booleanArg(),
@@ -70,19 +70,26 @@ export const PostQueries = extendType({
         // const gravity = 1.8
         // const rankScore = (score - 1) / (age + 2) ** gravity
         // console.log('Posts resolver', context.prisma.post.findMany())
-        return context.prisma.post.findMany({
-          where: {
-            authorId: authorId,
-            published: args.published || undefined,
-            ...search,
-            ...tagFilter,
-            ...topicFilter,
-          },
-          orderBy: [{ score: 'desc' }],
-          take: args.take || undefined,
-          skip: args.skip || undefined,
-          
-        })
+        const allFilters = {
+          authorId: authorId,
+          published: args.published || undefined,
+          ...search,
+          ...tagFilter,
+          ...topicFilter,
+        }
+        const [posts, postCount] = await context.prisma.$transaction([
+          context.prisma.post.findMany({
+            where: allFilters,
+            orderBy: [{ score: 'desc' }],
+            take: args.take || undefined,
+            skip: args.skip || undefined,
+          }),
+          context.prisma.post.count({
+            where: allFilters
+          })
+        ])
+        console.log([posts, postCount])
+        return { posts, postCount }
       },
     })
 

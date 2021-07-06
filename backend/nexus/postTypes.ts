@@ -1,6 +1,7 @@
 // @ts-nocheck
 import {
   objectType,
+  extendType,
   inputObjectType
 } from 'nexus'
 import { Context } from '../apollo/context'
@@ -66,6 +67,14 @@ export const PostType = objectType({
 
 
   }
+})
+
+export const PostsWithCount = objectType({
+  name: 'PostsWithCount',
+  definition(t) {
+    t.list.field('posts', { type: 'Post' })
+    t.int('count')
+  },
 })
 
 export const PostCreateInput = inputObjectType({

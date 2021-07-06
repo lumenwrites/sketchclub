@@ -2,15 +2,15 @@ const slugify = require('slugify')
 const { PrismaClient, Prisma } = require('@prisma/client')
 const prisma = new PrismaClient()
 
-async function addTopic() {
+function addTopic() {
   const topic = {
     name: process.argv[2],
-    slug: slugify(process.argv[2], { lower: true, strict: true })
+    slug: slugify(process.argv[2], { lower: true, strict: true }),
   }
-  const createTopic = await prisma.topic.create({
+  const createTopic = prisma.topic.create({
     data: topic,
   })
-  console.log(`Created topic: ${createTopic.slug}`)
+  console.log(`Created topic: ${topic.name}`)
   //console.log(topic)
 }
 
@@ -39,8 +39,6 @@ addTopic()
 //     },
 //   },
 // ]
-
-
 
 // main()
 //   .catch((e) => {

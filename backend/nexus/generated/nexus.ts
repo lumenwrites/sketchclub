@@ -81,6 +81,10 @@ export interface NexusGenObjects {
     slug: string; // String!
     title: string; // String!
   }
+  PostsWithCount: { // root type
+    count?: number | null; // Int
+    posts?: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+  }
   PresignedUrl: { // root type
     filepath?: string | null; // String
     url?: string | null; // String
@@ -146,6 +150,10 @@ export interface NexusGenFieldTypes {
     topic: NexusGenRootTypes['TopicType'] | null; // TopicType
     upvoters: Array<NexusGenRootTypes['User'] | null> | null; // [User]
   }
+  PostsWithCount: { // field return type
+    count: number | null; // Int
+    posts: Array<NexusGenRootTypes['Post'] | null> | null; // [Post]
+  }
   PresignedUrl: { // field return type
     filepath: string | null; // String
     url: string | null; // String
@@ -154,7 +162,7 @@ export interface NexusGenFieldTypes {
     getPresignedUrl: NexusGenRootTypes['PresignedUrl'] | null; // PresignedUrl
     me: NexusGenRootTypes['User'] | null; // User
     post: NexusGenRootTypes['Post'] | null; // Post
-    posts: NexusGenRootTypes['Post'][]; // [Post!]!
+    posts: NexusGenRootTypes['PostsWithCount'][]; // [PostsWithCount!]!
     postsCount: number[]; // [Int!]!
     tags: NexusGenRootTypes['TagType'][]; // [TagType!]!
     topics: NexusGenRootTypes['TopicType'][]; // [TopicType!]!
@@ -212,6 +220,10 @@ export interface NexusGenFieldTypeNames {
     topic: 'TopicType'
     upvoters: 'User'
   }
+  PostsWithCount: { // field return type name
+    count: 'Int'
+    posts: 'Post'
+  }
   PresignedUrl: { // field return type name
     filepath: 'String'
     url: 'String'
@@ -220,7 +232,7 @@ export interface NexusGenFieldTypeNames {
     getPresignedUrl: 'PresignedUrl'
     me: 'User'
     post: 'Post'
-    posts: 'Post'
+    posts: 'PostsWithCount'
     postsCount: 'Int'
     tags: 'TagType'
     topics: 'TopicType'
