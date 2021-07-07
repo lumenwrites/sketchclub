@@ -5,6 +5,7 @@ import Link from "components/Elements/Link"
 import Gallery from "./Gallery"
 const { BUCKET_URL } = process.env
 import { useUpvotePost } from "apollo/postsActions"
+import { useState } from "react"
 
 export default function PostView({ post }) {
   const { toggleModal } = useModal()
@@ -31,14 +32,20 @@ export default function PostView({ post }) {
 
 function Header({ post }) {
   //console.log('post.slug', post.slug)
-  const [upvotePost] = useUpvotePost(post.slug)
   const { toggleModal } = useModal()
   const { username } = useAuth()
+  const [upvotePost] = useUpvotePost(post.slug, username)
   const isPostAuthor = post.author.username == username
-  const hasUpvoted = post.upvoters?.find((u) => u.username === username)
+  const [hasUpvoted, setHasUpvoted] = useState(post.upvoters?.find((u) => u.username === username))
+  const [score, setScore] = useState(post.score)
   async function handleUpvote(e) {
     if (!username) return toggleModal(`login`)
     // console.log('upvoting', post.slug)
+    setHasUpvoted(upvoted => {
+      if (upvoted) setScore(score - 1)
+      if (!upvoted) setScore(score + 1)
+      return !upvoted
+    })
     const { data } = await upvotePost({ variables: { slug: post.slug } })
   }
   return (
@@ -65,7 +72,7 @@ function Header({ post }) {
       <div className="stats">
         <div className="stat">
           <FontAwesomeIcon icon={["fas", "arrow-up"]} />
-          {post.upvoters?.length || post.score || 0}
+          {score}
           <span className="stat-label">Upvotes</span>
         </div>
         <div className="stat">

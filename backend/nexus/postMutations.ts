@@ -49,6 +49,8 @@ export const PostMutations = extendType({
             },
             topic: connectTopic,
             author: { connect: { id: getUserId(context) } },
+            upvoters: { connect: { id: getUserId(context) } },
+            score: 1,
             // authorId: getUserId(context),
             published: true, // make it false once Edit post works.
             // include: {

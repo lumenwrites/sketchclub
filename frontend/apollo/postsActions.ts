@@ -24,7 +24,7 @@ export const useGetPost = (slug) => useQuery(GET_POST, {
 })
 
 export const useCreatePost = () => useMutation(CREATE_POST, {
-// context: { headers: { cookies: typeof window === 'undefined' ? '' : document.cookie } },
+  // context: { headers: { cookies: typeof window === 'undefined' ? '' : document.cookie } },
   refetchQueries: [{ query: GET_POSTS, variables: { published: true } }]
 })
 
@@ -39,11 +39,29 @@ export const useDeletePost = () => useMutation(DELETE_POST, {
   refetchQueries: [{ query: GET_POSTS, variables: { published: true } }]
 })
 
-export const useUpvotePost = (slug) => useMutation(UPVOTE_POST, {
+export const useUpvotePost = (slug, username) => useMutation(UPVOTE_POST, {
   refetchQueries: [
-    { query: GET_POSTS, variables: { published: true } },
-    { query: GET_POST, variables: { slug: slug } }
-  ]
+    // { query: GET_POSTS, variables: { published: true } },
+    // { query: GET_POST, variables: { slug: slug } }
+  ],
+  update: (cache, { data: { upvote } }) => {
+    // Updating state works, but would be a huge pain in the ass for GET_POSTS
+    // console.log('upvote update', upvote.score, slug)
+    // const { post } = cache.readQuery({
+    //   query: GET_POST,
+    //   variables: { slug }
+    // })
+    // console.log('readPostQuery', post.score, post.upvoters)
+    // const hasUpvoted = post.upvoters?.find((u) => u.username === username)
+    // const score = hasUpvoted ? (post.score - 1) : (post.score + 1)
+    // const upvoters = hasUpvoted ? post.upvoters.filter(u => u.username !== username) : [...post.upvoters, { username }]
+    // const updatedPost = {...post, score, upvoters}
+    // cache.writeQuery({
+    //   query: GET_POST,
+    //   variables: { slug },
+    //   data: { post: updatedPost }
+    // })
+  }
 })
 
 export const useGetTopics = () => useQuery(GET_TOPICS)

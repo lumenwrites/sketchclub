@@ -23,7 +23,7 @@ export default function Topic() {
     return data.topics.map((topic, i) => {
       let isActive = ""
       if (router.query.topicSlug === topic.slug) isActive = "active"
-      if (!router.query.topicSlug && i === 0) isActive = "active"
+      //if (!router.query.topicSlug && i === 0) isActive = "active"
       return (
         <Link key={i} className={`topic ${isActive}`} href={`/topic/${topic.slug}`}>
           <div className="flex-center">

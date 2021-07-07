@@ -37,6 +37,7 @@ async function main() {
     post.author = { connect: { id: userIds[Math.floor(Math.random() * userIds.length)] } }
     post.published = true
     post.score = Math.floor(Math.random() * 150)
+    post.views = Math.floor(Math.random() * 700)
     const createdPost = await prisma.post.create({ data: post })
     console.log(`Created post: ${createdPost.slug}`)
   }

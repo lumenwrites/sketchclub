@@ -7,12 +7,12 @@ export default function Search() {
   //useEffect(search, [searchString])
   function search(e) {
     if (e.key !== "Enter") return
-    let { search, ...originalQuery } = router.query
+    let { search, page, ...originalQuery } = router.query
     if (searchString.length === 0) {
       router.push({ query: originalQuery })
       return
     }
-    router.push({ query: { ...router.query, search: searchString } })
+    router.push({ query: { ...originalQuery, search: searchString } })
   }
 
   return (
