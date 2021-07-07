@@ -15,6 +15,7 @@ export const PostType = objectType({
     t.nonNull.string('slug')
     t.string('body')
     t.int('score')
+    t.int('views')
     t.boolean('published')
     t.list.field('images', {
       type: 'File',

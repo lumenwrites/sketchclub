@@ -70,7 +70,7 @@ function Header({ post }) {
         </div>
         <div className="stat">
           <FontAwesomeIcon icon={["fas", "eye"]} />
-          {` 508 `}
+          {post.views}
           <span className="stat-label">Views</span>
         </div>
         {/* <div className="stat">

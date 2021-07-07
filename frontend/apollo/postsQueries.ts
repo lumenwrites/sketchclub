@@ -40,6 +40,7 @@ export const GET_POSTS = gql`
           createdAt
         }
         score
+        views
         upvoters {
           username
         }
@@ -76,6 +77,7 @@ export const GET_POST = gql`
         createdAt
       }
       score
+      views
       upvoters {
         username
       }

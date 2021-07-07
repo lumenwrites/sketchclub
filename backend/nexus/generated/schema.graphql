@@ -45,6 +45,7 @@ type Post {
   title: String!
   topic: TopicType
   upvoters: [User]
+  views: Int
 }
 
 input PostCreateInput {

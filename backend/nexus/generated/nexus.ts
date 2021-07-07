@@ -80,6 +80,7 @@ export interface NexusGenObjects {
     score?: number | null; // Int
     slug: string; // String!
     title: string; // String!
+    views?: number | null; // Int
   }
   PostsWithCount: { // root type
     postCount?: number | null; // Int
@@ -149,6 +150,7 @@ export interface NexusGenFieldTypes {
     title: string; // String!
     topic: NexusGenRootTypes['TopicType'] | null; // TopicType
     upvoters: Array<NexusGenRootTypes['User'] | null> | null; // [User]
+    views: number | null; // Int
   }
   PostsWithCount: { // field return type
     postCount: number | null; // Int
@@ -219,6 +221,7 @@ export interface NexusGenFieldTypeNames {
     title: 'String'
     topic: 'TopicType'
     upvoters: 'User'
+    views: 'Int'
   }
   PostsWithCount: { // field return type name
     postCount: 'Int'

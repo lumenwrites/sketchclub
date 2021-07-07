@@ -30,6 +30,7 @@ model Post {
   images Image[] @relation("ImagePost")
   rank Float @default(0)
   score Int @default(0)
+  views Int @default(0)
   upvoters User[]
   published Boolean  @default(false)
   createdAt DateTime @default(now())

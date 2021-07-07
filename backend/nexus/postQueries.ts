@@ -17,8 +17,10 @@ export const PostQueries = extendType({
       args: {
         slug: stringArg(),
       },
-      resolve: (_parent, args, context: Context) => {
+      resolve: async (_parent, args, context: Context) => {
         //console.log('getPost', args)
+        //Increment views
+        await context.prisma.post.update({ where: { slug: args.slug }, data: { views: { increment: 1 } } })
         return context.prisma.post.findUnique({
           where: { slug: args.slug || undefined },
         })

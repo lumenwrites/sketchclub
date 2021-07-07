@@ -1,6 +1,7 @@
 node_modules/
 dist/
-src/generated/
+nexus/generated/
+prisma/migrations/
 .env
 *.db
 .env
@@ -15,3 +16,4 @@ yarn-error.log*
 
 # local env files
 .env
+
