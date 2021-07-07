@@ -5,6 +5,9 @@
   background: $main-bg; //rgb(253 212 167 / 78%);
   width: 100%;
   line-height: 0;
+  // For scrolling:
+  // offsetLeft = position left+margin from the first positioned parent left edge.
+  position: relative;
   //display: inline-flex;
   // transform: rotateX(180deg); // put scrollbar at the top
   .topic {
