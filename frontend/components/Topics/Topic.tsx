@@ -1,19 +1,8 @@
 import { useEffect } from "react"
-import { topics } from "./topics"
 import { useRouter } from "next/router"
 import Link from "components/Elements/Link"
 import slugify from "slugify"
 import { useGetTopics } from "apollo/postsActions"
-
-export function scrollTo(element, wrapper, speed=0.2) {
-  /* console.log('scrollTo',card,col) */
-  var rect = element.getBoundingClientRect()
-  var wrapperRect = wrapper.getBoundingClientRect()
-  var elementCenter = rect.left + rect.width*0.5
-  elementCenter = rect.left - 40 // + wrapperRect.width / 4
-  // console.log('center', elementCenter)
-  wrapper.scrollLeft = elementCenter // wrapper.scrollLeft + (elementCenter - wrapper.offsetHeight*0.5)
-}
 
 export default function Topic() {
   const router = useRouter()
@@ -24,9 +13,7 @@ export default function Topic() {
     var activeTopic = document.getElementsByClassName("topic active")[0]
     var topicsDiv = document.getElementsByClassName("topics")[0]
     if (topicsDiv && activeTopic) {
-      scrollTo(activeTopic, topicsDiv)
-      // console.log('scroll', activeTopic.scrollWidth)
-      // topicsDiv.scrollLeft = activeTopic.scrollWidth
+      topicsDiv.scrollLeft = activeTopic.offsetLeft - 40
     }
   })
 
