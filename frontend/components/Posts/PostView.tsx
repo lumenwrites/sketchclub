@@ -40,11 +40,14 @@ function Header({ post }) {
     if (!username) return toggleModal(`login`)
     // console.log('upvoting', post.slug)
     const { data } = await upvotePost({ variables: { slug: post.slug } })
-    // console.log('upvoted', data)
   }
   return (
     <div className="header">
-      <Link className="btn btn-user-profile" href={`/profile/${post.author.username}`}>
+      <Link
+        className="btn btn-user-profile"
+        href={`/profile/${post.author.username}`}
+        onClick={() => toggleModal(`post-view`)}
+      >
         <FontAwesomeIcon icon={["fas", "user"]} /> <b>{post.author.username}</b>
       </Link>
       <div className="buttons">

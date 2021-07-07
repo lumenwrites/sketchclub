@@ -83,7 +83,7 @@ export const PostQueries = extendType({
             where: allFilters
           })
         ])
-        console.log({ posts, postCount })
+        // console.log({ posts, postCount })
         return { posts, postCount }
       },
     })
