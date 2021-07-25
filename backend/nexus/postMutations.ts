@@ -91,8 +91,9 @@ export const PostMutations = extendType({
               published: args.published || undefined,
               tags: {
                 // Existing tags have id, replace them. New tags don't, create them.
-                set: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
-                create: args.tags?.filter(t => !('id' in t))
+                // set: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
+                // create: args.tags?.filter(t => !('id' in t))
+                connect: args.tags?.map(t => ({ slug: t.slug })),
               },
               topic: setTopic,
               images: {
