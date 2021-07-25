@@ -44,8 +44,9 @@ export const PostMutations = extendType({
             },
             tags: {
               // Existing tags have id, connect them. New tags don't, create them.
-              connect: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
-              create: args.tags?.filter(t => !('id' in t))
+              // connect: args.tags?.filter(t => ('id' in t)).map(t => ({ id: t.id })),
+              // create: args.tags?.filter(t => !('id' in t))
+              connect: args.tags?.map(t => ({ slug: t.slug })),
             },
             topic: connectTopic,
             author: { connect: { id: getUserId(context) } },

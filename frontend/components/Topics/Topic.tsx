@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { useEffect } from "react"
 import { useRouter } from "next/router"
 import Link from "components/Elements/Link"
@@ -11,7 +11,7 @@ export default function Topic() {
   const { loading, error, data } = useGetTopics()
   useEffect(() => {
     //Scroll after render
-    var activeTopic = document.getElementsByClassName("topic active")[0]
+    var activeTopic = document.getElementsByClassName("topic active")[0] as HTMLElement
     var topicsDiv = document.getElementsByClassName("topics")[0]
     if (topicsDiv && activeTopic) {
       topicsDiv.scrollLeft = activeTopic.offsetLeft - 40

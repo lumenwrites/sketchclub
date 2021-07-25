@@ -77,7 +77,7 @@ export const PostQueries = extendType({
         const [posts, postCount] = await context.prisma.$transaction([
           context.prisma.post.findMany({
             where: allFilters,
-            orderBy: [{ rank: 'desc' }],
+            orderBy: [{ createdAt: 'desc' }], //rank: 'desc'
             take: args.take || undefined,
             skip: args.skip || undefined,
           }),

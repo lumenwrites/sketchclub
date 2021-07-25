@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { useGetPosts } from "apollo/postsActions"
 // For SSR
 import { fetchPosts } from "apollo/fetchQuery"

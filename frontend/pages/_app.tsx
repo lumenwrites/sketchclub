@@ -3,6 +3,7 @@ import withApollo from "apollo/client"
 import { ApolloProvider } from "@apollo/client/react"
 import CombinedContextsProvider from "context/CombinedContexts"
 import "../styles/style.scss"
+import { ComponentType } from "react"
 
 
 function App({ Component, pageProps, apollo }) {
@@ -17,7 +18,10 @@ function App({ Component, pageProps, apollo }) {
 
 // Tell next js that it needs to go and fetch all the queries that are in the children components
 App.getInitialProps = async function ({ Component, ctx }) {
-  let pageProps = {}
+  interface PageProps {
+    query: String
+  }
+  let pageProps: PageProps= {}
   // if any of the pages have getInitialProps method on them (that's what withApollo is adding to them)
   if (Component.getInitialProps) {
     // then wait and fetch it

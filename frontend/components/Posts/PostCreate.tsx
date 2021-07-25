@@ -3,6 +3,7 @@ import ListImages from "./ListImages"
 import Modal from "components/Elements/Modal"
 import { useModal } from "context/ModalContext"
 import { useState } from "react"
+import { useAuth } from "context/AuthContext"
 import useForm from "hooks/useForm"
 import { useCreatePost } from "apollo/postsActions"
 import { useUploadFiles } from "hooks/useUploadFiles"
@@ -17,6 +18,8 @@ export default function PostCreate() {
   const [topic, setTopic] = useState(null)
   const [createPost, createPostRes] = useCreatePost()
   const { toggleModal } = useModal()
+  const { username } = useAuth() // to redirect after the post has been created
+
   async function handleSubmit() {
     const { title, body } = inputs
     console.log("submitting post", { title, body, images, tags, topic })
@@ -33,6 +36,7 @@ export default function PostCreate() {
     toggleModal("post-create") // hide the modal
     // toggleModal(`post-edit-${data.createPost.slug}`)
     console.log("Created Post", data.createPost)
+    window.location.href = `/profile/${username}`
   }
   return (
     <Modal name={`post-create`} className={"post-modal edit"}>

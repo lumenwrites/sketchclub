@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { useQuery, useMutation } from '@apollo/client'
 import { GET_POSTS, GET_POST, CREATE_POST, UPDATE_POST, DELETE_POST, UPVOTE_POST } from 'apollo/postsQueries'
 import { GET_TOPICS, GET_TAGS } from 'apollo/postsQueries'
@@ -13,7 +13,8 @@ export const useGetPosts = () => {
       tagSlug: router.query.tagSlug || undefined,
       topicSlug: router.query.topicSlug || undefined,
       searchString: router.query.search || undefined,
-      skip: parseInt(process.env.POSTS_PER_PAGE) * (parseInt(router.query.page) - 1 || 0),
+      // For pagination, skip posts_per_page*page_number posts. toString() makes the typescript error go away.
+      skip: parseInt(process.env.POSTS_PER_PAGE) * (parseInt(router.query.page?.toString()) - 1 || 0),
       take: parseInt(process.env.POSTS_PER_PAGE)
     },
   })

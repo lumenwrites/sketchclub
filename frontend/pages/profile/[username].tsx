@@ -1,4 +1,4 @@
-// @ts-nocheck
+
 import { useRouter } from "next/router"
 import { useGetPosts } from "apollo/postsActions"
 // For SSR
