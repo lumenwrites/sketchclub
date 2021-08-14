@@ -15,36 +15,3 @@ function addTopic() {
 }
 
 addTopic()
-
-// const userData: Prisma.UserCreateInput[] = [
-//   {
-//     username: 'username1',
-//     email: 'username1@gmail.com',
-//     password: 'password1',
-//     posts: {
-//       create: [
-//         {
-//           title: 'My First Post',
-//           slug: "my-first-post",
-//           body: 'Hello world! This is my first post!',
-//           published: true
-//         },
-//         {
-//           title: 'My Second Post',
-//           slug: "my-second-post",
-//           body: 'Huzzah! Ima postin!',
-//           published: true
-//         },
-//       ],
-//     },
-//   },
-// ]
-
-// main()
-//   .catch((e) => {
-//     console.error(e)
-//     process.exit(1)
-//   })
-//   .finally(async () => {
-//     await prisma.$disconnect()
-//   })
