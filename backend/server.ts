@@ -7,12 +7,12 @@ import { createContext } from './apollo/context'
 import { schema } from './nexus/nexusSchema'
 
 import 'dotenv/config'
-const { PORT, CLIENT_URL } = process.env
-
+const { PORT } = process.env
 
 const app = express();
 app.use(cookieParser())
 
+// Use the Nexus schema to create a GraphQL API Server
 const server = new ApolloServer({
   schema,
   context: createContext,
@@ -27,6 +27,5 @@ server.applyMiddleware({
 })
 
 app.listen({ port: PORT }, () => {
-  console.log('S', process.env.APP_SECRET)
   console.log(`Server running at http://localhost:${PORT}${server.graphqlPath}`);
 })

@@ -6,7 +6,7 @@ import { getDataFromTree } from '@apollo/client/react/ssr'
 import withApollo from 'next-with-apollo'
 import { getCookie } from 'utils/cookies'
 import https from 'https'
-// import paginationField from './paginationField'
+
 const { BACKEND_URL } = process.env
 
 
@@ -30,14 +30,6 @@ function createClient({ headers, initialState }) {
           )
         }
       }),
-      new ApolloLink((operation, forward) => {
-        // console.log('getContext', operation.getContext())
-        // operation.setContext({
-        //   headers: { Authorization: typeof window === 'undefined' ? '' : getCookie("Authorization") },
-        // })
-        // console.log('getContext', operation.getContext())
-        return forward(operation)
-      }),
       new HttpLink({
         uri: BACKEND_URL, //process.env.NODE_ENV === 'development' ? endpoint : prodEndpoint,
         fetchOptions: {
@@ -45,9 +37,10 @@ function createClient({ headers, initialState }) {
           // Vercel deploy kept giving me CORS errors.
           // Setting NODE_TLS_REJECT_UNAUTHORIZED=0 would solve that, but vercel rejected it because it was insecure for them.
           // Setting this parameter is some kind of narrower equivalent that makes it work for me.
+          // https://github.com/apollographql/apollo-link/issues/229
           agent: new https.Agent({ rejectUnauthorized: false })
         },
-        // pass the headers along from this request. This enables SSR with logged in state
+        // Pass the headers along from this request. This enables SSR with logged in state.
         headers: {
           ...headers,
           // Pass the cookie as a header because when I'm making mutations (as opposed to queries), 
@@ -56,16 +49,7 @@ function createClient({ headers, initialState }) {
         },
       })
     ]),
-    cache: new InMemoryCache({
-      typePolicies: {
-        Query: {
-          fields: {
-            // TODO
-            // allPosts: paginationField(),
-          },
-        },
-      },
-    }).restore(initialState || {}),
+    cache: new InMemoryCache().restore(initialState || {}),
   });
 }
 
