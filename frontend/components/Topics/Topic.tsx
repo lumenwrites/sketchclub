@@ -5,7 +5,8 @@ import Link from "components/Elements/Link"
 import slugify from "slugify"
 import { useGetTopics } from "apollo/postsActions"
 
-export default function Topic({ topics }) {
+export default function Topic(props) {
+  const topics = props.topics
   const router = useRouter()
   // console.log('topics',topics.trim().split('\n'))
   const { loading, error, data } = useGetTopics()
