@@ -1,0 +1,17 @@
+[
+  {
+      "AllowedHeaders": [
+          "*"
+      ],
+      "AllowedMethods": [
+          "POST"
+      ],
+      "AllowedOrigins": [
+          "https://sketchdaily.io"
+      ],
+      "ExposeHeaders": [
+          "Etag"
+      ],
+      "MaxAgeSeconds": 3000
+  }
+]
