@@ -16,6 +16,8 @@ app.use(cookieParser())
 const server = new ApolloServer({
   schema,
   context: createContext,
+  playground: true,
+  introspection: true,
 })
 
 server.applyMiddleware({
