@@ -23,9 +23,9 @@ export default function browse({ posts }) {
   )
 }
 
-// export async function getServerSideProps(context) {
-//   const { posts, postCount } = await fetchPosts(context)
-//   return {
-//     props: { posts, postCount }, // will be passed to the page component as props
-//   }
-// }
+export async function getServerSideProps(context) {
+  const { posts, postCount } = await fetchPosts(context)
+  return {
+    props: { posts, postCount }, // will be passed to the page component as props
+  }
+}
