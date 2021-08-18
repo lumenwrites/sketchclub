@@ -8,17 +8,18 @@ import Topic from "components/Topics/Topic"
 import Subnav from "components/Layout/Subnav"
 import Pagination from "components/Elements/Pagination"
 
-export default function browse({ posts }) {
+export default function browse({ posts, postCount }) {
+  // console.log("ssr posts", posts)
   const { loading, error, data } = useGetPosts()
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  console.log('res', { loading, error, data })
+  if (!posts && loading) return <p>Loading...</p>
+  if (!posts && error) return <p>Error :(</p>
   // console.log('skip', process.env.POSTS_PER_PAGE  * (parseInt(router.query.page) - 1 || 0))
   // console.log('browse posts', data)
-  // console.log("ssr posts", posts)
   return (
     <Layout subnav={<Topic/>}>
-      <Browse posts={data.getPosts.posts} />
-      <Pagination postCount={data.getPosts.postCount}/>
+      <Browse posts={posts} />
+      <Pagination postCount={postCount}/>
     </Layout>
   )
 }

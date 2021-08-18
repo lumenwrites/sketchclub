@@ -16,10 +16,7 @@ function createClient({ headers, initialState }) {
   return new ApolloClient({
     ssrMode: true, //https://www.apollographql.com/docs/react/performance/server-side-rendering/
     link: ApolloLink.from([
-      onError((err) => {
-        const { graphQLErrors, networkError } = err
-        console.log('BACKEND_URL', BACKEND_URL)
-        console.log('err', err)
+      onError(({ graphQLErrors, networkError }) => {
         if (graphQLErrors) {
           graphQLErrors.forEach(({ message, locations, path }) =>
             console.log(
