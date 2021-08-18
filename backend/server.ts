@@ -12,6 +12,17 @@ const { PORT } = process.env
 const app = express();
 app.use(cookieParser())
 
+// Error handler
+// https://github.com/apollographql/apollo-feature-requests/issues/153
+const errorHandler = (err, req, res, next) => {
+  if (res.headersSent) {
+    return next(err)
+  }
+  const { status } = err
+  res.status(status).json(err)
+};
+app.use(errorHandler)
+
 // Use the Nexus schema to create a GraphQL API Server
 const server = new ApolloServer({
   schema,
