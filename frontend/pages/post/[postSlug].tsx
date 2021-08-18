@@ -8,7 +8,7 @@ import Layout from "components/Layout/Layout"
 import PostView from "components/Posts/PostView"
 import PostEdit from "components/Posts/PostEdit"
 
-export default function post() {
+export default function post(props) {
   const router = useRouter()
   const { loading, error, data } = useGetPost(router.query.postSlug)
   if (loading) return <p>Loading...</p>
