@@ -9,7 +9,6 @@ import https from 'https'
 
 const { BACKEND_URL } = process.env
 
-
 // https://www.apollographql.com/docs/react/networking/authentication/
 function createClient({ headers, initialState }) {
   console.log('[ApolloClient] Connecting to backend:\n', BACKEND_URL)
