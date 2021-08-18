@@ -26,7 +26,7 @@ export async function fetchPosts(ctx) {
       published: true
     },
   })
-  console.log('fetchPosts', data)
+  // console.log('fetchPosts', data)
   return { posts: data.getPosts.posts, postCount: data.getPosts.postCount }
 }
 

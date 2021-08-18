@@ -2,6 +2,7 @@
 // https://www.apollographql.com/docs/apollo-server/integrations/middleware/#applying-middleware
 import express from 'express'
 import cookieParser from 'cookie-parser'
+import cors from 'cors'
 import { ApolloServer } from 'apollo-server-express'
 import { createContext } from './apollo/context'
 import { schema } from './nexus/nexusSchema'
@@ -11,17 +12,8 @@ const { PORT } = process.env
 
 const app = express();
 app.use(cookieParser())
-
-// Error handler
-// https://github.com/apollographql/apollo-feature-requests/issues/153
-const errorHandler = (err, req, res, next) => {
-  if (res.headersSent) {
-    return next(err)
-  }
-  const { status } = err
-  res.status(status).json(err)
-};
-app.use(errorHandler)
+// app.options('/graphql', cors())
+app.use(cors({ credentials: true, origin: "*" }))
 
 // Use the Nexus schema to create a GraphQL API Server
 const server = new ApolloServer({
