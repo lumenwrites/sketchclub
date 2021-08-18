@@ -182,7 +182,7 @@ export const GET_TAGS = gql`
 `
 
 export const GET_TOPICS = gql`
-  query Tags {
+  query Topics {
     topics {
       id
       name

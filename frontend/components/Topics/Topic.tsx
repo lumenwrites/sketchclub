@@ -1,11 +1,11 @@
-
+// @ts-nocheck
 import { useEffect } from "react"
 import { useRouter } from "next/router"
 import Link from "components/Elements/Link"
 import slugify from "slugify"
 import { useGetTopics } from "apollo/postsActions"
 
-export default function Topic() {
+export default function Topic({ topics }) {
   const router = useRouter()
   // console.log('topics',topics.trim().split('\n'))
   const { loading, error, data } = useGetTopics()
@@ -18,10 +18,11 @@ export default function Topic() {
     }
   })
 
-  if (loading) return <p>Loading...</p>
-  if (error) return <p>Error :(</p>
+  if (!topics && loading) return <p>Loading...</p>
+  if (!topics && error) return <p>Error :(</p>
   function renderTopics() {
-    return data.topics.map((topic, i) => {
+    const ts = data?.topics || topics
+    return ts.map((topic, i) => {
       let isActive = ""
       if (router.query.topicSlug === topic.slug) isActive = "active"
       //if (!router.query.topicSlug && i === 0) isActive = "active"
@@ -43,7 +44,3 @@ export default function Topic() {
     </div>
   )
 }
-
-//<Link className="topic" href={`/tag/${topic.slug}`}>
-//<div className="wrapper">{`Today's Topic: ${topic.name}`}</div>
-//</Link>
