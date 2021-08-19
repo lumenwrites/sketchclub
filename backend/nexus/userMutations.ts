@@ -63,8 +63,5 @@ export const UserMutations = extendType({
     })
 
 
-
-
-
   },
 })
