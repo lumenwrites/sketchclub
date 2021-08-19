@@ -1,4 +1,4 @@
-// https://stackoverflow.com/questions/4825683/how-do-i-create-and-read-a-value-from-cookie
+// From: https://stackoverflow.com/questions/4825683/how-do-i-create-and-read-a-value-from-cookie
 
 export function setCookie(name, value, days = 360) {
   var expires = "";

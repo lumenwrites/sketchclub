@@ -1,3 +1,6 @@
+// For the initial Apollo/Nexus/Prisma setup this was used as an example:
+// https://github.com/prisma/prisma-examples/tree/latest/typescript/graphql-auth 
+// (the code has changed significantly during the development and is very different now):
 // Integrating ApolloServer with Express (so that I can use cookie-parser)
 // https://www.apollographql.com/docs/apollo-server/integrations/middleware/#applying-middleware
 import express from 'express'

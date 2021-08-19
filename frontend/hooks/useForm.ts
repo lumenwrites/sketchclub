@@ -1,3 +1,4 @@
+// Based on: https://github.com/wesbos/Advanced-React/blob/master/finished-application/frontend/lib/useForm.js
 import { useEffect, useState } from 'react';
 
 export default function useForm(initial: any = {}) {

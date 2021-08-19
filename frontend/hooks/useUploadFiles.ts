@@ -12,7 +12,6 @@ export function useUploadFiles(initial = []) {
   useEffect(() => { setFiles(initial) }, [initialValues]);
 
 
-
   async function uploadToS3(file) {
     // request presigned url
     const { data } = await client.query({
