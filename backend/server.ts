@@ -3,13 +3,14 @@
 // (the code has changed significantly during the development and is very different now):
 // Integrating ApolloServer with Express (so that I can use cookie-parser)
 // https://www.apollographql.com/docs/apollo-server/integrations/middleware/#applying-middleware
+import 'dotenv/config'
 import express from 'express'
 import cookieParser from 'cookie-parser'
 import { ApolloServer } from 'apollo-server-express'
 import { createContext } from './apollo/context'
 import { schema } from './nexus/nexusSchema'
 
-import 'dotenv/config'
+
 const { PORT } = process.env
 
 const app = express();

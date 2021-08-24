@@ -9,7 +9,7 @@ import { useState } from "react"
 
 export default function PostView({ post }) {
   const { toggleModal } = useModal()
-  console.log('post', post)
+  // console.log('post', post)
   return (
     <div className={"post-view"}>
       <Gallery images={post.images} />
