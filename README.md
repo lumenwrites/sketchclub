@@ -9,4 +9,6 @@ https://sketchclub.io/
 
 This is my CS MSc project. Sketch Club is an instagram-inspired web app that helps art students to regularly practice their drawing skills.
 
+It is built using Next.js, React, Apollo, GraphQL, Prisma, Nexus, and AWS (for image uploads).
+
 See the detailed project report [here](https://lumenwrites.dev/files/Sketch%20Club%20Project%20Report.pdf).
